@@ -1,0 +1,47 @@
+@font-face {
+	font-family:'NouvelR';
+	src:	url('../fonts/NouvelR-Light.woff2') format('woff2'),
+			url('../fonts/NouvelR-Light.woff') format('woff');
+	font-weight: 100;
+	font-style: normal;
+}
+
+@font-face {
+	font-family:'NouvelR';
+	src:	url('../fonts/NouvelR-Book.woff2') format('woff2'),
+			url('../fonts/NouvelR-Book.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family:'NouvelR';
+	src:	url('../fonts/NouvelR-Regular.woff2') format('woff2'),
+			url('../fonts/NouvelR-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family:'NouvelR';
+	src:	url('../fonts/NouvelR-Semibold.woff2') format('woff2'),
+			url('../fonts/NouvelR-Semibold.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family:'NouvelR';
+	src:	url('../fonts/NouvelR-Bold.woff2') format('woff2'),
+			url('../fonts/NouvelR-Bold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family:'NouvelR';
+	src:	url('../fonts/NouvelR-Extrabold.woff2') format('woff2'),
+			url('../fonts/NouvelR-Extrabold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}

@@ -1,0 +1,16 @@
+# Exclude upload folders
+uploads/
+uploads_cache/
+
+# Exclude homolog folder
+homolog/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,19 @@
+{
+    "droidsansfallbackfull": {
+        "normal": "droidsansfallbackfull_normal_2edc180f858cb019afd325d2672e0922"
+    },
+    "noto_sansregular": {
+        "normal": "noto_sansregular_normal_2edc180f858cb019afd325d2672e0922"
+    },
+    "nouvelr": {
+        "100": "C:\\xampp\\htdocs\\newfeed\\actions\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/nouvelr_100_562f6efe0c18c7d62f4165889ea41e3d",
+        "300": "C:\\xampp\\htdocs\\newfeed\\actions\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/nouvelr_300_bfaa6398f113d137c916aca581a9da45",
+        "normal": "C:\\xampp\\htdocs\\newfeed\\actions\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/nouvelr_normal_80b344cf847539f9be2b4a7740e9c3f2",
+        "500": "C:\\xampp\\htdocs\\newfeed\\actions\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/nouvelr_500_b28c51137351c4e391e8abd99c992808",
+        "600": "C:\\xampp\\htdocs\\newfeed\\actions\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/nouvelr_600_15f5327558f087b5cb4cb86401126add",
+        "bold": "nouvelr_bold_4db694e71588700505caed5519aa6647"
+    },
+    "arial": {
+        "normal": "arial_normal_74daa969a3e663c972092f19051454b7"
+    }
+}

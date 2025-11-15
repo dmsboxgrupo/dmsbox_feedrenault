@@ -1,0 +1,13 @@
+{
+    "nouvelr": {
+        "100": "C:\/xampp\/htdocs\/feedrenault_webapp\/fonts\/nouvelr_100_213a65dd9f566390797bc1cc3cfa5722",
+        "300": "C:\/xampp\/htdocs\/feedrenault_webapp\/fonts\/nouvelr_300_54a2c3f395be864d5a88c03592665037",
+        "normal": "C:\/xampp\/htdocs\/feedrenault_webapp\/fonts\/nouvelr_normal_6f586aa22095691b9db199b4a1f10e84",
+        "500": "C:\/xampp\/htdocs\/feedrenault_webapp\/fonts\/nouvelr_500_46fd1684cff0789ff4d9a0bb4e56c702",
+        "600": "C:\/xampp\/htdocs\/feedrenault_webapp\/fonts\/nouvelr_600_df341fcd0d2e5b3498c87aa1d3ff165b",
+        "bold": "nouvelr_bold_393c9f8232dfe2c8c962e211facbe8a5"
+    },
+    "arial": {
+        "normal": "arial_normal_87a49a3b6d3cca01ff67d767d9c568f2"
+    }
+}

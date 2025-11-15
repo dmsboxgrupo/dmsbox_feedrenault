@@ -1,0 +1,21 @@
+{
+    "nouvelr": {
+        "100": "C:\/xampp\/htdocs\/feedrenault\/fonts\/nouvelr_100_f9ff0b4b510364d07ace93c1822695d0",
+        "300": "C:\/xampp\/htdocs\/feedrenault\/fonts\/nouvelr_300_c20dac395477a15c8a64823067481f5a",
+        "normal": "C:\/xampp\/htdocs\/feedrenault\/fonts\/nouvelr_normal_5f7e230af300b4602ce4e5a2c83001ed",
+        "500": "C:\/xampp\/htdocs\/feedrenault\/fonts\/nouvelr_500_33a64e2628aef31f050e1605373229f5",
+        "600": "C:\/xampp\/htdocs\/feedrenault\/fonts\/nouvelr_600_27e99097226c20d6fb6c6de0bee9c312",
+        "bold": "nouvelr_bold_bdb7e0c180b5e078ba9babf238870f6f"
+    },
+    "arial": {
+        "normal": "arial_normal_7296124d349895b3a490771f60a58e3c"
+    },
+    "renault": {
+        "300": "\/opt\/bitnami\/apache\/htdocs\/newfeed\/assets\/fonts\/\/renault_300_bc701566ebdb807e7c4e79f0ee80e9b8",
+        "normal": "\/opt\/bitnami\/apache\/htdocs\/newfeed\/assets\/fonts\/\/renault_normal_bf5cc28bb77c1fb7061f93aac94a01d1",
+        "500": "\/opt\/bitnami\/apache\/htdocs\/newfeed\/assets\/fonts\/\/renault_500_0f1cb997a078142ee1081dc4e7b3de2b",
+        "600": "\/opt\/bitnami\/apache\/htdocs\/newfeed\/assets\/fonts\/\/renault_600_04af0f2a62a7c769f20d586f151ff9c8",
+        "bold": "\/opt\/bitnami\/apache\/htdocs\/newfeed\/assets\/fonts\/\/renault_bold_f5ad8420cc8e35c467ed4d4b2bbaaf8a",
+        "800": "renault_800_e904f1d5346a76900c6bf839191e149b"
+    }
+}

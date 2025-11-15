@@ -1,0 +1,197 @@
+@font-face {
+  font-family:'NouvelR';
+  src:  url('../fonts/NouvelR-Light.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:'NouvelR';
+  src:  url('../fonts/NouvelR-Book.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:'NouvelR';
+  src:  url('../fonts/NouvelR-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:'NouvelR';
+  src:  url('../fonts/NouvelR-Semibold.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:'NouvelR';
+  src:  url('../fonts/NouvelR-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:'NouvelR';
+  src:  url('../fonts/NouvelR-Extrabold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:'Arial';
+  src:  url('../fonts/arial.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family:'NouvelR';
+}
+
+.card-content.print {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1080px;
+  height: 1920px;
+  pointer-events: none;
+  background: white;
+}
+
+.card-content.print .img-perfil {
+  width: 424px;
+  height: 424px;
+  position: absolute;
+  top: 222px;
+  left: 328px;
+  z-index: 2;
+  border: solid 1px white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.card-content.print .img-perfil img {
+  width: 424px;
+  height: 424px;
+}
+
+.card-content.print .bg-card {
+  width: 1080px;
+  height: 455px;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+}
+.card-content.print .bg-card img {
+  width: 100%;
+  min-height: 100%;
+}
+
+.card-content.print .nome {
+  position: absolute;
+  top: 692px;
+  left: 0;
+  width: 1080px;
+  text-align: center;
+}
+
+.card-content.print .nome h3 {
+  font-size: 66px;
+  color: black;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1;
+}
+
+.card-content.print .nome p {
+  font-size: 37px;
+  color: black;
+  color: #707070;
+  line-height: 1;
+}
+
+.card-content .itens .item:nth-child(1) {
+  position: absolute;
+  left: 205px;
+  top: 875px;
+}
+
+.card-content .itens .item:nth-child(2) {
+  position: absolute;
+  left: 593px;
+  top: 875px;
+}
+
+.card-content .itens .item:nth-child(3) {
+  position: absolute;
+  left: 205px;
+  top: 1197px;
+}
+
+.card-content .itens .item:nth-child(4) {
+  position: absolute;
+  left: 593px;
+  top: 1197px;
+}
+
+.card-content.print .itens .item .hld {
+  width: 272px;
+  height: 272px;
+  border: solid 3px black;
+  display: block;
+  text-decoration: none;
+}
+
+.card-content.print .itens .item .hld .ico {
+  width: 272px;
+  padding-top: 50px;
+  text-align: center;
+}
+
+.card-content.print .itens .item:nth-child(3) .hld .ico {
+  padding-top: 65px;
+}
+
+.card-content.print .itens .item .hld .ico img {
+  height: 125px;
+}
+
+.card-content.print .itens .item:nth-child(3) .hld .ico img {
+  height: 95px;
+}
+
+.card-content.print .itens .item .hld .txt {
+  font-size: 33px;
+  color: black;
+  width: 272px;
+  text-align: center;
+  padding-top: 30px;
+  font-weight: 600;
+}
+.card-content.print .itens .item:nth-child(3) .hld .txt {
+  padding-top: 45px;
+}
+
+.card-content.print .concessionaria {
+  position: absolute;
+  top: 1600px;
+  width: 1080px;
+  text-align: center;
+}
+
+.card-content.print .concessionaria img {
+  width: 125px;
+}
+
+.card-content.print .concessionaria .txt {
+  font-size: 46px;
+  font-weight: 600;
+  text-align: center;
+  color: black;
+  margin-top: 35px;
+}

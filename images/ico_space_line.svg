@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36.909" height="26.146" viewBox="0 0 36.909 26.146">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_577" data-name="Retângulo 577" width="10.132" height="26.146" transform="translate(0 0)" fill="#707070"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_2274" data-name="Grupo 2274" transform="translate(-1902 -2872.927)">
+    <g id="Grupo_2270" data-name="Grupo 2270">
+      <g id="Retângulo_543" data-name="Retângulo 543" transform="translate(1917.091 2882)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="21.818" height="2" stroke="none"/>
+        <rect x="0.5" y="0.5" width="20.818" height="1" fill="none"/>
+      </g>
+      <g id="Retângulo_545" data-name="Retângulo 545" transform="translate(1917.091 2894)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="21.818" height="2" stroke="none"/>
+        <rect x="0.5" y="0.5" width="20.818" height="1" fill="none"/>
+      </g>
+      <g id="Retângulo_546" data-name="Retângulo 546" transform="translate(1917.091 2888)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="21.818" height="2" stroke="none"/>
+        <rect x="0.5" y="0.5" width="20.818" height="1" fill="none"/>
+      </g>
+      <g id="Retângulo_544" data-name="Retângulo 544" transform="translate(1917.091 2876)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="21.818" height="2" stroke="none"/>
+        <rect x="0.5" y="0.5" width="20.818" height="1" fill="none"/>
+      </g>
+    </g>
+    <g id="Grupo_2272" data-name="Grupo 2272" transform="translate(1902 2872.927)">
+      <g id="Grupo_2271" data-name="Grupo 2271" clip-path="url(#clip-path)">
+        <path id="Caminho_770" data-name="Caminho 770" d="M5.97,23.337l0-8.349h.009l0-12.322C6.712,3.735,7.318,4.6,8.566,6.482l1.566-.937A61.1,61.1,0,0,0,6.052,0L4.174,0A50.226,50.226,0,0,0,.1,5.593l1.6.916c1.134-1.8,1.755-2.7,2.43-3.7l.086,11.332h0l-.091,9.321c-.725-1.075-1.323-1.948-2.553-3.84L0,20.545a61.378,61.378,0,0,0,4.027,5.579l1.878.022a50.077,50.077,0,0,0,4.124-5.554l-1.6-.931c-1.15,1.787-1.78,2.686-2.464,3.676" fill="#707070"/>
+      </g>
+    </g>
+  </g>
+</svg>

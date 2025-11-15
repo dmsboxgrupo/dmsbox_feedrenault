@@ -1,0 +1,216 @@
+p strong, strong {
+	font-size: inherit;
+    font-weight: bolder;
+}
+
+a {
+	color: #3b5998;
+}
+
+.splash {
+	width: 100vw;
+	height: 100vh;
+    background-size: cover;
+    background-position-y: 0;
+    max-height: 830px;
+	position: fixed;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+	background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+.destaque-texto-solo {
+	color: #fff;
+	text-shadow: #000 1px 1px 4px;
+}
+
+.loading {
+  max-height: 60px;
+}
+
+.loading-line {
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.loading-line .loading {
+  max-height: 55px;
+}
+
+.loading-line.loading-vehicles {
+	margin-top: 20px;
+}
+
+.loading-line.loading-tags {
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.card .card-imagem video {
+	width: 100%;
+	height: auto;
+	max-height: 400px;
+	background-color: #000;
+	margin-bottom: 0px;
+}
+
+.login-msg-hide {
+	display: none;
+}
+
+.login-linha .link-retornar {
+	position: absolute;
+	right: 20px;
+}
+
+.ql-indent-1 {
+	margin-left: 20px;
+    border-left: 1px solid #ffd500;
+}
+
+.card-folheto .card-folheto-imagem {
+	background-position: center center;
+	background-repeat: no-repeat; 
+	background-size: cover;
+	width: 160px;
+}
+
+.card .card-footer.link-off {
+	margin-top: 15px;
+}
+
+.card .card-iframe {
+	width: 100%;
+	height: 400px;
+}
+
+.compartilhar-popup .compartilhar-container {
+	transform: translate(-50%, 0%);
+    left: 50%;
+}
+
+input:read-only {
+    opacity: .5;
+    pointer-events: none;
+}
+
+#destaque-popup {
+	z-index: 200;
+}
+
+.compartilhar-popup {
+	z-index: 201;
+}
+
+.confirmacao-popup {
+	z-index: 202;
+}
+
+.vermais-mostrar {
+	display: none;
+}
+
+#comunicado .vermais {
+	display: none;
+}
+
+#comunicado .vermais-mostrar {
+	display: block;
+}
+
+:root {
+	--plyr-color-main: rgba(255,255,255,0.5);
+}
+
+.pesquisa-tags label .pesquisa-renault:before, .pesquisa-dropdown label .pesquisa-renault:before,
+.pesquisa-tags label .pesquisa-renault:after, .pesquisa-dropdown label .pesquisa-renault:after {
+	background-image: url("../images/pesquisarenaultnovo.svg?v=2");
+}
+
+.plyr [data-plyr=pip] {
+	display: none !important;
+}
+
+.plyr:-webkit-full-screen video {
+	position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+@media (max-width: 1000px) {
+	
+	.menu-subsecoes .subsecao {
+		font-size: 13px;
+	}
+
+	.lista-artigos .artigo .artigo-imagem video {
+		width: 110px;
+		height: 110px;
+		border-radius: 5px;
+		-o-object-fit: cover;
+		object-fit: cover;
+		display: block;
+	}
+	
+	.card .card-wlink {
+		margin-top: 35px;
+		content: ' ';
+	}
+
+}
+
+@media (min-width: 1000px) {
+	
+	.card .card-box .line1 {
+		margin-top: 10px;
+	}
+	
+	.card .card-box {
+		height: 94px;
+	}
+	
+	.lista-artigos .artigo .artigo-imagem video {
+		width: 240px;
+		height: 180px;
+	}
+	
+	.scroll-destaques .destaque-card video {
+		border-radius: 30px;
+		width: 122px;
+	}
+	
+	.card .card-wlink {
+		padding-top: 45px;
+	}
+	
+}
+
+/* animations */
+
+#footer-menu a .notificacao, .is-ios #footer-menu a .notificacao {
+	animation-duration: .5s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes scale-easeOutElastic {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.5);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+
+}

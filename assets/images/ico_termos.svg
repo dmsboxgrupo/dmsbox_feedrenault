@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+  <g class="off">
+    <rect fill="#656666" x="12.3" y="15.8" width="10.4" height="1.7"/>
+    <rect fill="#656666" x="12.3" y="19.3" width="10.4" height="1.7"/>
+    <rect fill="#656666" x="12.3" y="22.8" width="10.4" height="1.7"/>
+    <path fill="#656666" d="M21.5,3.4H7v28.1h21V10c-2-2.4-4.1-4.6-6.5-6.5M26.3,29.9H8.7V5.1h10.5v7h7v17.7ZM21,10.5v-5.3c1.9,1.6,3.7,3.4,5.3,5.3h-5.3Z"/>
+  </g>
+  <g class="on">
+    <rect fill="#000000" data-name="Retângulo_722" x="12.3" y="15.8" width="10.4" height="1.7"/>
+    <rect fill="#000000" data-name="Retângulo_723" x="12.3" y="19.3" width="10.4" height="1.7"/>
+    <rect fill="#000000" data-name="Retângulo_724" x="12.3" y="22.8" width="10.4" height="1.7"/>
+    <path fill="#000000" data-name="Caminho_882" d="M21.5,3.4H7v28.1h21V10c-2-2.4-4.1-4.6-6.5-6.5M26.3,29.9H8.7V5.1h10.5v7h7v17.7ZM21,10.5v-5.3c1.9,1.6,3.7,3.4,5.3,5.3h-5.3Z"/>
+  </g>
+</svg>

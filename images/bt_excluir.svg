@@ -1,0 +1,10 @@
+<svg id="Criar_Botão_exclusão" data-name="Criar | Botão exclusão" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="27.233" viewBox="0 0 20 27.233">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_510" data-name="Retângulo 510" width="20" height="27.233"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_2228" data-name="Grupo 2228" clip-path="url(#clip-path)">
+    <path id="Caminho_753" data-name="Caminho 753" d="M5.491,3.7C5.534,1.133,7.1,0,10.022,0s4.488,1.133,4.488,3.7H20V5.447H0V3.7ZM1.831,24.14V7.277H3.616v16.6c0,1.133.436,1.612,1.569,1.612h9.63c1.133,0,1.568-.479,1.568-1.612V7.277H18.17V24.14c0,2.09-1,3.093-3.094,3.093H4.924c-2.091,0-3.093-1-3.093-3.093M5.491,7.277H7.277V23.616H5.491ZM7.277,3.7h5.447c-.088-1.7-1.047-1.918-2.7-1.918-1.743,0-2.745.261-2.745,1.918m1.83,3.573h1.786V23.616H9.107Zm3.617,0H14.51V23.616H12.724Z" transform="translate(0 0)"/>
+  </g>
+</svg>

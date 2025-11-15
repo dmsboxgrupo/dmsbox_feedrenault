@@ -1,0 +1,123 @@
+<!-- <input type="hidden" id="userOptions" value="pos-vendas,noticias,redes-sociais,universo-renault"> -->
+<input type="hidden" id="userOptions" value="">
+
+<div class="content">
+    <!-- SLIDER -->
+    <div class="menu-slider destaque">
+        <h2>destaques</h2>
+        <div class="hld-slider">
+            <div class="slider"></div>
+            <div class="nav-slider">
+                <div class="arrow left"></div>
+                <div class="arrow right"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="area">
+        <h2>meu Feed</h2>
+
+        <div class="bt">
+            <a href="#" class="bt-config" data-target="config"><div class="ico"></div></a>
+        </div>
+    </div>
+    <div class="menu" id="menu-dashboard">
+        <div class="aux">
+            <div class="aux-scroll"></div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div id="internal-holder"></div>
+</div>
+
+<!-- CONFIG PANEL -->
+<div class="panel-config">
+    <div class="holder">
+        <div class="configs">
+            <div class="top">
+                <div class="ico-config"></div>
+                <div class="infos">
+                    <h2>filtre e customize</h2>
+                    <p>Os filtros serão aplicados no seu Feed atual e poderão ser alterados a qualquer momento.</p>
+                </div>
+                <div class="bt">
+                    <a href="#" class="fechar-config" data-target="panel-config"><div class="ico"></div></a>
+                </div>
+            </div>
+            <div class="exibidos">
+                <div class="infos">
+                    <h2>conteúdos exibidos</h2>
+                    <p>Arraste para reordenar as seções de conteúdo</p>
+                </div>
+
+
+                <div class="grid">
+                    <ul id="sortable"></ul>
+                </div>
+            </div>
+            <div class="disponiveis">
+                <div class="infos">
+                    <h2>conteúdos disponíveis</h2>
+                    <p>Selecione de 3 ou 4 seções de conteúdo</p>
+                </div>
+                <div class="selects">
+                    <div class="hld-inp inp-checkbox">
+                        <input type="checkbox" name="conteudos" value="noticias" data-reference="noticias" id="chk-noticias">
+                        <label class="check-option" data-check="noticias" for="chk-noticias">notícias</label>
+                    </div>
+                    <div class="hld-inp inp-checkbox">
+                        <input type="checkbox" name="conteudos" value="redes-sociais" data-reference="redes" id="chk-redes-sociais">
+                        <label class="check-option" data-check="redes-sociais" for="chk-redes-sociais">redes sociais</label>
+                    </div>
+                    <div class="hld-inp inp-checkbox">
+                        <input type="checkbox" name="conteudos" value="pos-vendas" data-reference="careservices" id="chk-pos-vendas">
+                        <label class="check-option" data-check="pos-vendas" for="chk-pos-vendas">pós-vendas</label>
+                    </div>
+                    <div class="hld-inp inp-checkbox">
+                        <input type="checkbox" name="conteudos" value="comunicados" data-reference="comunicados" id="chk-comunicados">
+                        <label class="check-option" data-check="comunicados" for="chk-comunicados">comunicados</label>
+                    </div>
+                    <div class="hld-inp inp-checkbox">
+                        <input type="checkbox" name="conteudos" value="universo-renault" data-reference="universo" id="chk-universo-renault">
+                        <label class="check-option" data-check="universo-renault" for="chk-universo-renault">universo Renault</label>
+                    </div>
+                    <div class="hld-inp inp-checkbox">
+                        <input type="checkbox" name="conteudos" value="renault-academy" data-reference="academy" id="chk-renault-academy">
+                        <label class="check-option" data-check="renault-academy" for="chk-renault-academy">Renault Academy</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aux-bt">
+            <div class="bt-aplicar">
+                 <a href="#" class="salvar-config" data-target="panel-config">aplicar</a>
+            </div>
+        </div>
+    </div>
+    <div class="area-config fechar-config"></div>
+</div>
+
+<div class="modal destaque" id="destaque">
+    <div class="holder">
+        <div class="aux-slider">
+            <div class="bt-fechar black">
+                <a href="#" class="bt-close-modal" data-target="modal"></a>
+            </div>
+            <div class="bulls"></div>
+            <div class="slider"></div>
+            <div class="nav-slider">
+                <div class="arrow left"></div>
+                <div class="arrow right"></div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<div class="modal galeria" id="galeria"></div>
+
+<script src="assets/js/libraries/jquery-ui.min.js"></script>
+<script src="assets/js/libraries/touch-punch.min.js"></script>
+<script src="assets/js/libraries/pdf.min.js"></script>
+<script src="assets/js/libraries/pdf.worker.min.js"></script>
+<script src="assets/js/parts/home.js?a=a" type="text/javascript" charset="utf-8"></script>

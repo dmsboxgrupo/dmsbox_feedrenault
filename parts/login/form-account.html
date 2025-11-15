@@ -1,0 +1,126 @@
+<form id="formCreate" data-fields="6">
+    <div class="hld-steps">
+        <div class="aux-steps">
+            <div class="step-form selected" data-anchor="step-1">
+                <div class="chamada">
+                    <div class="ico"><img src="assets/images/ico_account.svg"></div>
+                    <h2>crie uma conta</h2>
+                    <p>Seja bem-vindo, precisamos de algumas informações para efetuar o cadastro</p>
+                </div>
+
+                <div class="inputs">
+                    <div class="hld-inp">
+                        <input type="text" name="nome" class="valid-text" placeholder="Digite seu nome" tabindex="1">
+                        <div class="msg"></div>
+                    </div>
+                    <div class="hld-inp">
+                        <input type="text" name="sobrenome" class="valid-text" placeholder="Digite seu sobrenome" tabindex="2">
+                        <div class="msg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-form" data-anchor="step-2">
+                <div class="chamada">
+                    <div class="ico"><img src="assets/images/ico_email.svg"></div>
+                    <p>Por favor, informe o seu e-mail</p>
+                </div>
+
+                <div class="inputs">
+                    <div class="hld-inp">
+                        <input type="email" name="email" class="valid-email" placeholder="Digite seu e-mail" tabindex="3">
+                        <div class="msg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-form" data-anchor="step-3">
+                <div class="chamada">
+                    <div class="ico"><img src="assets/images/ico_bir.svg"></div>
+                    <p>Agora insira o número da BIR <br> da sua concessionária</p>
+                </div>
+
+                <div class="inputs">
+                    <div class="hld-inp">
+                        <input type="text" name="bir" class="num-bir" placeholder="BIR da concessionária" tabindex="4">
+                        <div class="msg"></div>
+                        <div class="msg-inf">7 caracteres</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-form" data-anchor="step-4">
+                <div class="chamada">
+                    <div class="ico"><img src="assets/images/ico_new_password.svg"></div>
+                    <h2>estamos quase lá :)</h2>
+                    <p>Só falta criar uma senha de acesso</p>
+                </div>
+
+                <div class="inputs">
+                    <div class="hld-inp">
+                        <input type="password" name="senha" class="senha-check" placeholder="Cadastre uma senha" autocomplete="off" tabindex="5">
+                        <div class="msg"></div>
+                        <a href="#" class="bt-view" data-target="view-password">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="28.9" height="21.9" viewBox="0 0 28.9 21.9">
+                              <g class="close">
+                                <path fill="#888b8d" d="M14.5,19.5c-4.5,0-8.1-3.8-8-8.3,0-4.5,3.5-8.2,8-8.3,4.5,0,8.1,3.8,8,8.3,0,4.5-3.5,8.2-8,8.3M14.5,4.9c-3.4,0-6.1,2.9-6.1,6.3,0,3.4,2.7,6.3,6.1,6.3,3.4,0,6.1-2.9,6.1-6.3,0-3.4-2.7-6.3-6.1-6.3"/>
+                                <path fill="#888b8d" d="M14.6,19.6c-4.9,0-9.8-2.6-14.4-7.6l-.3-.3v-1l.2-.3c.2-.3,5.4-7.2,13.4-7.7,5.2-.3,10.3,2.3,15.1,7.6l.3.3v1l-.2.3c-.2.3-5.4,7.2-13.4,7.7-.3,0-.5,0-.8,0M2,11.1c4.3,4.6,8.8,6.8,13.3,6.5,6-.3,10.4-4.9,11.7-6.5-4.3-4.6-8.8-6.8-13.3-6.5-6,.3-10.4,4.9-11.7,6.5"/>
+                              </g>
+                              <g class="open">
+                                <path fill="#888b8d" d="M0,12v-1.6C4,5.7,9.3,3,14.5,3c.9,0,1.8,0,2.7.3l-1.2,1.6c-.5,0-1-.1-1.5-.1-3.7,0-6,2.5-6,6.5,0,1,.1,1.9.4,2.8l-1.2,1.5c-.7-1.3-1.1-2.8-1-4.3,0-1.9.5-3.8,1.7-5.2-2.6,1.3-5,3-6.9,5.2,1.8,1.8,3.8,3.4,6,4.8l-1.1,1.3c-2.4-1.4-4.6-3.2-6.4-5.3M21.9,0l1.4,1.1L7.4,21.9l-1.4-1.1L21.9,0ZM14.5,17.7c3.7,0,6-2.5,6-6.5,0-1-.2-2-.5-2.9l1.2-1.5c.8,1.3,1.1,2.9,1.1,4.4,0,1.8-.5,3.6-1.5,5.1,2.5-1.3,4.8-3,6.7-5.1-1.8-1.9-3.8-3.5-6-4.8l1-1.3c2.5,1.4,4.7,3.2,6.5,5.3v1.6c-4,4.7-9.3,7.4-14.5,7.4-.9,0-1.9,0-2.8-.3l1.2-1.6c.5.1,1,.2,1.6.2"/>
+                              </g>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="hld-inp">
+                        <input type="password" name="senha" class="senha-repeat" placeholder="Repita a senha" autocomplete="off" tabindex="6">
+                        <div class="msg"></div>
+                        <a href="#" class="bt-view" data-target="view-password">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="28.9" height="21.9" viewBox="0 0 28.9 21.9">
+                              <g class="close">
+                                <path fill="#888b8d" d="M14.5,19.5c-4.5,0-8.1-3.8-8-8.3,0-4.5,3.5-8.2,8-8.3,4.5,0,8.1,3.8,8,8.3,0,4.5-3.5,8.2-8,8.3M14.5,4.9c-3.4,0-6.1,2.9-6.1,6.3,0,3.4,2.7,6.3,6.1,6.3,3.4,0,6.1-2.9,6.1-6.3,0-3.4-2.7-6.3-6.1-6.3"/>
+                                <path fill="#888b8d" d="M14.6,19.6c-4.9,0-9.8-2.6-14.4-7.6l-.3-.3v-1l.2-.3c.2-.3,5.4-7.2,13.4-7.7,5.2-.3,10.3,2.3,15.1,7.6l.3.3v1l-.2.3c-.2.3-5.4,7.2-13.4,7.7-.3,0-.5,0-.8,0M2,11.1c4.3,4.6,8.8,6.8,13.3,6.5,6-.3,10.4-4.9,11.7-6.5-4.3-4.6-8.8-6.8-13.3-6.5-6,.3-10.4,4.9-11.7,6.5"/>
+                              </g>
+                              <g class="open">
+                                <path fill="#888b8d" d="M0,12v-1.6C4,5.7,9.3,3,14.5,3c.9,0,1.8,0,2.7.3l-1.2,1.6c-.5,0-1-.1-1.5-.1-3.7,0-6,2.5-6,6.5,0,1,.1,1.9.4,2.8l-1.2,1.5c-.7-1.3-1.1-2.8-1-4.3,0-1.9.5-3.8,1.7-5.2-2.6,1.3-5,3-6.9,5.2,1.8,1.8,3.8,3.4,6,4.8l-1.1,1.3c-2.4-1.4-4.6-3.2-6.4-5.3M21.9,0l1.4,1.1L7.4,21.9l-1.4-1.1L21.9,0ZM14.5,17.7c3.7,0,6-2.5,6-6.5,0-1-.2-2-.5-2.9l1.2-1.5c.8,1.3,1.1,2.9,1.1,4.4,0,1.8-.5,3.6-1.5,5.1,2.5-1.3,4.8-3,6.7-5.1-1.8-1.9-3.8-3.5-6-4.8l1-1.3c2.5,1.4,4.7,3.2,6.5,5.3v1.6c-4,4.7-9.3,7.4-14.5,7.4-.9,0-1.9,0-2.8-.3l1.2-1.6c.5.1,1,.2,1.6.2"/>
+                              </g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="validacao">
+                    <div class="item" data-anchor="numCaracter">8-12 caracteres</div>
+                    <div class="item" data-anchor="specialCaracter">Caracter especial</div>
+                    <div class="item" data-anchor="upperCase">Letra maiúscula</div>
+                    <div class="item" data-anchor="lowerCase">Letra minúscula</div>
+                    <div class="item" data-anchor="num">Número</div>
+                </div>
+            </div>
+
+            <div class="step-form" data-anchor="step-5">
+                <div class="chamada">
+                    <div class="ico"><img src="assets/images/ico_nice.svg"></div>
+                    <h2>agora falta pouco!</h2>
+                </div>
+                <div class="infos">
+                    <p>Em breve, o seu gerente irá liberar o seu acesso. <strong>Quando isso acontecer, avisaremos você pelo e-mail cadastrado</strong>.</p>
+                </div>
+                <a href="#" class="bt black bt-changeview" data-target="login">finalizar</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="bullets">
+        <div class="bull selected" data-anchor="bull-1"></div>
+        <div class="bull" data-anchor="bull-2"></div>
+        <div class="bull" data-anchor="bull-3"></div>
+        <div class="bull" data-anchor="bull-4"></div>
+    </div>
+    <div class="bts">
+        <div class="bt bt-back"><a href="#" class="nav-form" data-target="prev">voltar</a></div>
+        <div class="bt bt-next"><a href="#" class="nav-form" data-target="next">próximo</a></div>
+    </div>
+</form> 
+
+<div class="txt-legal">Conheça os nossos <a href="#" class="bt-modal" data-type="open" data-target="termos">Termos e Política</a></div>

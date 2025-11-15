@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="19.495" viewBox="0 0 24 19.495">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_1808" data-name="Retângulo 1808" width="24" height="19.495" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_4090" data-name="Grupo 4090" transform="translate(0 0)">
+    <g id="Grupo_4089" data-name="Grupo 4089" transform="translate(0 0)" clip-path="url(#clip-path)">
+      <path id="Caminho_1554" data-name="Caminho 1554" d="M0,16.937V2.991H7.46A3.969,3.969,0,0,1,10.7,4.253l2.631,2.594H18.45a2.242,2.242,0,0,1,2.558,2.558v7.532A2.242,2.242,0,0,1,18.45,19.5H2.558A2.242,2.242,0,0,1,0,16.937m2.775,1.081h15.46c.937,0,1.3-.4,1.3-1.333V9.658c0-.937-.361-1.333-1.3-1.333H12.72L9.91,5.513A3.175,3.175,0,0,0,7.387,4.468H1.477V16.685c0,.937.36,1.333,1.3,1.333M22.523,16.5V5.838c0-.937-.36-1.333-1.3-1.333H14.559l-1.91-1.983a3.175,3.175,0,0,0-2.523-1.045H2.991V0H10.2a3.973,3.973,0,0,1,3.244,1.261l1.73,1.766h6.27c1.73,0,2.559.9,2.559,2.775V16.5Z" transform="translate(0 0)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,619 @@
+<link rel="stylesheet" type="text/css" href="assets/css/libraries/slick.css?v=001" />
+<link rel="stylesheet" type="text/css" href="assets/css/libraries/cropper.css?v=001" />
+<link rel="stylesheet" type="text/css" href="assets/css/dashboard/custom.css?v=001" />
+
+<nav>
+	<div class="container">
+		<div class="logo">
+			<a href="#" class="bt-changeview" data-target="dashboard"><img src="assets/images/logo_feedRenault.svg"></a>
+		</div>
+		<div class="links">
+			<div class="bt busca">
+				<a href="#" class="bt-modal" data-target="busca"></a>
+			</div>
+			<div class="bt notificacao">
+				<div class="num"></div>
+				<a href="#" class="bt-changeview" data-target="notificacoes"></a>
+			</div>
+			<div class="bt informacao">
+				<a href="#" class="bt-modal" data-target="tour" data-medium="ini"></a>
+			</div>
+			<div class="bt perfil">
+				<a href="#"  class="bt-perfil" data-target="left"></a>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<div class="nav-mobile">
+	<div class="bt master-bt">
+		<a href="#" class="bt-changeview" data-target="dashboard">
+			<div class="ico">
+				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+				    <path fill="#656666" class="off" d="M28,29.6h-8.1v-9.7h-4.9v9.7h-8v-13.8c3.1-3.7,6.4-7.1,9.8-10.4h1.3c3.5,3.3,6.8,6.7,9.8,10.4v13.8h0ZM13.5,28.1v-9.7h8.1v9.7h4.9v-11.7c-2.8-3.3-5.7-6.4-8.9-9.3-3.3,2.9-6.2,6-9,9.3v11.7h4.9Z"/>
+				    <path fill="#000000" class="on" d="M28,29.6h-8.1v-9.7h-4.9v9.7h-8v-13.8c3.1-3.7,6.3-7.1,9.8-10.4h1.3c3.5,3.3,6.8,6.7,9.8,10.4v13.8h0Z"/>
+				</svg>
+			</div>
+		</a>
+	</div>
+	<div class="bt master-bt">
+		<a href="#" class="bt-changeview" data-target="biblioteca-de-materiais">
+			<div class="ico">
+				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+				  <g class="on">
+				    <path fill="#000000" d="M5.3,23.3l1.2,1.2,5.2-5.2-1.2-1.2-5.2,5.2Z"/>
+				    <path fill="#000000" d="M10.3,28.4l1.2,1.2,5.2-5.2-1.2-1.2s-5.2,5.2-5.2,5.2Z"/>
+				    <path fill="#000000" d="M5,28.6l1.2,1.2,8-7.9-1.2-1.2-8,7.9Z"/>
+				    <path fill="#000000" d="M8.2,13.8l17.8-6-9.9,9.9-7.9-4h0ZM28.9,5.1L6.1,12.6v1.9l9.6,5,5,9.6h1.9l7.4-22.9-1.1-1.1Z"/>
+				  </g>
+				  <path class="off" fill="#656666" d="M17.3,19l9.9-9.9-5.9,17.8-4-7.9ZM8.2,13.7l17.8-5.9-9.9,9.9s-7.9-4-7.9-4ZM28.9,5.1L6,12.6v1.9l9.6,5,5,9.6h1.9l7.5-22.9-1.1-1.1Z"/>
+				</svg>
+			</div>
+		</a>
+	</div>
+	<div class="bt master-bt">
+		<a href="#" class="bt-changeview" data-target="campanhas">
+			<div class="ico">
+				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+				  <g class="off">
+				    <path fill="#656666" d="M.2,21.2l2.9-1,18-12.1,5.8,16-9.6,1,.2,1.1v.6c0,2-2.2,2.9-4.4,2.9s-3.4-.8-3.5-2.8v-.9l-4.2.4-2.9,1L.2,21.2ZM4.9,25.1l-1.3-3.6-1.5.5,1.3,3.6,1.5-.5ZM6.4,24.8l18.4-2-4.5-12.4-15.4,10.4,1.4,4h0ZM13,28.2c1.5,0,3-.2,3-1.6v-1.4c-.1,0-4.9.5-4.9.5v.8c.2,1.3.9,1.6,2,1.6M25.8,11.2l-1.1-1,3.9-4.9,1.2,1-3.9,4.9h-.1ZM26.8,16l-.5-1.4,5.9-2.1.5,1.4s-5.9,2.1-5.9,2.1ZM34.5,21.5l-6.2-1.3.3-1.5,6.2,1.3-.4,1.5h.1Z"/>
+				  </g>
+				  <g class="on">
+				    <path fill="#000000" d="M.2,21.2l2.9-1,18-12.1,5.8,16-9.6,1,.2,1.1v.6c0,2-2.2,2.9-4.4,2.9s-3.4-.8-3.5-2.8v-.9l-4.2.4-2.9,1L.2,21.2ZM4.9,25.1l-1.3-3.6-1.5.5,1.3,3.6,1.5-.5ZM13,28.2c1.5,0,3-.2,3-1.5v-1.4c-.1,0-4.9.5-4.9.5v.8c.2,1.3.9,1.6,2,1.6M25.8,11.2l-1.1-1,3.9-4.9,1.2,1-3.9,4.9h-.1ZM26.8,16l-.5-1.4,5.9-2.1.5,1.4s-5.9,2.1-5.9,2.1ZM34.5,21.5l-6.2-1.3.3-1.5,6.2,1.3-.4,1.5h.1Z"/>
+				  </g>
+				</svg>
+			</div>
+		</a>
+	</div>
+	<div class="bt master-bt">
+		<a href="#" class="bt-changeview" data-target="busca">
+			<div class="ico">
+				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+				  <path class="off" fill="#656666" d="M24.6,15.4c0,2.2-.7,4.3-2.1,5.9l6.8,6.8-1,1-6.8-6.8c-4,3.4-10,3-13.4-1-1.5-1.7-2.3-4-2.3-6.3,0-5.1,4.1-9.2,9.2-9.2,0,0,.1,0,.2,0,5.2,0,9.4,4.1,9.5,9.3,0,.1,0,.2,0,.3M15.1,7.3c-4.2-.1-7.8,3.2-7.9,7.5,0,0,0,.2,0,.3,0,4.4,3.5,8.1,7.9,8.2,0,0,0,0,.1,0,4.2.1,7.8-3.2,7.9-7.5,0,0,0-.2,0-.3,0-4.4-3.4-8.1-7.8-8.2,0,0-.1,0-.2,0"/>
+				  <path class="on" stroke="#000000" stroke-width=".5px" d="M24.6,15.4c0,2.2-.7,4.3-2.1,5.9l6.8,6.8-1,1-6.8-6.8c-4,3.4-10,3-13.4-1-1.5-1.7-2.3-4-2.3-6.3,0-5.1,4.1-9.2,9.2-9.2,0,0,.1,0,.2,0,5.2,0,9.4,4.1,9.5,9.3,0,.1,0,.2,0,.3M15.1,7.3c-4.2-.1-7.8,3.2-7.9,7.5,0,0,0,.2,0,.3,0,4.4,3.5,8.1,7.9,8.2,0,0,0,0,.1,0,4.2.1,7.8-3.2,7.9-7.5,0,0,0-.2,0-.3,0-4.4-3.4-8.1-7.8-8.2,0,0-.1,0-.2,0"/>
+				</svg>
+			</div>
+		</a>
+	</div>
+	<div class="bt master-bt">
+		<a href="#" class="bt-modal" data-target="tour" data-medium="ini">
+			<div class="ico">
+				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 35 35">
+				    <path class="off" fill="#656666" d="M20,26.5c-.5,1.1-1,2.1-1.7,3h-1.6c-.7-.9-1.2-1.9-1.7-3h-6.2c-1.3,0-2.5-.9-2.6-2.2,0-.1,0-.2,0-.3v-15.9c0-1.3,1-2.5,2.3-2.5,0,0,.2,0,.3,0h17.4c1.2-.2,2.4.7,2.6,1.9,0,.2,0,.4,0,.6v15.9c0,1.3-.9,2.5-2.2,2.6-.1,0-.3,0-.4,0h-6.1ZM17.5,28.2c.6-1,1.1-2.1,1.5-3.1h7c.6,0,1.2-.4,1.3-1,0,0,0-.2,0-.3v-15.6c0-.6-.4-1.2-1-1.3,0,0-.2,0-.3,0H9c-.6,0-1.2.4-1.3,1.1,0,0,0,.1,0,.2v15.7c0,.7.5,1.2,1.1,1.3,0,0,0,0,.1,0h7.1c.4,1.1.9,2.1,1.5,3.1M13.8,13h4.4v7.6h3v1.4h-7.4v-1.4h2.9v-6.1h-2.9v-1.4ZM18.7,10.2c0,.9-.4,1.2-1.2,1.2s-1.2-.3-1.2-1.2.4-1.2,1.2-1.2,1.2.3,1.2,1.2"/>
+				    <path class="on" d="M26.8,5.5H8.5c-.2,0-.3,0-.5,0,0,0-.2,0-.3.1,0,0-.1,0-.1,0,0,0-.2,0-.2.1,0,0,0,0-.1,0,0,0-.2.1-.2.2-.2.2-.4.4-.5.6,0,0,0,.2-.1.3,0,0,0,0,0,.1,0,.1,0,.2,0,.3,0,0,0,0,0,0,0,.1,0,.3,0,.4v16.4c0,1.3,1.2,2.3,2.6,2.2h6.2c.5,1.1,1,2.1,1.7,3h1.6c.7-.9,1.2-1.9,1.7-3h6.1c.1,0,.3,0,.4,0,.1,0,.2,0,.4,0h0s0,0,0,0c.1,0,.3,0,.4-.1,0,0,0,0,.1,0,0,0,0,0,.1,0,0,0,.1,0,.2-.1,0,0,.2-.1.2-.2,0,0,0,0,0-.1,0,0,0-.1.1-.2,0,0,0,0,0-.1,0-.1.1-.2.2-.3,0,0,0-.2.1-.3,0,0,0,0,0-.1h0c0-.1,0-.2,0-.4V7.4c-.1-1-1-1.8-2-2M21.3,22h-7.4v-1.4h2.9v-6.1h-2.9v-1.4h4.4v7.6h3v1.4ZM16.3,10.2c0-.9.4-1.2,1.2-1.2s1.2.3,1.2,1.2-.4,1.2-1.2,1.2-1.2-.3-1.2-1.2"/>
+				</svg>
+			</div>
+		</a>
+	</div>
+</div>
+
+<section class="container">
+	<aside class="left" data-anchor="menu">
+		<div class="content">
+			<div class="aux-scroll">
+				<div class="switcher">
+	                <div class="aux">
+	                    <div class="hld">
+	                        <a href="#" class="bt-switcher" data-target="menu">
+	                         	menu
+	                        </a>
+	                        <a href="#" class="bt-switcher" data-target="perfil">
+	                            perfil
+	                        </a>
+	                    </div>
+	                    <div class="sel-bg"></div>
+	                </div>
+	            </div>
+
+	            <div class="holder-content menu">
+	            	<div class="accordion">
+	            		<div class="bt master-bt selected">
+	            			<a href="#" class="bt-changeview" data-target="dashboard">
+	            				<div class="ico">
+		            				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+									    <path fill="#656666" class="off" d="M28,29.6h-8.1v-9.7h-4.9v9.7h-8v-13.8c3.1-3.7,6.4-7.1,9.8-10.4h1.3c3.5,3.3,6.8,6.7,9.8,10.4v13.8h0ZM13.5,28.1v-9.7h8.1v9.7h4.9v-11.7c-2.8-3.3-5.7-6.4-8.9-9.3-3.3,2.9-6.2,6-9,9.3v11.7h4.9Z"/>
+									    <path fill="#000000" class="on" d="M28,29.6h-8.1v-9.7h-4.9v9.7h-8v-13.8c3.1-3.7,6.3-7.1,9.8-10.4h1.3c3.5,3.3,6.8,6.7,9.8,10.4v13.8h0Z"/>
+									</svg>
+	            				</div>
+								<div class="txt">início</div>
+	            			</a>
+	            		</div>
+
+	            		<div class="bt master-bt">
+	            			<div class="aux-dropdown">
+		            			<a href="#" class="bt-changeview" data-target="biblioteca-de-materiais">
+		            				<div class="ico">
+			            				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+										  <g class="on">
+										    <path fill="#000000" d="M5.3,23.3l1.2,1.2,5.2-5.2-1.2-1.2-5.2,5.2Z"/>
+										    <path fill="#000000" d="M10.3,28.4l1.2,1.2,5.2-5.2-1.2-1.2s-5.2,5.2-5.2,5.2Z"/>
+										    <path fill="#000000" d="M5,28.6l1.2,1.2,8-7.9-1.2-1.2-8,7.9Z"/>
+										    <path fill="#000000" d="M8.2,13.8l17.8-6-9.9,9.9-7.9-4h0ZM28.9,5.1L6.1,12.6v1.9l9.6,5,5,9.6h1.9l7.4-22.9-1.1-1.1Z"/>
+										  </g>
+										  <path class="off" fill="#656666" d="M17.3,19l9.9-9.9-5.9,17.8-4-7.9ZM8.2,13.7l17.8-5.9-9.9,9.9s-7.9-4-7.9-4ZM28.9,5.1L6,12.6v1.9l9.6,5,5,9.6h1.9l7.5-22.9-1.1-1.1Z"/>
+										</svg>
+		            				</div>
+									<div class="txt">biblioteca de materiais</div>
+		            			</a>
+
+		            			<a href="#" class="bt-dropdown" data-target="materiais">
+									<div class="chevron"></div>
+								</a>
+	            			</div>
+
+	            			<div class="sub-content materiais"></div>
+	            		</div>
+	            		<div class="bt master-bt">
+	            			<div class="aux-dropdown">
+	            				<a href="#" class="bt-changeview" data-target="campanhas">
+		            				<div class="ico">
+			            				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+										  <g class="off">
+										    <path fill="#656666" d="M.2,21.2l2.9-1,18-12.1,5.8,16-9.6,1,.2,1.1v.6c0,2-2.2,2.9-4.4,2.9s-3.4-.8-3.5-2.8v-.9l-4.2.4-2.9,1L.2,21.2ZM4.9,25.1l-1.3-3.6-1.5.5,1.3,3.6,1.5-.5ZM6.4,24.8l18.4-2-4.5-12.4-15.4,10.4,1.4,4h0ZM13,28.2c1.5,0,3-.2,3-1.6v-1.4c-.1,0-4.9.5-4.9.5v.8c.2,1.3.9,1.6,2,1.6M25.8,11.2l-1.1-1,3.9-4.9,1.2,1-3.9,4.9h-.1ZM26.8,16l-.5-1.4,5.9-2.1.5,1.4s-5.9,2.1-5.9,2.1ZM34.5,21.5l-6.2-1.3.3-1.5,6.2,1.3-.4,1.5h.1Z"/>
+										  </g>
+										  <g class="on">
+										    <path fill="#000000" d="M.2,21.2l2.9-1,18-12.1,5.8,16-9.6,1,.2,1.1v.6c0,2-2.2,2.9-4.4,2.9s-3.4-.8-3.5-2.8v-.9l-4.2.4-2.9,1L.2,21.2ZM4.9,25.1l-1.3-3.6-1.5.5,1.3,3.6,1.5-.5ZM13,28.2c1.5,0,3-.2,3-1.5v-1.4c-.1,0-4.9.5-4.9.5v.8c.2,1.3.9,1.6,2,1.6M25.8,11.2l-1.1-1,3.9-4.9,1.2,1-3.9,4.9h-.1ZM26.8,16l-.5-1.4,5.9-2.1.5,1.4s-5.9,2.1-5.9,2.1ZM34.5,21.5l-6.2-1.3.3-1.5,6.2,1.3-.4,1.5h.1Z"/>
+										  </g>
+										</svg>
+		            				</div>
+									<div class="txt">campanhas</div>
+	            				</a>
+	            				<a href="#" class="bt-dropdown" data-target="campanhas">
+									<div class="chevron"></div>
+								</a>
+	            			</div>
+	            			<div class="sub-content campanhas"></div>
+	            		</div>
+	            	</div>
+	            </div>
+
+	            <div class="holder-content perfil">
+	            	<div class="bt-fechar">
+			            <a href="#" class="bt-fechar-perfil" data-target="left"></a>
+			        </div>
+
+	            	<div class="dados">
+	            		<div class="img">
+	            			<div class="hld"></div>
+	            			<div class="bt">
+	            				<a href="#" class="bt-modal" data-target="edit-foto" data-medium="perfil">
+	            					<div class="ico"></div>
+	            				</a>
+	            			</div>
+	            		</div>
+	            		<div class="saudacao">olá, <span></span> :)</div>
+	            	</div>
+
+	            	<div class="bts">
+		            	<div class="bt">
+	            			<a href="#" class="bt-changeview" data-target="meus-itens-salvos">
+	            				<div class="ico">
+		            				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+									  <g class="off">
+									    <path fill="#656666" d="M17.5,27.7l-9,5.6-1.5-.6V4.7c0-2,1-3,3-3h15c2,0,3,1,3,3v28l-1.5.5-9-5.6h0ZM26.3,31V5c0-1.1-.4-1.6-1.5-1.6h-14.6c-1.1,0-1.5.5-1.5,1.6v26l8.8-5.5,8.8,5.5ZM21.3,20.3c-1.7-.8-2.6-1.3-3.9-1.9-1.2.6-2.2,1.1-3.9,1.9l-.8-.5c.2-1.4.5-2.8.8-4.2-1-.9-1.7-1.6-3-3l.2-1c1.8-.3,2.9-.5,4.2-.6.6-1.3,1.2-2.4,2.1-4.1h.7c.9,1.6,1.5,2.8,2.1,4.1,1.3.1,2.3.3,4.1.6l.2,1c-1.3,1.3-2,2.1-3,3,.4,1.4.6,2.8.8,4.2l-.8.5h.2ZM14.8,18c1.3-.6,2-1.1,2.7-1.5.8.5,1.7,1,2.6,1.4-.3-1.3-.4-2.1-.5-2.8,1.1-1,1.6-1.6,2.3-2.2-1.4-.2-2.2-.3-3-.4-.4-.9-.8-1.9-1.3-2.8-.4.8-.7,1.4-1.3,2.8-.9,0-1.6.2-3.1.4.7.8,1.4,1.5,2.2,2.2-.2.8-.3,1.5-.5,2.9"/>
+									  </g>
+									  <g class="on">
+									    <path fill="#000000" d="M17.5,9.7c-.4.8-.7,1.4-1.3,2.8-.9,0-1.6.2-3.1.4.7.8,1.4,1.5,2.2,2.2-.2.8-.3,1.5-.5,2.9,1.3-.6,2-1,2.7-1.5.8.5,1.7,1,2.6,1.4-.3-1.3-.4-2.1-.5-2.8,1.1-1,1.6-1.6,2.3-2.2-1.4-.2-2.2-.3-3-.4-.4-.9-.8-1.9-1.3-2.8"/>
+									    <path fill="#000000" d="M24.9,1.7h-15c-2,0-3,1-3,3v28l1.5.6,9-5.6,9,5.6,1.5-.5V4.7c0-2-1-3-3-3M21.2,15.6c.4,1.4.6,2.8.8,4.2l-.8.5c-1.7-.8-2.6-1.3-3.9-1.9-1.2.6-2.2,1.1-3.9,1.9l-.8-.5c.2-1.4.5-2.8.8-4.2-1-.9-1.7-1.6-3-3l.2-1c1.8-.3,2.9-.5,4.2-.6.6-1.3,1.2-2.4,2.1-4.1h.7c.9,1.6,1.5,2.8,2.1,4.1,1.3.1,2.3.3,4.1.6l.2,1c-1.3,1.3-2,2.1-3,3"/>
+									  </g>
+									</svg>
+	            				</div>
+								<div class="txt">meus itens salvos</div>
+	            			</a>
+	            		</div>
+
+		            	<div class="bt">
+	            			<a href="#" class="bt-changeview" data-target="central-de-ajuda">
+	            				<div class="ico">
+		            				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+									  <g class="off">
+									    <path fill="#656666" stroke="#656666" stroke-width=".2px" d="M17.5,4.7c-7.3,0-12.2,5.5-12.2,12.8s4.9,12.8,12.2,12.8,12.2-5.5,12.2-12.8-4.9-12.8-12.2-12.8M17.5,29c-6.5,0-10.9-4.9-10.9-11.5s4.4-11.5,10.9-11.5,10.9,4.9,10.9,11.5-4.4,11.5-10.9,11.5M13.5,10.6v-1.3c1.2-.4,2.5-.5,3.8-.6,2.7,0,4.4,1.4,4.4,4.1s-.7,2.4-2,3.8l-.6.6c-.7.6-1,1.4-1,2.3v1.4h-1.4v-1.5c0-1.2.5-2.4,1.4-3.2l.6-.6c1.1-1.2,1.4-1.7,1.4-2.8,0-1.9-1.1-2.8-3.2-2.8-1.2,0-2.4.2-3.5.5M16.3,24.8c0-.7.4-1.1,1.1-1.1s1.1.3,1.1,1.1-.3,1.1-1.1,1.1c-.5,0-1-.3-1.1-.8,0,0,0-.2,0-.3"/>
+									  </g>
+									  <g class="on">
+									    <path fill="#000000" d="M17.5,4.7c-7.3,0-12.2,5.5-12.2,12.8s4.9,12.8,12.2,12.8,12.2-5.5,12.2-12.8-4.9-12.8-12.2-12.8M17.5,25.9c-.5,0-1-.3-1.1-.8,0,0,0-.2,0-.3,0-.8.4-1.1,1.1-1.1s1.1.3,1.1,1.1-.3,1.1-1.1,1.1M19.7,16.6l-.6.6c-.7.6-1,1.4-1,2.3v1.4h-1.4v-1.5c0-1.2.5-2.4,1.4-3.2l.6-.6c1.1-1.2,1.4-1.7,1.4-2.8,0-1.9-1.1-2.8-3.2-2.8-1.2,0-2.4.2-3.5.5v-1.3c1.2-.4,2.5-.5,3.8-.6,2.7,0,4.4,1.4,4.4,4.1s-.6,2.4-2,3.8"/>
+									  </g>
+									</svg>
+	            				</div>
+								<div class="txt">central de ajuda</div>
+	            			</a>
+	            		</div>
+
+		            	<div class="bt">
+	            			<a href="#" class="bt-modal" data-target="termos">
+	            				<div class="ico">
+		            				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+									  <g class="off">
+									    <rect fill="#656666" x="12.3" y="15.8" width="10.4" height="1.7"/>
+									    <rect fill="#656666" x="12.3" y="19.3" width="10.4" height="1.7"/>
+									    <rect fill="#656666" x="12.3" y="22.8" width="10.4" height="1.7"/>
+									    <path fill="#656666" d="M21.5,3.4H7v28.1h21V10c-2-2.4-4.1-4.6-6.5-6.5M26.3,29.9H8.7V5.1h10.5v7h7v17.7ZM21,10.5v-5.3c1.9,1.6,3.7,3.4,5.3,5.3h-5.3Z"/>
+									  </g>
+									  <g class="on">
+									    <rect fill="#000000" data-name="Retângulo_722" x="12.3" y="15.8" width="10.4" height="1.7"/>
+									    <rect fill="#000000" data-name="Retângulo_723" x="12.3" y="19.3" width="10.4" height="1.7"/>
+									    <rect fill="#000000" data-name="Retângulo_724" x="12.3" y="22.8" width="10.4" height="1.7"/>
+									    <path fill="#000000" data-name="Caminho_882" d="M21.5,3.4H7v28.1h21V10c-2-2.4-4.1-4.6-6.5-6.5M26.3,29.9H8.7V5.1h10.5v7h7v17.7ZM21,10.5v-5.3c1.9,1.6,3.7,3.4,5.3,5.3h-5.3Z"/>
+									  </g>
+									</svg>
+	            				</div>
+								<div class="txt">termos e política</div>
+	            			</a>
+	            		</div>
+
+		            	<div class="bt">
+	            			<a href="#" class="bt-changeview" data-target="configuracoes">
+	            				<div class="ico">
+		            				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+									  <g class="off">
+									    <path fill="#656666" d="M30.6,14.5l-.8-.2c-2.5-.7-3.5-1.7-3.5-3.4,0-.8.2-1.7.4-2.4l.2-.7c-1.7-1.2-3.4-2.3-5.3-3.2l-.5.6c-.8,1.2-2.2,1.9-3.6,2-1.4,0-2.8-.8-3.6-2l-.5-.6c-1.9.9-3.6,1.9-5.3,3.2l.2.7c.3.8.4,1.6.4,2.4,0,1.7-1,2.7-3.5,3.4l-.8.2c0,2.2,0,3.9,0,6.1l.8.2c2.5.7,3.5,1.7,3.5,3.4,0,.8-.2,1.7-.4,2.5l-.2.7c1.7,1.2,3.4,2.3,5.3,3.2l.5-.6c.8-1.2,2.2-1.9,3.6-2,1.5,0,2.8.8,3.6,2l.5.6c1.9-.9,3.6-1.9,5.3-3.2l-.2-.7c-.3-.8-.4-1.6-.4-2.5,0-1.7,1-2.7,3.5-3.4l.8-.2c0-2.1,0-3.9,0-6.1M29,19.4c-3.2.7-4.4,2.5-4.4,4.8,0,.8.1,1.7.4,2.5-1,.7-2,1.3-3.1,1.9-1.6-1.7-2.8-2.2-4.4-2.2s-2.8.5-4.4,2.2c-1.1-.5-2.1-1.2-3.1-1.9.2-.8.3-1.6.4-2.5,0-2.2-1.1-4-4.4-4.8v-3.8c3.2-.8,4.4-2.5,4.4-4.7,0-.8-.1-1.7-.4-2.5,1-.7,2-1.4,3.1-1.9,1.6,1.7,2.8,2.2,4.3,2.2s2.8-.5,4.3-2.1c1.1.5,2.2,1.1,3.2,1.9-.2.8-.3,1.6-.4,2.5,0,2.2,1.1,3.9,4.4,4.7v3.8Z"/>
+									    <path fill="#656666" d="M17.5,12.6c-3.1,0-5,1.8-5,4.9s1.9,5,5,5,4.9-1.9,4.9-5-1.8-4.9-4.9-4.9M17.5,20.9c-1.7.2-3.2-1.1-3.4-2.8,0-.2,0-.4,0-.6-.2-1.7,1.1-3.2,2.8-3.3.2,0,.4,0,.6,0,1.7-.2,3.2,1.1,3.3,2.7,0,.2,0,.4,0,.6.2,1.7-1,3.2-2.7,3.4-.2,0-.4,0-.6,0"/>
+									  </g>
+									  <g class="on">
+									    <path fill="#000000" d="M30.6,14.5l-.8-.2c-2.5-.7-3.5-1.7-3.5-3.4,0-.8.2-1.7.4-2.5l.2-.7c-1.7-1.2-3.4-2.3-5.3-3.2l-.5.6c-.8,1.2-2.2,1.9-3.6,2-1.4,0-2.8-.8-3.6-2l-.5-.6c-1.9.9-3.6,1.9-5.3,3.2l.2.7c.3.8.4,1.6.4,2.5,0,1.7-1,2.7-3.5,3.4l-.8.2c0,2.2,0,3.9,0,6.1l.8.2c2.5.7,3.5,1.7,3.5,3.4,0,.8-.2,1.7-.4,2.5l-.2.7c1.7,1.2,3.4,2.3,5.3,3.2l.5-.5c.8-1.2,2.2-1.9,3.6-2,1.5,0,2.8.8,3.6,2l.5.5c1.9-.9,3.6-1.9,5.3-3.1l-.2-.7c-.3-.8-.4-1.6-.4-2.5,0-1.7,1-2.7,3.5-3.4l.8-.2c0-2.1,0-3.9,0-6.1M18.1,20.9c-.2,0-.4,0-.6,0-1.7.2-3.2-1.1-3.4-2.8,0,0,0,0,0,0,0-.2,0-.4,0-.6-.2-1.7,1.1-3.2,2.7-3.3,0,0,0,0,0,0,.2,0,.4,0,.6,0,1.7-.2,3.1,1.1,3.3,2.7,0,0,0,0,0,0,0,.2,0,.4,0,.6.2,1.7-1,3.2-2.7,3.4"/>
+									  </g>
+									</svg>
+	            				</div>
+								<div class="txt">configurações</div>
+	            			</a>
+	            		</div>
+
+		            	<div class="bt">
+	            			<a href="#" class="bt-logout" data-target="login">
+	            				<div class="ico">
+		            				<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" version="1.1" viewBox="0 0 35 35">
+									  <g class="off">
+									    <path fill="#656666" d="M6.1,7v21h12.9v-8.1h-1.6v6.5H7.7V8.6h9.8v6.4h1.6V7H6.1Z"/>
+									    <path fill="#656666" d="M22.6,22.6l-1-1.3c2.1-1.3,3.2-1.9,4.8-3h-15.4v-1.6h15.5c-1.6-1.1-2.7-1.7-4.8-3l.9-1.3c2.1,1.4,4.2,2.8,6.2,4.4v1.4c-2,1.6-4.1,3-6.2,4.4"/>
+									  </g>
+									  <g class="on">
+									    <path fil="#000000" d="M6.1,7v21h12.9v-8.1h-1.6v6.5H7.7V8.6h9.8v6.4h1.6V7H6.1Z"/>
+									    <path fil="#000000" d="M22.6,22.6l-1-1.3c2.1-1.3,3.2-1.9,4.8-3h-15.4v-1.6h15.5c-1.6-1.1-2.7-1.7-4.8-3l.9-1.3c2.1,1.4,4.2,2.8,6.2,4.4v1.4c-2,1.6-4.1,3-6.2,4.4"/>
+									  </g>
+									</svg>
+	            				</div>
+								<div class="txt">sair</div>
+	            			</a>
+	            		</div>
+	            	</div>
+	            </div>
+			</div>
+		</div>
+	</aside>
+	
+	<div id="content-holder"></div>
+
+	<aside id="sidebar-holder" class="right"></aside>
+</section>
+
+
+<div class="tour" id="tour">
+	<div class="holder">
+		<div class="bt-fechar">
+            <a href="#" class="bt-fechar-tour" data-target="modal"></a>
+        </div>
+
+		<h3>bem-vindo</h3>
+		<p>Bem-vindo(a) ao Feed Renault! Vamos te mostrar como explorar cada recurso da plataforma.</p>
+		<div class="bts">
+			<div class="bt">
+				<a href="#" class="bt-iniciar-tour">avançar <div class="ico"></div></a>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="shape"></div>
+	<div class="box" id="box-tour">
+		<div class="bt-fechar">
+            <a href="#" class="bt-fechar-tour"></a>
+        </div>
+
+		<div class="txt"></div>
+		<div class="dots"></div>
+		<div class="nav-tour">
+			<a href="#" class="bt-prev-tour">
+				<div class="ico">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.031" height="13.089" viewBox="0 0 9.031 13.089">
+					   <path class="linha" d="M8.481,13.089A98.874,98.874,0,0,1,0,6.946v-.8A98.875,98.875,0,0,1,8.481,0l.55.8A72.775,72.775,0,0,0,1.077,6.556a75.733,75.733,0,0,0,7.954,5.731Z" transform="translate(0 0)"/>
+					</svg>
+				</div> 
+				voltar
+			</a>
+			<a href="#" class="bt-next-tour">
+				avançar 
+				<div class="ico">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.031" height="13.089" viewBox="0 0 9.031 13.089">
+					   <path class="linha" d="M8.481,13.089A98.874,98.874,0,0,1,0,6.946v-.8A98.875,98.875,0,0,1,8.481,0l.55.8A72.775,72.775,0,0,0,1.077,6.556a75.733,75.733,0,0,0,7.954,5.731Z" transform="translate(0 0)"/>
+					</svg>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="modal busca" id="busca">
+	<div class="holder-busca">
+		<div class="busca-geral">
+	        <form id="form-busca-geral">
+	            <input type="text" name="busca" placeholder="Pesquise em todo o Feed Renault">
+	            <div class="aux-submit">
+	                <input type="submit" value="">
+	                <div class="ico"></div>
+	            </div>
+	        </form>
+	    </div>
+		<div class="bt-fechar white">
+            <a href="#" class="bt-close-modal" data-target="modal"></a>
+        </div>
+	</div>
+</div>
+
+<div class="modal termos" id="termos">
+	<div class="hld-termos holder">
+        <div class="topo-termos">
+        	<h3>Termos e políticas de uso da plataforma</h3>
+			<p>Feed Renault</p>
+
+			<div class="bt-fechar white">
+                <a href="#" class="bt-close-modal" data-target="modal"></a>
+            </div>
+        </div>
+        <div class="content-termos">
+        	<h3>POLÍTICA DE PRIVACIDADE PARA USO E TRATAMENTO DE DADOS DA PLATAFORMA FEED RENAULT</h3>
+			<p>A sua privacidade é importante para nós. É política da Renault do Brasil respeitar a sua privacidade em relação a qualquer informação que nos seja repassada ou que possamos coletar na plataforma e no aplicativo Feed Renault, ou em outros sites e hotsites relacionados que possamos utilizar e operar.</p>
+			<p>Este documento visa dispor acerca das regras de uso e tratamento de dados na plataforma e no aplicativo “Feed Renault ”, assim como dispor acerca da forma de registro da manifestação livre, informada e inequívoca pela qual você possa concordar com o tratamento de seus dados pessoais para as finalidades dispostas neste documento e no “Feed Renault”, nos termos da Lei nº 13.709/2018 – Lei Geral de Proteção de Dados Pessoais (LGPD).</p>
+			<p>Ao manifestar sua aceitação a este termo, o <strong>USUÁRIO</strong> consente e concorda que a RENAULT DO BRASIL S.A., pessoa jurídica de direito privado, com sede em São José dos Pinhais, estado do Paraná, na Avenida Renault, n.º 1300, Borda do Campo, inscrita no CNPJ/MF sob n.º 00.913.443/0001-73, neste doravante citada como <strong>RENAULT</strong>, tome decisões referentes ao tratamento de seus dados pessoais, em especial aquelas que envolvam coleta, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, comunicação, transferência, difusão ou extração.</p>
+			<p>DADOS PROFISSIONAIS</p>
+			<p>A <strong>RENAULT</strong> ficará autorizada a tomar decisões referentes ao tratamento dos seus dados informados e/ou coletados quando do uso da plataforma e do aplicativo “Feed Renault”. Considera-se dado pessoal toda informação que identifique ou que possa identificar uma pessoa física. Quando do uso da plataforma e do aplicativo “Feed Renault”, destacamos que os dados abaixo serão tratados:</p>
+			<p>•  Nome completo;</p>
+			<p>• E-mail;</p>
+			<p>• Número da BIR;</p>
+			<p>A Renault destaca que não fará a coleta ou o tratamento de dados pessoais classificados como sensíveis, nos termos do inciso II, art. 5ª da Lei Geral de Proteção de Dados – Lei 13.709/2018.</p>
+			<p>A RENAULT fica autorizada a tomar decisões referentes ao tratamento dos dados que tiver acesso por meio da plataforma “Feed Renault”, tal tratamento sempre estará vinculado com o objetivo de divulgar informações da marca, novidades, campanhas, etc. sobre a Renault do Brasil, assim como buscar aproximar a Rede de Concessionárias ao universo Renault, nos termos das finalidades destacadas neste documento.</p>
+			<p>O tratamento sempre se dará por meios justos e legais, com o seu conhecimento e consentimento, e ocorrerá em função do vínculo entre a Renault e a Concessionária. Serão adotadas todas as medidas de segurança da informação de forma a restringir acessos aos dados informados e coletados pela Renault, assim como se empregará mecanismos de anonimização das informações.</p>
+			<p>FINALIDADES DO TRATAMENTO DOS DADOS</p>
+			<p>O tratamento dos dados profissionais listados neste termo tem a finalidade de possibilitar que a RENAULT:</p>
+			<p>• Divulgue informações sobre a empresa para funcionários e integrantes da Rede de Concessionárias Renault;</p>
+			<p>• Comunique novidades de campanhas, materiais exclusivos para clientes, redes sociais e tudo que envolve o universo da marca Renault.</p>
+			<p>• Utilize os dados para mensuração de número de usuários, volume de acessos e engajamento no portal e aplicativo “Feed Renault”.</p>
+			<p>Os dados serão coletados e tratados apenas pelo tempo necessário para desenvolvimento das atividades destacadas nas finalidades acima e poderão ser a qualquer tempo excluídos ou alterados pelo usuário. O usuário pode solicitar a sua exclusão junto à equipe da plataforma, via atendimento “Fale Conosco”.</p>
+			<p>A Renault emprega todos as medidas de segurança de forma a resguardar os dados que por ela forem coletados de modo a evitar acessos indevidos, furtos, invasões, bem como divulgação, cópia, uso ou modificação não autorizados.</p>
+			<p>POLÍTICA DE COOKIES FEED RENAULT</p>
+			<p>Como é prática comum em quase todos aplicativos e sites, o aplicativo e a plataforma “Feed Renault” utilizam cookies. Os cookies são arquivos de internet que armazenam temporariamente dados de navegação na rede, eles tornam sua experiência on-line mais fácil e com eles as aplicações podem manter o usuário conectado, lembrar as preferências no aplicativo e fornecer conteúdo relevante localmente.</p>
+			<p>Utilizamos cookies para tornar a sua navegação no “Feed Renault” uma ótima experiência com foco em suas preferências.</p>
+			<p>Se você criar uma conta conosco, usaremos cookies para o gerenciamento do processo de inscrição e administração geral. Esses cookies geralmente serão excluídos quando você sair do sistema, porém, em alguns casos, eles poderão permanecer posteriormente para lembrar as preferências do seu usuário. Isso evita que você precise fazer um novo login sempre que visitar a página.</p>
+			<p>O aplicativo e a plataforma também oferecem serviços de notificações e newsletter via celular ou e-mail e os cookies podem ser usados para lembrar se você já está registrado e se deve mostrar determinadas notificações válidas apenas para usuários inscritos / não inscritos.</p>
+			<p>Periodicamente, fazemos pesquisas e questionários para colher informações interessantes ou para entender e atender nossa base de usuários com mais precisão. Essas pesquisas podem usar cookies para lembrar aqueles usuários que já participaram em uma pesquisa ou para fornecer resultados precisos após a alteração das páginas. Quando você envia dados por meio de um formulário/enquete, os cookies te ajudam a lembrar que já participou da pesquisa.</p>
+			<p>O Aplicativo e a plataforma “Feed Renault” fazem uso do Google Analytics e Firebase, soluções de análise mais difundidas e confiáveis da Web, para nos ajudar a entender como se dá a interação e como podemos melhorar sua experiência. Esses cookies podem rastrear informações como quanto tempo você gasta no aplicativo e as páginas visitadas, isso serve para que possamos continuar produzindo conteúdo atraente. Para mais informações sobre cookies do Google Analytics e Firebase consulte as páginas oficiais dos serviços.</p>
+			<p>Os cookies são essenciais para a operacionalização sistêmica do “Feed Renault”, apesar disso, os usuários têm a possibilidade de desabilitar estes recursos nas configurações do aplicativo e do celular/computador.</p>
+			<p>Você pode impedir a configuração de cookies ajustando as configurações do seu navegador (consulte o item de “Ajuda” do navegador para saber como fazer isso). Esteja ciente de que a desativação de cookies afetará a funcionalidade do “Feed Renault” e de outros sites que você visita.</p>
+			<p>A desativação de cookies geralmente resultará na desativação de determinadas funcionalidades e recursos do “Feed Renault”. Portanto, é recomendável que você não desative os cookies. A desabilitação de todos os cookies pode acarretar o não funcionamento ou a má operação do sistema. É recomendável que você deixe todos os cookies ativos se não tiver certeza se precisa ou não deles, uma vez que eles podem ser utilizados para fornecer um serviço que você usa.</p>
+			<p>COMPARTILHAMENTO DE DADOS</p>
+			<p>A RENAULT poderá compartilhar os dados recebidos com seus prestadores de serviços, fornecedores, subcontratados, empresas do Grupo Renault, entidades sindicais, entre outros. O compartilhamento sempre se dará em conformidade com o preconizado na legislação vigente, em especial, mas não apenas, com a Lei nº 13.709/2018.</p>
+			<p>O compartilhamento, quando ocorrer, se dará única e exclusivamente para o atingimento dos objetivos estabelecidos no presente documento e na plataforma “Feed Renaullt” e se dará seguindo os padrões de segurança do Grupo Renault.</p>
+			<p>SEGURANÇA DOS DADOS</p>
+			<p>A RENAULT responsabiliza-se pela manutenção de medidas de segurança, técnicas e administrativas aptas a proteger os dados pessoais de acessos não autorizados e de situações acidentais ou ilícitas de destruição, perda, alteração, comunicação ou qualquer forma de tratamento inadequado ou ilícito.</p>
+			<p>Em conformidade ao art. 48 da Lei nº 13.709, a RENAULT comunicará ao USUÁRIO e à Autoridade Nacional de Proteção de Dados (ANPD) a ocorrência de incidente de segurança que possa acarretar risco ou dano relevante.</p>
+			<p>DO ARMAZENAMENTO</p>
+			<p>O armazenamento dos seus dados pessoais ocorre principalmente em servidores localizados no Brasil, pode acontecer, entretanto, de que estes dados sejam armazenados em servidores localizados no exterior.</p>
+			<p>Esclarecemos que o armazenamento em servidores localizados em outros países só acontecerá se e quando as medidas adotadas pelo país de origem, no que se referem à proteção de dados, forem equivalentes às do Brasil e às empregadas pela RENAULT.</p>
+			<p>TÉRMINO DO TRATAMENTO DOS DADOS</p>
+			<p>A RENAULT poderá manter e tratar os dados pessoais fornecidos no aplicativo e na plataforma durante todo o período em que eles forem pertinentes ao alcance das finalidades listadas nesta política. Dados pessoais anonimizados, sem possibilidade de associação ao indivíduo, poderão ser mantidos por período indefinido.</p>
+			<p>O USUÁRIO poderá solicitar via “Fale Conosco”, a qualquer momento, que sejam eliminados seus dados pessoais não anonimizados. O USUÁRIO fica ciente de que poderá ser inviável à RENAULT continuar o fornecimento de produtos ou serviços ao titular a partir da eliminação dos dados pessoais.</p>
+			<p>DIREITOS DO TITULAR</p>
+			<p>Os conteúdos publicados no aplicativo e na plataforma “Feed Renault” podem ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e as práticas desses sites e não nos responsabilizamos por seus atos e por suas políticas de privacidade.</p>
+			<p>Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que neste caso talvez não possamos fornecer alguns dos serviços desejados e/ou utilizados no “Feed Renault”.</p>
+			<p>O uso continuado do aplicativo e da plataforma “Feed Renault” será considerado como aceitação de nossas práticas em torno de privacidade e informações pessoais. Se você tiver alguma dúvida adicional sobre como lidamos com dados do usuário e informações pessoais, entre em contato conosco via “Fale Conosco”.</p>
+			<p>Última atualização: 29/04/2021</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal foto" id="edit-foto">
+    <div class="holder">
+        <div class="bt-fechar">
+            <a href="#" class="bt-close-modal" data-target="modal"></a>
+        </div>
+        
+        <div class="titulo var perfil">atualizar foto de perfil</div>
+        <div class="titulo var cartao">atualizar foto do cartão</div>
+
+        <div class="crop-foto">
+            <div class="hld-img">
+                <div class="aux-img">
+                    <img id="image" src="assets/images/img_perfil.jpg">
+                </div>
+                <div class="mascara"></div>
+
+                <div class="info">
+                <img src="assets/images/ico_drag_white.svg">
+                    Arraste para reposicionar
+                </div>
+            </div>
+        </div>
+
+        <div class="drag-slide">
+            <div class="aux">
+                <div class="ico bt-menos"></div>
+                <input type="range" step="0.001" min="0" max="2" name="" id="scale" value="1">
+                <div class="ico bt-mais"></div>
+            </div>
+        </div>
+        <div class="bt-upload">
+            <input type="file" id="file" accept="image/*" />
+            <label for="file">
+                pesquisar imagem
+                <div class="ico"></div>
+            </label>
+        </div>
+        <div class="bts">
+            <div class="bt">
+                <a href="#" class="bt-cancelar-modal" data-target="modal">cancelar</a>
+            </div>
+            <div class="bt alt">
+                <a href="#" class="bt-salvar-imagem var perfil" data-target="modal" data-medium="perfil">salvar</a>
+                <a href="#" class="bt-salvar-imagem var cartao" data-target="modal" data-medium="cartao">salvar</a>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<div class="modal compartilhar" id="compartilhar">
+    <div class="holder">
+        <div class="bt-fechar">
+            <a href="#" class="bt-close-compartile" data-target="modal"></a>
+        </div>
+        
+        <div class="titulo">compartilhe</div>
+
+        <div class="bts-social">
+            <div class="bt">
+                <a href="#" class="bt-share" data-type="whatsapp" target="_blank"><div class="ico whatsapp"></div> WhatsApp</a>
+            </div>
+            <div class="bt">
+                <a href="#" class="bt-share" data-type="telegram" target="_blank"><div class="ico telegram"></div> Telegram</a>
+            </div>
+            <div class="bt">
+                <a href="#" class="bt-share" data-type="facebook" target="_blank"><div class="ico facebook"></div> Facebook</a>
+            </div>
+            <div class="bt">
+                <a href="#" class="bt-share" data-type="linkedin" target="_blank"><div class="ico linkedin"></div> LinkedIn</a>
+            </div>
+            <div class="bt">
+                <a href="#" class="bt-share" data-type="email"><div class="ico email"></div> E-mail</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="aux-cards">
+	<div id="cards">
+	    <div class="card post">
+	        <div class="txt">insira um texto que ocupe até seis linhas do espaço reservado para personalização</div>
+	    </div>
+
+	    <!-- STORY -->
+	    <div class="card story atributos">
+	    	<div class="aux-text">
+	        	<div class="txt concessionaria"></div>
+	        	<div class="txt telefones"></div>
+	        	<div class="txt vendedor"></div>
+	        	<div class="txt endereco"></div>
+	        	<div class="txt cep"></div>
+	    	</div>
+	    </div>
+	    <div class="card story testdrive">
+	    	<div class="aux-text">
+	        	<div class="txt concessionaria"></div>
+	        	<div class="txt telefones"></div>
+	        	<div class="txt vendedor"></div>
+	        	<div class="txt endereco"></div>
+	        	<div class="txt cep"></div>
+	    	</div>
+	    </div>
+	    <div class="card story valor">
+	    	<div class="aux-text">
+	        	<div class="txt valor"></div>
+	        	<div class="txt texto"></div>
+	    	</div>
+	    </div>
+	    <div class="card story parcela">
+	    	<div class="aux-text">
+	        	<div class="txt valor"></div>
+	        	<div class="txt texto"></div>
+	    	</div>
+	    </div>
+	    <div class="card story atributos-care">
+	    	<div class="aux-text">
+	        	<div class="txt concessionaria"></div>
+	        	<div class="txt telefones"></div>
+	        	<div class="txt vendedor"></div>
+	        	<div class="txt endereco"></div>
+	        	<div class="txt cep"></div>
+	    	</div>
+	    </div>
+	    <div class="card story agendamento-care">
+	    	<div class="aux-text">
+	        	<div class="txt concessionaria"></div>
+	        	<div class="txt telefones"></div>
+	        	<div class="txt vendedor"></div>
+	        	<div class="txt endereco"></div>
+	        	<div class="txt cep"></div>
+	    	</div>
+	    </div>
+	    <div class="card story comercial-care">
+	    	<div class="aux-text">
+	        	<div class="txt servico"></div>
+	        	<div class="txt valor"></div>
+	        	<div class="txt oferta"></div>
+	        	<div class="txt itens"></div>
+	    	</div>
+	    </div>
+
+	    <!-- POST -->
+	    <div class="card post atributos">
+	    	<div class="aux-text">
+	        	<div class="txt concessionaria"></div>
+	        	<div class="txt telefones"></div>
+	        	<div class="txt vendedor"></div>
+	        	<div class="txt endereco"></div>
+	        	<div class="txt cep"></div>
+	    	</div>
+	    </div>
+	    <div class="card post testdrive">
+	    	<div class="aux-text">
+	        	<div class="txt concessionaria"></div>
+	        	<div class="txt telefones"></div>
+	        	<div class="txt vendedor"></div>
+	        	<div class="txt endereco"></div>
+	        	<div class="txt cep"></div>
+	    	</div>
+	    </div>
+	    <div class="card post valor">
+	    	<div class="aux-text">
+	        	<div class="txt valor"></div>
+	        	<div class="txt texto"></div>
+	    	</div>
+	    </div>
+	    <div class="card post parcela">
+	    	<div class="aux-text">
+	        	<div class="txt valor"></div>
+	        	<div class="txt texto"></div>
+	    	</div>
+	    </div>
+	    <div class="card post atributos-care">
+	    	<div class="aux-text">
+	        	<div class="txt concessionaria"></div>
+	        	<div class="txt telefones"></div>
+	        	<div class="txt vendedor"></div>
+	        	<div class="txt endereco"></div>
+	        	<div class="txt cep"></div>
+	    	</div>
+	    </div>
+	    <div class="card post agendamento-care">
+	    	<div class="aux-text">
+	        	<div class="txt concessionaria"></div>
+	        	<div class="txt telefones"></div>
+	        	<div class="txt vendedor"></div>
+	        	<div class="txt endereco"></div>
+	        	<div class="txt cep"></div>
+	    	</div>
+	    </div>
+	    <div class="card post comercial-care">
+	    	<div class="aux-text">
+	        	<div class="txt servico"></div>
+	        	<div class="txt valor"></div>
+	        	<div class="txt oferta"></div>
+	        	<div class="txt itens"></div>
+	    	</div>
+	    </div>
+	</div>
+</div>
+
+<script src="assets/js/libraries/jquery.mask.js?v=001" type="text/javascript" charset="utf-8"></script>
+<script src="assets/js/libraries/cropper.js?v=001" type="text/javascript" charset="utf-8"></script>
+<script src="assets/js/libraries/slick_custom.js?v=001" type="text/javascript" charset="utf-8"></script>
+<script src="assets/js/dashboard/classes.js?v=001" type="text/javascript" charset="utf-8"></script>
+<script src="assets/js/dashboard/actions.js?v=001" type="text/javascript" charset="utf-8"></script>

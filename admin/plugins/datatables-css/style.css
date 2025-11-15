@@ -1,0 +1,7 @@
+.dataTables_filter, div.dataTables_filter label {
+	width: 100%;
+}
+
+.dataTables_filter input {
+	width: calc(100% - 100px) !important;
+}

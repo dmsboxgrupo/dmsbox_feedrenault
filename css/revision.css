@@ -1,0 +1,46 @@
+/* logo nao centralizada vertical desktop */
+.header-logo-center .header-title {
+	margin-top: 4px;
+}
+
+/* botao de curtida numero colado*/
+.card .card-footer span[data-custom=score-count] {
+	margin-right: 4px;
+}
+
+/* primeiro caracter do texto deve estar minusculo (estava dando upper-case automatico) */
+.menu-subsecoes .subsecao {
+	text-transform: none;
+}
+
+/* ainda necessita validar esse item com DMSBOX */
+#subsecao.readlater .card {
+	cursor: pointer;
+}
+
+/* botao de salvar dados parece muito proximo */
+@media (min-height: 870px) {
+	.login-linha, .form-linha {
+		padding: 22px 15px 2px 14px;
+	}
+}
+
+/* parece com muita margem a divisao do menu -- */
+.menu .menu-header {
+	margin-bottom: 30px;
+}
+
+.menu .menu-sep {
+	margin-top: -8px;
+}
+
+/* pode ficar sobreposto em tablets */
+#download-app-popup {
+	z-index: 1000;
+}
+
+@media (min-width: 1000px) {
+	#header-desktop {
+		z-index: 101;
+	}
+}

@@ -1,0 +1,2751 @@
+const LOADING_POST_TEMPLATE    = '<div class="post" type="feed" reference="loading">'+
+                                 '   <div class="midia">'+
+                                 '       <div class="img"></div>'+
+                                 '       <div class="description">'+
+                                 '           <h3></h3>'+
+                                 '           <h4></h4>'+
+                                 '       </div>'+
+                                 '   </div>'+
+                                 '   <div class="infos">'+
+                                 '        <div class="aux">'+
+                                 '            <div class="title">'+
+                                 '                <div class="aux">'+
+                                 '                   <div class="ico"></div>'+
+                                 '                   <div class="txt">'+
+                                 '                       <h3></h3>'+
+                                 '                       <p></p>'+
+                                 '                   </div>'+
+                                 '               </div>'+
+                                 '            </div>'+
+                                 '            <div class="aux-text">'+
+                                 '                <div class="text">'+
+                                 '                   <p></p>'+
+                                 '                   <p></p>'+
+                                 '                   <p></p>'+
+                                 '                   <p></p>'+
+                                 '                   <p></p>'+
+                                 '                </div>'+
+                                 '            </div>'+
+                                 '        </div>'+
+                                 '       <div class="actions">'+
+                                 '           <div class="reactions">'+
+                                 '               <img src="assets/images/ico_reacoes.png">'+
+                                 '               <div class="status"></div>'+
+                                 '           </div>'+
+                                 '           <div class="buttons">'+
+                                 '               <img src="assets/images/icos.png">'+
+                                 '           </div>'+
+                                 '       </div>'+
+                                 '   </div>'+
+                                 '</div>';
+
+const LOADING_SALVOS_TEMPLATE  = '<div class="post" type="salvos" reference="loading"></div>';
+
+const LOADING_CAMPANHA_TEMPLATE    = '<div class="post" type="feed" reference="loading">'+
+                                 '   <div class="midia">'+
+                                 '       <div class="img"></div>'+
+                                 '       <div class="description">'+
+                                 '           <h3></h3>'+
+                                 '           <h4></h4>'+
+                                 '       </div>'+
+                                 '   </div>'+
+                                 '   <div class="infos">'+
+                                 '        <div class="aux">'+
+                                 '            <div class="title">'+
+                                 '                <div class="aux">'+
+                                 '                   <div class="ico"></div>'+
+                                 '                   <div class="txt">'+
+                                 '                       <h3></h3>'+
+                                 '                       <p></p>'+
+                                 '                   </div>'+
+                                 '               </div>'+
+                                 '               <div class="prazo">'+
+                                 '                   <div class="ico"></div>'+
+                                 '                   <div class="txt"></div>'+
+                                 '               </div>'+
+                                 '            </div>'+
+                                 '            <div class="aux-text">'+
+                                 '                <div class="text">'+
+                                 '                   <p></p>'+
+                                 '                   <p></p>'+
+                                 '                   <p></p>'+
+                                 '                   <p></p>'+
+                                 '                   <p></p>'+
+                                 '                </div>'+
+                                 '            </div>'+
+                                 '        </div>'+
+                                 '        <div class="actions">'+
+                                 '           <div class="reactions">'+
+                                 '               <img src="assets/images/ico_reacoes.png">'+
+                                 '               <div class="status"></div>'+
+                                 '           </div>'+
+                                 '           <div class="buttons">'+
+                                 '               <img src="assets/images/icos.png">'+
+                                 '           </div>'+
+                                 '       </div>'+
+                                 '   </div>'+
+                                 '</div>';
+
+
+if(loginStatus.check()){
+    if(keeper.get('image') != 'undefined') {
+        $('.perfil .dados .img .hld').css({'background-image': 'url(\'download/img/' + keeper.get('image') + '\')'});
+    } else {
+        $('.perfil .dados .img .hld').css({'background-image': 'url(\'assets/images/logo_renault.svg\')'});
+    }
+    $('.perfil .saudacao span').text(keeper.get('short'));
+} else {
+  $('main').load('login.html');
+}
+
+let hash = [
+                {internal: 'dashboard', holder: 'dashboard', hash: 'dashboard'},
+                {internal: 'pos-vendas', holder: 'dashboard', hash: 'pos-vendas'},
+                {internal: 'noticias', holder: 'dashboard', hash: 'noticias'},
+                {internal: 'redes-sociais', holder: 'dashboard', hash: 'redes-sociais'},
+                {internal: 'universo-renault', holder: 'dashboard', hash: 'universo-renault'},
+                {internal: 'renault-academy', holder: 'dashboard', hash: 'renault-academy'},
+                {internal: 'comunicados', holder: 'dashboard', hash: 'comunicados'},
+                {internal: 'universo-renault', holder: 'dashboard', hash: 'universo-renault'},
+
+                {internal: 'campanhas', holder: 'campanhas', hash: 'campanhas'},
+                {internal: 'campanha', holder: 'campanhas', hash: 'campanha'},
+
+                {internal: 'notificacoes', holder: 'notificacoes', hash: 'notificacoes'},
+                {internal: 'notificacao', holder: 'notificacoes', hash: 'notificacao'},
+
+                {internal: 'meus-itens-salvos', holder: 'salvos', hash: 'meus-itens-salvos'},
+                {internal: 'item-salvo', holder: 'salvos', hash: 'item-salvo'},
+
+                {internal: 'biblioteca-de-materiais', holder: 'materiais', hash: 'biblioteca-de-materiais'},
+
+                {internal: 'central-de-ajuda', holder: 'ajuda', hash: 'central-de-ajuda'},
+
+                {internal: 'busca', holder: 'busca', hash: 'busca'},
+                {internal: 'buscado', holder: 'busca', hash: 'buscado'},
+
+                {internal: 'configuracoes', holder: 'configuracoes', hash: 'configuracoes'},
+             ]
+window.hash = hash;
+
+function makeHash(string, type, medium, sub) {
+    let holder = '';
+    let str = '';
+    let unknown = true;
+
+    $('aside.left').removeClass('open');
+    
+    if(type == 'internal'){
+        for (let i = 0; i < hash.length; i++) {
+            if(hash[i].internal == string){
+                let newHash = hash[i].hash;
+
+                if(medium){
+                    if(string == 'busca') {
+                        newHash += '&term=' + medium;
+                    } else if(string == 'materiais-imagens-dos-veiculos') {
+                        newHash += '&veiculo=' + medium;
+                    } else if(string == 'materiais-ficha-de-modelos') {
+                        newHash += '&veiculo=' + medium;
+                    } else {
+                        newHash += '&sub=' + medium;
+                    }
+                }
+
+                if(sub){
+                    if(string == 'busca') {
+                        newHash += '&tags=' + sub;
+                    } else if(string == 'materiais-imagens-dos-veiculos') {
+                        newHash += '&versao=' + sub;
+                    } else if(string == 'materiais-ficha-de-modelos') {
+                        newHash += '&grupo=' + sub;
+                    } else {
+                        newHash += '&id=' + sub;
+                    }
+                }
+
+                window.location.hash = newHash;
+
+                activeArea = string;
+                holder = hash[i].holder;
+                unknown = false;
+            }
+        }
+    } else {
+        let url = string.substr(1);
+        let index = url.indexOf('&');
+        if(index > 0){
+            str = url.substr(0, index);
+        } else {
+            str = url;
+        }
+
+        for (let i = 0; i < hash.length; i++) {
+            if(hash[i].hash == str){
+                activeArea = hash[i].internal;
+                holder = hash[i].holder;
+                unknown = false;
+            }
+        }
+    }
+
+    if(unknown){
+        if(string.substring(0, 9) != '#campanha') {
+            window.location.hash = 'dashboard';
+        }
+    }
+
+    $('.bt-changeview').each(function(){
+        if($(this).attr('data-target') != holder){
+            $(this).parent().removeClass('selected');
+        } else {
+            $(this).parent().addClass('selected');
+        }
+
+        if(holder != 'materiais') {
+            $('.bt-dropdown[data-target="materiais"]').parent().parent().removeClass('selected');
+            $('.bt-dropdown[data-target="materiais"]').parent().parent().removeClass('open');
+            $('.bt-dropdown[data-target="materiais"]').parent().parent().find('.sub-content').slideUp();
+        }
+        if(holder != 'campanhas') {
+            $('.bt-dropdown[data-target="campanhas"]').parent().parent().removeClass('selected');
+            $('.bt-dropdown[data-target="campanhas"]').parent().parent().removeClass('open');
+            $('.bt-dropdown[data-target="campanhas"]').parent().parent().find('.sub-content').slideUp();
+        }
+    })
+
+    if(baseLoaded) {
+        base.load(activeArea);
+    } else {
+        checkBase();
+    }
+}
+
+function checkBase() {
+    if(!baseLoaded) {
+        setTimeout(checkBase, 50);
+        return;
+    }
+    base.load(activeArea);
+}
+
+let page = 0;
+
+function makeLoading(page, type) {
+    let loadingCode = '';
+
+    if(type == 'post') {
+        template = LOADING_POST_TEMPLATE;
+    } else if(type == 'salvos') {
+        template = LOADING_SALVOS_TEMPLATE;
+    } else if(type == 'campanha') {
+        template = LOADING_CAMPANHA_TEMPLATE;
+    }
+
+    loadingCode +=  '<div class="hld-loading-' + page + '">';
+    for(let i=0; i <20; i++){
+        loadingCode +=  util.factory(template);
+    }
+    loadingCode +=  '</div>';
+
+    $('#internal-holder').append(loadingCode);
+    closeModal();
+}
+
+let auxCount = 0;
+let countModal = 0;
+let arrSlides = [];
+
+function makePost(page, res, area) {
+    if(res.error != null) {
+    } else {
+        let htmlCode = '';
+        let htmlModal = '';
+        let baseModal = '';
+        let loopPost = res.feed;
+
+        baseModal += '<div class="holder">';
+        baseModal += '    <div class="aux-slider">';
+        baseModal += '        <div class="bulls"></div>';
+        baseModal += '        <div class="actions">';
+        baseModal += '            <div class="bt-salvar white">';
+        baseModal += '                <a href="#" class="bt-save" data-sub="galeria">';
+        baseModal += '                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+        baseModal += '                      <g class="off">';
+        baseModal += '                      <path d="M12,19.7l-6.8,4.3-1.1-.5V2.3c0-1.5.8-2.3,2.3-2.3h11.4c1.5,0,2.3.8,2.3,2.3v21.3l-1.1.4-6.8-4.3h0ZM18.7,22.3V2.5c0-.8-.3-1.2-1.1-1.2H6.5c-.8,0-1.1.4-1.1,1.2v19.7l6.7-4.2,6.7,4.2ZM14.9,14.1c-1.3-.6-2-1-3-1.4-.9.5-1.7.8-3,1.4l-.6-.4c.2-1.1.4-2.1.6-3.2-.8-.7-1.3-1.2-2.3-2.3l.2-.8c1.4-.2,2.2-.4,3.2-.5.5-1,.9-1.8,1.6-3.1h.5c.7,1.2,1.1,2.1,1.6,3.1,1,0,1.7.2,3.1.5l.2.8c-1,1-1.5,1.6-2.3,2.3.3,1.1.5,2.1.6,3.2l-.6.4s.2,0,.2,0ZM9.9,12.4c1-.5,1.5-.8,2.1-1.1.6.4,1.3.8,2,1.1-.2-1-.3-1.6-.4-2.1.8-.8,1.2-1.2,1.7-1.7-1.1-.2-1.7-.2-2.3-.3-.3-.7-.6-1.4-1-2.1-.3.6-.5,1.1-1,2.1-.7,0-1.2.2-2.4.3.5.6,1.1,1.1,1.7,1.7-.2.6-.2,1.1-.4,2.2"/>';
+        baseModal += '                      </g>';
+        baseModal += '                      <g class="on">';
+        baseModal += '                        <path d="M12.1,6.1c-.3.6-.5,1.1-1,2.1-.7,0-1.2.2-2.4.3.5.6,1.1,1.1,1.7,1.7-.2.6-.2,1.1-.4,2.2,1-.5,1.5-.8,2.1-1.1.6.4,1.3.8,2,1.1-.2-1-.3-1.6-.4-2.1.8-.8,1.2-1.2,1.7-1.7-1.1-.2-1.7-.2-2.3-.3-.3-.7-.6-1.4-1-2.1"/>';
+        baseModal += '                        <path d="M17.7,0H6.3C4.8,0,4,.8,4,2.3v21.3l1.1.5,6.8-4.3,6.8,4.3,1.1-.4V2.3c0-1.5-.8-2.3-2.3-2.3M14.9,10.6c.3,1.1.5,2.1.6,3.2l-.6.4c-1.3-.6-2-1-3-1.4-.9.5-1.7.8-3,1.4l-.6-.4c.2-1.1.4-2.1.6-3.2-.8-.7-1.3-1.2-2.3-2.3l.2-.8c1.4-.2,2.2-.4,3.2-.5.5-1,.9-1.8,1.6-3.1h.5c.7,1.2,1.1,2.1,1.6,3.1,1,0,1.7.2,3.1.5l.2.8c-1,1-1.5,1.6-2.3,2.3"/>';
+        baseModal += '                      </g>';
+        baseModal += '                    </svg>';
+        baseModal += '                </a>';
+        baseModal += '            </div>';
+        baseModal += '            <div class="bt-fechar white">';
+        baseModal += '                <a href="#" class="bt-close-modal" data-target="modal"></a>';
+        baseModal += '            </div>';
+        baseModal += '        </div>';
+        baseModal += '        <div class="slider"></div>';
+        baseModal += '        <div class="nav-slider">';
+        baseModal += '            <div class="arrow left"></div>';
+        baseModal += '            <div class="arrow right"></div>';
+        baseModal += '        </div>';
+        baseModal += '    </div>';
+        baseModal += '    <div class="bts">';
+        baseModal += '        <div class="bt">';
+        baseModal += '            <a href="#" class="bt-baixar">baixar</a>';
+        baseModal += '        </div>';
+        baseModal += '        <div class="bt">';
+        baseModal += '            <a href="#" class="bt-compartilhar">compartilhar</a>';
+        baseModal += '        </div>';
+        baseModal += '    </div> ';
+        baseModal += '</div>';
+
+        $('#galeria').html(baseModal);
+
+        if(loopPost) {
+            loopPost.forEach(function(item) {
+                let dia = item.date;
+                let diaFormat = new Date(dia).toLocaleDateString();
+
+                if(item.type != 'enquete'){
+
+                    if(item.type != 'twitter' && item.type != 'youtube' && item.type != 'instagram' && item.type != 'facebook' && item.type != 'campanha'){
+                        item.reference = 'interno';
+                        item.origin = item.type;
+                        item.perfil = 'Renault';
+                        item.description = item.title;
+                    } else {
+                        item.reference = item.type;
+                        if(item.type == 'twitter') {
+                            item.origin = 'X';
+                            item.perfil = '@RenaultBrasil';
+                            item.description = 'x.com';
+                        }
+
+                        if(item.type == 'youtube') {
+                            item.origin = 'YouTube';
+                            item.perfil = '@RenaultBrasil';
+                            item.description = 'youtube.com';
+                        }
+
+                        if(item.type == 'instagram') {
+                            item.origin = 'Instagram';
+                            item.perfil = '@renaultbrasil';
+                            item.description = 'instagram.com';
+                        }
+
+                        if(item.type == 'facebook') {
+                            item.origin = 'Facebook';
+                            item.perfil = '@Renault';
+                            item.description = 'facebook.com';
+                        }
+
+                        if(item.type == 'campanha') {
+                            auxCount++;
+
+                            if(item.expiration_date != '') {
+                                item.reference = 'campanha-momento';
+                                item.origin = 'campanha';
+                                item.perfil = 'Campanha momento';
+                                item.description = 'renault-br.my.salesforce.com';
+                            } else {
+                                item.reference = 'campanha-permanente';
+                                item.origin = 'campanha';
+                                item.perfil = 'Campanha permanente';
+                                item.description = 'renault-br.my.salesforce.com';
+                            }
+                        }
+                    }
+
+                    htmlCode += '<div class="post type-' + item.reference + '" type="feed" reference="' + item.reference + '">';
+                    htmlCode += '   <div class="midia">';
+                    if(item.youtube != undefined && item.youtube != null){
+                        htmlCode += '   <div class="hld-youtube">';
+                        htmlCode += '       <div class="source"></div>';
+                        htmlCode += '       <div class="thumb" style="background-image: url(\'https://img.youtube.com/vi/' + item.youtube + '/hqdefault.jpg\');"></div>';
+                        htmlCode += '       <div class="bt-youtube-close"></div>';
+                        htmlCode += '   </div>';
+                        htmlCode += '   <a href="#" class="bt-youtube" data-target="youtube" data-video="' + item.youtube + '">';
+                            htmlCode += '       <div class="img" style="background-image: url(\'https://img.youtube.com/vi/' + item.youtube + '/hqdefault.jpg\');"></div>';
+                    } else {
+                        if(item.content_type == 'video') {
+                            htmlCode += '   <div class="hld-video">';
+                            htmlCode += '       <div class="source"></div>';
+                            htmlCode += '       <div class="thumb" style="background-image: url(\'' + item.thumbnail + '\');"></div>';
+                            htmlCode += '       <div class="bt-video-close"></div>';
+                            htmlCode += '   </div>';
+                            htmlCode += '   <a href="#" class="bt-video" data-target="video" data-video="' + item.content + '">';
+                            htmlCode += '       <div class="img" style="background-image: url(\'' + item.thumbnail + '\');"></div>';
+                        } else {
+
+                            if(item.link != '') {
+                                htmlCode += '<a href="'+ item.link +'" class="link-externo" target="_blank">';
+                            } else {
+                                if(item.type == 'campanha') {
+                                    htmlCode += '<a href="#" class="bt-changeview" data-target="' + item.origin + '" data-sub="' + item.id + '">';
+                                }
+                            }
+
+                            htmlCode += '       <div class="img" style="background-image: url(\'' + item.content + '\');"></div>';
+                        }
+                    } 
+                    htmlCode += '           <div class="description">';
+                    htmlCode += '               <h3>' + item.description + '</h3>';
+                    htmlCode += '               <h4>' + item.cta + '</h4>';
+                    htmlCode += '           </div>';
+
+                    if(item.link != '' || item.content_type == 'video' || item.type == 'campanha') {
+                        htmlCode += '</a>';
+                    }
+
+                    htmlCode += '   </div>';
+                    htmlCode += '   <div class="infos">';
+                    htmlCode += '        <div class="aux">';
+                    htmlCode += '            <div class="title">';
+                    htmlCode += '                <div class="aux">';
+                    htmlCode += '                   <div class="ico"><img src="assets/images/ico_' + item.reference + '.svg"></div>';
+                    htmlCode += '                   <div class="txt">';
+                    if(item.type == 'twitter' || item.type == 'youtube' || item.type == 'instagram' || item.type == 'facebook') {
+                        htmlCode += '                   <h3>' + item.origin + '</h3>';
+                    } else {
+                        htmlCode += '                   <h3>' + item.title + '</h3>';
+                    }
+                    htmlCode += '                       <p>' + item.perfil + '  <small>∙</small>  <span>'+ diaFormat +'</span></p>';
+                    htmlCode += '                   </div>';
+                    htmlCode += '               </div>';
+
+                    if(item.reference == 'campanha-momento'){
+                        let diaExpire = new Date(item.expiration_date).toLocaleDateString();
+
+                        htmlCode += '           <div class="prazo">';
+                        htmlCode += '               <div class="ico"><img src="assets/images/ico_tempo.svg"></div>';
+                        htmlCode += '               <div class="txt">válida até <br> <strong>' + diaExpire + '</strong></div>';
+                        htmlCode += '           </div>';
+                    }
+
+                    let message = item.message;
+                    message = message.replace('[nome]', keeper.get('short'));
+
+                    let cleanMessage = message.replaceAll('<p>', '_').replaceAll('<\/p>', '').replace(/(<([^>]+)>)/gi, '');
+                    
+                    htmlCode += '            </div>';
+                    htmlCode += '            <div class="aux-text">';
+                    htmlCode += '                <div class="text">';
+                    htmlCode += '                   ' + message;
+                    htmlCode += '                </div>';
+                    htmlCode += '                <div class="bt-ler-mais">';
+                    htmlCode += '                    <a href="#" class="bt-expand-text" data-target="mais">';
+                    htmlCode += '                        ler mais';
+                    htmlCode += '                    </a>';
+                    htmlCode += '                </div>';
+                    htmlCode += '            </div>';
+                    htmlCode += '        </div>';
+                    htmlCode += '       <div class="actions">';
+                    htmlCode += '           <div class="reactions" data-num="' + item.score_count + '">';
+                    htmlCode += '               <div class="types">';
+                    let loopReaction = item.score_reactions;
+                    if(loopReaction) {
+                        loopReaction.forEach(function(react) {
+                            if( react.id == 1  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_love.svg">';
+                            }
+                            if( react.id == 2  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_wow.svg">';
+                            }
+                            if( react.id == 3  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_like.svg">';
+                            }
+                            if( react.id == 4  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_clap.svg">';
+                            }
+                            if( react.id == 5  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_sad.svg">';
+                            }
+                        })
+                    }
+                    htmlCode += '               </div>';
+                    if(item.score_count > 0){
+                        if(item.score_count > 1){
+                            htmlCode += '       <div class="status">' + item.score_count + ' reações</div>';
+                        } else {
+                            htmlCode += '       <div class="status">' + item.score_count + ' reação</div>';
+                        }
+                    } else {
+                        htmlCode += '       <div class="status"></div>';
+                    }
+                    htmlCode += '           </div>';
+                    htmlCode += '           <div class="buttons">';
+                    htmlCode += '               <div class="hld-bt hld-reactions">';
+                    if( item.user_score > 0 ){
+                        htmlCode += '                    <a href="#" class="bt-react active" data-target="' + item.id + '" data-type="like">';
+                    } else {
+                        htmlCode += '                    <a href="#" class="bt-react" data-target="' + item.id + '" data-type="like">';
+                    }
+                    if( item.user_score == 3 || item.user_score == 0 ){
+                        htmlCode += '                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                        htmlCode += '                          <g class="off">';
+                        htmlCode += '                            <path d="M2.8,9.4h1.3v11.6h-1.3v-11.6ZM12.6,10.7l.5-3.4c.3-1.7-.5-3.1-1.5-3.1h-.4v1.8c0,.6,0,1.2-.3,1.8l-1.4,2.7c-.7,1.2-1.5,1.5-3,1.5h-1v-1.3h.9c1,.2,1.9-.4,2.2-1.3l.9-1.8c.3-.7.5-1.5.5-2.2v-2.4h1.8c1.9,0,3,2,2.8,4.3l-.3,2.2h4.7c1,0,2,.6,2.1,1.7v.2c0,.5-.2,1-.5,1.3.3.4.5.9.5,1.4,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,1-.7,1.8-1.7,1.8h-6.8c-1.5,0-2.1-1.3-3.5-1.3h-.9v-1.3h1.4c1.5,0,2.3,1.3,3.5,1.3h6c.5,0,.8-.2.8-.6s-.3-.6-.8-.6h-.5v-1.3h1.7c.6,0,.9-.2.9-.6s-.3-.6-.9-.6h-1.7v-1.3h3c.5,0,.9-.2.9-.6s-.3-.6-.9-.6h-3v-1.3h3.1c.5,0,.8-.2.8-.6s-.3-.7-.8-.7h-6.2l-.3-.3Z"/>';
+                        htmlCode += '                          </g>';
+                        htmlCode += '                          <g class="on">';
+                        htmlCode += '                            <rect x="2.9" y="9.4" width="1.3" height="11.6"/>';
+                        htmlCode += '                            <path d="M21.1,11.4c0-1.1-.8-1.9-1.9-1.9h-4.9l.3-2.2c.3-2.3-.8-4.3-2.8-4.3h-1.8v2.3c0,.8,0,1.5-.4,2.2l-.9,1.8c-.3.9-1.3,1.5-2.2,1.3h-.9v9h.9c1.4,0,1.9,1.3,3.5,1.3h6.6c1,0,1.8-.6,1.9-1.6v-.2c0-.3,0-.5-.2-.8.9-.2,1.5-.9,1.5-1.8s0-.5-.2-.8c.9-.1,1.6-.9,1.5-1.8,0-.5-.2-1-.5-1.4.3-.3.5-.8.5-1.3"/>';
+                        htmlCode += '                          </g>';
+                        htmlCode += '                        </svg>';
+                    }
+                    if( item.user_score == 1 ){
+                        htmlCode += '                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                        htmlCode += '                          <path class="off" d="M11.5,20c-4.9-3-8.1-7.1-8.1-11.1s1.7-4.9,4.4-4.9c1.7,0,3.3.9,4.2,2.3.9-1.4,2.5-2.3,4.2-2.3,2.7,0,4.4,1.8,4.4,4.9s-3.2,8.1-8.1,11.1h-.9ZM7.8,5.2c-2,0-3.2,1.3-3.2,3.7s2.9,7.1,7.4,9.9c4.5-2.8,7.4-6.6,7.4-9.9s-1.2-3.7-3.2-3.7-2.9,1-4.2,3.2c-1.2-2.2-2.5-3.2-4.2-3.2"/>';
+                        htmlCode += '                          <path class="on" d="M11.5,20c-4.9-3-8.1-7.1-8.1-11.1s1.7-4.9,4.4-4.9c1.7,0,3.3.9,4.2,2.3.9-1.4,2.5-2.3,4.2-2.3,2.7,0,4.4,1.8,4.4,4.9s-3.2,8.1-8.1,11.1h-.9Z"/>';
+                        htmlCode += '                        </svg>';
+                    }
+                    if( item.user_score == 2 ){
+                        htmlCode += '                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                        htmlCode += '                          <path class="off" d="M9.4,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM4.7,13.5c.4,3.6,3.6,6.3,7.3,6.1,4.2,0,6.9-2.8,7.3-6.2l1.1.6c-.6,3.7-3.7,6.7-8.4,6.7s-7.9-3-8.4-6.8l1.1-.5ZM4.9,10.8c.9-.4,1.4-.7,1.9-1,.6.4,1.2.7,1.8,1-.2-.9-.3-1.4-.4-1.9.8-.7,1.1-1,1.6-1.5-.7-.1-1.4-.2-2.1-.3-.4-.9-.6-1.4-.9-1.9-.3.6-.5,1-.9,1.9-.6,0-1.1.1-2.1.3.4.5.8.8,1.5,1.5-.1.5-.2,1-.3,2M8.3,13.3h7.4l.5.8c-.4,2.8-2.1,4.2-4.2,4.2s-3.8-1.4-4.2-4.2l.5-.8ZM14.6,5.4c-.8-.3-1.7-.4-2.6-.4-.9,0-1.7.1-2.5.3l-.5-1.1c1-.3,2-.4,3-.4,1.1,0,2.1.2,3.1.5l-.5,1.1ZM14.9,14.5h-6c.6,2,1.6,2.7,3,2.7s2.4-.7,3-2.7M19.9,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM15.4,10.8c.9-.4,1.4-.7,1.9-1,.6.4,1.2.7,1.8,1-.2-.9-.3-1.4-.4-1.9.8-.7,1.1-1,1.6-1.5-.7-.1-1.4-.2-2.1-.3-.4-.9-.6-1.4-.9-1.9-.3.6-.5,1-.9,1.9-.6,0-1.1.1-2.1.3.4.5.8.8,1.5,1.5-.1.5-.2,1-.3,2"/>';
+                        htmlCode += '                          <path class="on" d="M9.4,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM4.7,13.5c.4,3.6,3.6,6.3,7.3,6.1,4.2,0,6.9-2.8,7.3-6.2l1.1.6c-.6,3.7-3.7,6.7-8.4,6.7s-7.9-3-8.4-6.8l1.1-.5ZM8.3,13.3h7.4l.5.8c-.4,2.8-2.1,4.2-4.2,4.2s-3.8-1.4-4.2-4.2l.5-.8ZM14.6,5.4c-.8-.3-1.7-.4-2.6-.4-.9,0-1.7.1-2.5.3l-.5-1.1c1-.3,2-.4,3-.4,1.1,0,2.1.2,3.1.5l-.5,1.1ZM14.9,14.5h-6c.6,2,1.6,2.7,3,2.7s2.4-.7,3-2.7M19.9,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3Z"/>';
+                        htmlCode += '                        </svg>';
+                    }
+                    if( item.user_score == 4 ){
+                        htmlCode += '                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                        htmlCode += '                          <g class="off">';
+                        htmlCode += '                            <path d="M23,18.2l.2-.7c.2-.6.4-1.2.4-1.8,0-.9-.3-1.7-.7-2.5h0s-.9-1.9-.9-1.9c0,0,0,0,0,0l-1.6-3.2-.5-1.1c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.5-.9c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.9l3.5,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6-7.1-4.8c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.4,2.1.9-.8-4.1-8.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l3.8,7.5,1-.5-2.7-5.4c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0l2.5,4.9.9-.5h0s0,0,0,0l-1.8-3.6c-.2-.3,0-.6.2-.8.1,0,.3,0,.4,0,.2,0,.4,0,.5.3l2.6,5.2c.6,1,.9,2.1,1,3.2,0,.6-.1,1.2-.4,1.7l-.3.9,1.1,2.2,1-.5-.9-1.9Z"/>';
+                        htmlCode += '                            <path d="M1.7,13.9c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.5,2.1.9-.8L2.5,5.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l2.3,4.6c0-.5.2-1.1.5-1.5l-.7-1.5c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0v.2c.1,0,.2,0,.2,0,0-.5.2-.9.4-1.3v-.3c-.4-.6-1-1-1.7-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.5,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6L1.7,13.9Z"/>';
+                        htmlCode += '                            <path d="M14.4,2.6l-1.3-2.6-1,.5,1.3,2.6,1-.5Z"/>';
+                        htmlCode += '                            <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>';
+                        htmlCode += '                            <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>';
+                        htmlCode += '                          </g>';
+                        htmlCode += '                          <g class="on">';
+                        htmlCode += '                            <path d="M22.9,18.2l.2-.7c.2-.6.4-1.2.4-1.8,0-.9-.3-1.7-.7-2.5h0s-.9-1.9-.9-1.9c0,0,0,0,0,0l-1.6-3.2-.5-1.1c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.5-.9c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.4,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6-7.1-4.8c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.5,2.1.9-.8-4.1-8.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l3.8,7.5,1-.5-2.7-5.4c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0l2.5,4.9.9-.5h0s0,0,0,0l-1.8-3.6c-.2-.3,0-.6.2-.8.1,0,.3,0,.4,0,.2,0,.4,0,.5.3l2.6,5.2c.5,1,.9,2.1,1,3.2,0,.6-.1,1.2-.4,1.7l-.3.9,1.1,2.2,1-.5-.9-1.9Z"/>';
+                        htmlCode += '                            <path d="M14.4,2.6L13.1,0l-1,.5,1.3,2.6,1-.5Z"/>';
+                        htmlCode += '                            <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>';
+                        htmlCode += '                            <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>';
+                        htmlCode += '                            <path d="M7.6,17.9c-.8-.5-1.2-1.4-1.3-2.3,0-1.5,1.2-2.8,2.7-2.8.2,0,.4,0,.6,0l-1.9-4.1c-.2-.4-.3-.9-.3-1.3,0-1,.6-2,1.6-2.4,0-.5.2-.9.4-1.3v-.3c-.4-.6-1-1-1.7-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.4,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5h0s1.5-.8,1.5-.8l-3.9-2.6ZM9.1,19.4h0s0,0,0,0h0Z"/>';
+                        htmlCode += '                            <path d="M14.4,2.6L13.1,0l-1,.5,1.3,2.6,1-.5Z"/>';
+                        htmlCode += '                            <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>';
+                        htmlCode += '                            <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>';
+                        htmlCode += '                          </g>';
+                        htmlCode += '                        </svg>';
+                    }
+                    if( item.user_score == 5 ){
+                        htmlCode += '                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                        htmlCode += '                          <g class="off">';
+                        htmlCode += '                            <path d="M12,3.2c5.4,0,8.8,3.4,8.8,8.8s-3.4,8.8-8.8,8.8S3.2,17.3,3.2,12,6.6,3.2,12,3.2M12,4.4c-4.7,0-7.6,2.9-7.6,7.6s2.9,7.6,7.6,7.6,7.6-2.9,7.6-7.6-2.9-7.6-7.6-7.6M9.4,15.9l-.7-.9c.8-1.1,2-1.7,3.3-1.7s2.5.7,3.3,1.7l-.7.9c-.6-.8-1.6-1.3-2.6-1.4-1,0-2,.5-2.6,1.4M10.9,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3M15.3,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>';
+                        htmlCode += '                          </g>';
+                        htmlCode += '                          <g class="on">';
+                        htmlCode += '                            <path d="M12,3.2c5.4,0,8.8,3.4,8.8,8.8s-3.4,8.8-8.8,8.8S3.2,17.3,3.2,12,6.6,3.2,12,3.2"/>';
+                        htmlCode += '                            <path fill="#ffffff" d="M9.4,15.9l-.7-.9c.8-1.1,2-1.7,3.3-1.7s2.5.7,3.3,1.7l-.7.9c-.6-.8-1.6-1.3-2.6-1.4-1,0-2,.6-2.6,1.4"/>';
+                        htmlCode += '                            <path fill="#ffffff" d="M10.9,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>';
+                        htmlCode += '                            <path fill="#ffffff" d="M15.3,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>';
+                        htmlCode += '                          </g>';
+                        htmlCode += '                        </svg>';
+                    }
+                    htmlCode += '                    </a>';
+                    htmlCode += '                    <div class="over">';
+                    if( item.user_score == 3 ){
+                        htmlCode += '                    <a href="#" class="bt-like active" data-target="' + item.id + '" data-type="like">';
+                    } else {
+                        htmlCode += '                    <a href="#" class="bt-like" data-target="' + item.id + '" data-type="like">';
+                    }
+                    htmlCode += '                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                    htmlCode += '                              <g class="off">';
+                    htmlCode += '                                <path d="M2.8,9.4h1.3v11.6h-1.3v-11.6ZM12.6,10.7l.5-3.4c.3-1.7-.5-3.1-1.5-3.1h-.4v1.8c0,.6,0,1.2-.3,1.8l-1.4,2.7c-.7,1.2-1.5,1.5-3,1.5h-1v-1.3h.9c1,.2,1.9-.4,2.2-1.3l.9-1.8c.3-.7.5-1.5.5-2.2v-2.4h1.8c1.9,0,3,2,2.8,4.3l-.3,2.2h4.7c1,0,2,.6,2.1,1.7v.2c0,.5-.2,1-.5,1.3.3.4.5.9.5,1.4,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,1-.7,1.8-1.7,1.8h-6.8c-1.5,0-2.1-1.3-3.5-1.3h-.9v-1.3h1.4c1.5,0,2.3,1.3,3.5,1.3h6c.5,0,.8-.2.8-.6s-.3-.6-.8-.6h-.5v-1.3h1.7c.6,0,.9-.2.9-.6s-.3-.6-.9-.6h-1.7v-1.3h3c.5,0,.9-.2.9-.6s-.3-.6-.9-.6h-3v-1.3h3.1c.5,0,.8-.2.8-.6s-.3-.7-.8-.7h-6.2l-.3-.3Z"/>';
+                    htmlCode += '                              </g>';
+                    htmlCode += '                              <g class="on">';
+                    htmlCode += '                                <rect x="2.9" y="9.4" width="1.3" height="11.6"/>';
+                    htmlCode += '                                <path d="M21.1,11.4c0-1.1-.8-1.9-1.9-1.9h-4.9l.3-2.2c.3-2.3-.8-4.3-2.8-4.3h-1.8v2.3c0,.8,0,1.5-.4,2.2l-.9,1.8c-.3.9-1.3,1.5-2.2,1.3h-.9v9h.9c1.4,0,1.9,1.3,3.5,1.3h6.6c1,0,1.8-.6,1.9-1.6v-.2c0-.3,0-.5-.2-.8.9-.2,1.5-.9,1.5-1.8s0-.5-.2-.8c.9-.1,1.6-.9,1.5-1.8,0-.5-.2-1-.5-1.4.3-.3.5-.8.5-1.3"/>';
+                    htmlCode += '                              </g>';
+                    htmlCode += '                            </svg>';
+                    htmlCode += '                        </a>';
+                    if( item.user_score == 1 ){
+                        htmlCode += '                    <a href="#" class="bt-love active" data-target="' + item.id + '" data-type="love">';
+                    } else {
+                        htmlCode += '                    <a href="#" class="bt-love" data-target="' + item.id + '" data-type="love">';
+                    }
+                    htmlCode += '                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                    htmlCode += '                              <path class="off" d="M11.5,20c-4.9-3-8.1-7.1-8.1-11.1s1.7-4.9,4.4-4.9c1.7,0,3.3.9,4.2,2.3.9-1.4,2.5-2.3,4.2-2.3,2.7,0,4.4,1.8,4.4,4.9s-3.2,8.1-8.1,11.1h-.9ZM7.8,5.2c-2,0-3.2,1.3-3.2,3.7s2.9,7.1,7.4,9.9c4.5-2.8,7.4-6.6,7.4-9.9s-1.2-3.7-3.2-3.7-2.9,1-4.2,3.2c-1.2-2.2-2.5-3.2-4.2-3.2"/>';
+                    htmlCode += '                              <path class="on" d="M11.5,20c-4.9-3-8.1-7.1-8.1-11.1s1.7-4.9,4.4-4.9c1.7,0,3.3.9,4.2,2.3.9-1.4,2.5-2.3,4.2-2.3,2.7,0,4.4,1.8,4.4,4.9s-3.2,8.1-8.1,11.1h-.9Z"/>';
+                    htmlCode += '                            </svg>';
+                    htmlCode += '                        </a>';
+                    if( item.user_score == 2 ){
+                        htmlCode += '                    <a href="#" class="bt-wow active" data-target="' + item.id + '" data-type="wow">';
+                    } else {
+                        htmlCode += '                    <a href="#" class="bt-wow" data-target="' + item.id + '" data-type="wow">';
+                    }
+                    htmlCode += '                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                    htmlCode += '                              <path class="off" d="M9.4,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM4.7,13.5c.4,3.6,3.6,6.3,7.3,6.1,4.2,0,6.9-2.8,7.3-6.2l1.1.6c-.6,3.7-3.7,6.7-8.4,6.7s-7.9-3-8.4-6.8l1.1-.5ZM4.9,10.8c.9-.4,1.4-.7,1.9-1,.6.4,1.2.7,1.8,1-.2-.9-.3-1.4-.4-1.9.8-.7,1.1-1,1.6-1.5-.7-.1-1.4-.2-2.1-.3-.4-.9-.6-1.4-.9-1.9-.3.6-.5,1-.9,1.9-.6,0-1.1.1-2.1.3.4.5.8.8,1.5,1.5-.1.5-.2,1-.3,2M8.3,13.3h7.4l.5.8c-.4,2.8-2.1,4.2-4.2,4.2s-3.8-1.4-4.2-4.2l.5-.8ZM14.6,5.4c-.8-.3-1.7-.4-2.6-.4-.9,0-1.7.1-2.5.3l-.5-1.1c1-.3,2-.4,3-.4,1.1,0,2.1.2,3.1.5l-.5,1.1ZM14.9,14.5h-6c.6,2,1.6,2.7,3,2.7s2.4-.7,3-2.7M19.9,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM15.4,10.8c.9-.4,1.4-.7,1.9-1,.6.4,1.2.7,1.8,1-.2-.9-.3-1.4-.4-1.9.8-.7,1.1-1,1.6-1.5-.7-.1-1.4-.2-2.1-.3-.4-.9-.6-1.4-.9-1.9-.3.6-.5,1-.9,1.9-.6,0-1.1.1-2.1.3.4.5.8.8,1.5,1.5-.1.5-.2,1-.3,2"/>';
+                    htmlCode += '                              <path class="on" d="M9.4,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM4.7,13.5c.4,3.6,3.6,6.3,7.3,6.1,4.2,0,6.9-2.8,7.3-6.2l1.1.6c-.6,3.7-3.7,6.7-8.4,6.7s-7.9-3-8.4-6.8l1.1-.5ZM8.3,13.3h7.4l.5.8c-.4,2.8-2.1,4.2-4.2,4.2s-3.8-1.4-4.2-4.2l.5-.8ZM14.6,5.4c-.8-.3-1.7-.4-2.6-.4-.9,0-1.7.1-2.5.3l-.5-1.1c1-.3,2-.4,3-.4,1.1,0,2.1.2,3.1.5l-.5,1.1ZM14.9,14.5h-6c.6,2,1.6,2.7,3,2.7s2.4-.7,3-2.7M19.9,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3Z"/>';
+                    htmlCode += '                            </svg>';
+                    htmlCode += '                        </a>';
+                    if( item.user_score == 4 ){
+                        htmlCode += '                    <a href="#" class="bt-clap active" data-target="' + item.id + '" data-type="clap">';
+                    } else {
+                        htmlCode += '                    <a href="#" class="bt-clap" data-target="' + item.id + '" data-type="clap">';
+                    }
+                    htmlCode += '                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                    htmlCode += '                              <g class="off">';
+                    htmlCode += '                                <path d="M23,18.2l.2-.7c.2-.6.4-1.2.4-1.8,0-.9-.3-1.7-.7-2.5h0s-.9-1.9-.9-1.9c0,0,0,0,0,0l-1.6-3.2-.5-1.1c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.5-.9c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.9l3.5,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6-7.1-4.8c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.4,2.1.9-.8-4.1-8.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l3.8,7.5,1-.5-2.7-5.4c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0l2.5,4.9.9-.5h0s0,0,0,0l-1.8-3.6c-.2-.3,0-.6.2-.8.1,0,.3,0,.4,0,.2,0,.4,0,.5.3l2.6,5.2c.6,1,.9,2.1,1,3.2,0,.6-.1,1.2-.4,1.7l-.3.9,1.1,2.2,1-.5-.9-1.9Z"/>';
+                    htmlCode += '                                <path d="M1.7,13.9c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.5,2.1.9-.8L2.5,5.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l2.3,4.6c0-.5.2-1.1.5-1.5l-.7-1.5c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0v.2c.1,0,.2,0,.2,0,0-.5.2-.9.4-1.3v-.3c-.4-.6-1-1-1.7-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.5,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6L1.7,13.9Z"/>';
+                    htmlCode += '                                <path d="M14.4,2.6l-1.3-2.6-1,.5,1.3,2.6,1-.5Z"/>';
+                    htmlCode += '                                <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>';
+                    htmlCode += '                                <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>';
+                    htmlCode += '                              </g>';
+                    htmlCode += '                              <g class="on">';
+                    htmlCode += '                                <path d="M22.9,18.2l.2-.7c.2-.6.4-1.2.4-1.8,0-.9-.3-1.7-.7-2.5h0s-.9-1.9-.9-1.9c0,0,0,0,0,0l-1.6-3.2-.5-1.1c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.5-.9c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.4,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6-7.1-4.8c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.5,2.1.9-.8-4.1-8.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l3.8,7.5,1-.5-2.7-5.4c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0l2.5,4.9.9-.5h0s0,0,0,0l-1.8-3.6c-.2-.3,0-.6.2-.8.1,0,.3,0,.4,0,.2,0,.4,0,.5.3l2.6,5.2c.5,1,.9,2.1,1,3.2,0,.6-.1,1.2-.4,1.7l-.3.9,1.1,2.2,1-.5-.9-1.9Z"/>';
+                    htmlCode += '                                <path d="M14.4,2.6L13.1,0l-1,.5,1.3,2.6,1-.5Z"/>';
+                    htmlCode += '                                <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>';
+                    htmlCode += '                                <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>';
+                    htmlCode += '                                <path d="M7.6,17.9c-.8-.5-1.2-1.4-1.3-2.3,0-1.5,1.2-2.8,2.7-2.8.2,0,.4,0,.6,0l-1.9-4.1c-.2-.4-.3-.9-.3-1.3,0-1,.6-2,1.6-2.4,0-.5.2-.9.4-1.3v-.3c-.4-.6-1-1-1.7-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.4,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5h0s1.5-.8,1.5-.8l-3.9-2.6ZM9.1,19.4h0s0,0,0,0h0Z"/>';
+                    htmlCode += '                                <path d="M14.4,2.6L13.1,0l-1,.5,1.3,2.6,1-.5Z"/>';
+                    htmlCode += '                                <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>';
+                    htmlCode += '                                <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>';
+                    htmlCode += '                              </g>';
+                    htmlCode += '                            </svg>';
+                    htmlCode += '                        </a>';
+                    if( item.user_score == 5 ){
+                        htmlCode += '                    <a href="#" class="bt-sad active" data-target="' + item.id + '" data-type="sad">';
+                    } else {
+                        htmlCode += '                    <a href="#" class="bt-sad" data-target="' + item.id + '" data-type="sad">';
+                    }
+                    htmlCode += '                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                    htmlCode += '                              <g class="off">';
+                    htmlCode += '                                <path d="M12,3.2c5.4,0,8.8,3.4,8.8,8.8s-3.4,8.8-8.8,8.8S3.2,17.3,3.2,12,6.6,3.2,12,3.2M12,4.4c-4.7,0-7.6,2.9-7.6,7.6s2.9,7.6,7.6,7.6,7.6-2.9,7.6-7.6-2.9-7.6-7.6-7.6M9.4,15.9l-.7-.9c.8-1.1,2-1.7,3.3-1.7s2.5.7,3.3,1.7l-.7.9c-.6-.8-1.6-1.3-2.6-1.4-1,0-2,.5-2.6,1.4M10.9,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3M15.3,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>';
+                    htmlCode += '                              </g>';
+                    htmlCode += '                              <g class="on">';
+                    htmlCode += '                                <path d="M12,3.2c5.4,0,8.8,3.4,8.8,8.8s-3.4,8.8-8.8,8.8S3.2,17.3,3.2,12,6.6,3.2,12,3.2"/>';
+                    htmlCode += '                                <path fill="#ffffff" d="M9.4,15.9l-.7-.9c.8-1.1,2-1.7,3.3-1.7s2.5.7,3.3,1.7l-.7.9c-.6-.8-1.6-1.3-2.6-1.4-1,0-2,.6-2.6,1.4"/>';
+                    htmlCode += '                                <path fill="#ffffff" d="M10.9,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>';
+                    htmlCode += '                                <path fill="#ffffff" d="M15.3,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>';
+                    htmlCode += '                              </g>';
+                    htmlCode += '                            </svg>';
+                    htmlCode += '                        </a>';
+                    htmlCode += '                    </div>';
+                    htmlCode += '               </div>';
+                    htmlCode += '               <div class="hld-bt hld-save">';
+                    if (item.read_later !== undefined) {
+                        if(item.read_later){
+                            htmlCode += '            <a href="#" class="bt-save active" data-target="' + item.id + '">';
+                        } else {
+                            htmlCode += '            <a href="#" class="bt-save" data-target="' + item.id + '">';
+                        }
+                    }
+                    htmlCode += '                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">';
+                    htmlCode += '                          <g class="off">';
+                    htmlCode += '                          <path d="M12,19.7l-6.8,4.3-1.1-.5V2.3c0-1.5.8-2.3,2.3-2.3h11.4c1.5,0,2.3.8,2.3,2.3v21.3l-1.1.4-6.8-4.3h0ZM18.7,22.3V2.5c0-.8-.3-1.2-1.1-1.2H6.5c-.8,0-1.1.4-1.1,1.2v19.7l6.7-4.2,6.7,4.2ZM14.9,14.1c-1.3-.6-2-1-3-1.4-.9.5-1.7.8-3,1.4l-.6-.4c.2-1.1.4-2.1.6-3.2-.8-.7-1.3-1.2-2.3-2.3l.2-.8c1.4-.2,2.2-.4,3.2-.5.5-1,.9-1.8,1.6-3.1h.5c.7,1.2,1.1,2.1,1.6,3.1,1,0,1.7.2,3.1.5l.2.8c-1,1-1.5,1.6-2.3,2.3.3,1.1.5,2.1.6,3.2l-.6.4s.2,0,.2,0ZM9.9,12.4c1-.5,1.5-.8,2.1-1.1.6.4,1.3.8,2,1.1-.2-1-.3-1.6-.4-2.1.8-.8,1.2-1.2,1.7-1.7-1.1-.2-1.7-.2-2.3-.3-.3-.7-.6-1.4-1-2.1-.3.6-.5,1.1-1,2.1-.7,0-1.2.2-2.4.3.5.6,1.1,1.1,1.7,1.7-.2.6-.2,1.1-.4,2.2"/>';
+                    htmlCode += '                          </g>';
+                    htmlCode += '                          <g class="on">';
+                    htmlCode += '                            <path d="M12.1,6.1c-.3.6-.5,1.1-1,2.1-.7,0-1.2.2-2.4.3.5.6,1.1,1.1,1.7,1.7-.2.6-.2,1.1-.4,2.2,1-.5,1.5-.8,2.1-1.1.6.4,1.3.8,2,1.1-.2-1-.3-1.6-.4-2.1.8-.8,1.2-1.2,1.7-1.7-1.1-.2-1.7-.2-2.3-.3-.3-.7-.6-1.4-1-2.1"/>';
+                    htmlCode += '                            <path d="M17.7,0H6.3C4.8,0,4,.8,4,2.3v21.3l1.1.5,6.8-4.3,6.8,4.3,1.1-.4V2.3c0-1.5-.8-2.3-2.3-2.3M14.9,10.6c.3,1.1.5,2.1.6,3.2l-.6.4c-1.3-.6-2-1-3-1.4-.9.5-1.7.8-3,1.4l-.6-.4c.2-1.1.4-2.1.6-3.2-.8-.7-1.3-1.2-2.3-2.3l.2-.8c1.4-.2,2.2-.4,3.2-.5.5-1,.9-1.8,1.6-3.1h.5c.7,1.2,1.1,2.1,1.6,3.1,1,0,1.7.2,3.1.5l.2.8c-1,1-1.5,1.6-2.3,2.3"/>';
+                    htmlCode += '                          </g>';
+                    htmlCode += '                        </svg>';
+                    htmlCode += '                    </a>';
+                    htmlCode += '                    <div class="over">';
+                    htmlCode += '                        salvar';
+                    htmlCode += '                    </div>';
+                    htmlCode += '               </div>';
+                    htmlCode += '               <div class="hld-bt hld-share">';
+                    htmlCode += '                    <a href="#" class="bt-compartilhar" data-target="' + item.id + '" data-share-title="' + encodeURIComponent(item.title) + '" data-share-text="' + encodeURIComponent(cleanMessage).replaceAll('_', '%20') + '" data-share-link="' + encodeURIComponent(item.share_link) + '">';
+                    htmlCode += '                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">';
+                    htmlCode += '                            <path d="M9,12.8l6.1,2.8c.7-1.5,2.2-2.3,3.9-2.3,2.2-.1,4.2,1.6,4.3,3.8,0,.2,0,.3,0,.5.1,2.2-1.5,4.2-3.8,4.3-.2,0-.3,0-.5,0-2.3.1-4.2-1.6-4.3-3.9,0-.1,0-.3,0-.4,0-.2,0-.5,0-.7l-6.1-2.9c-.7,1.4-2.2,2.3-3.8,2.2-2.3.1-4.2-1.6-4.3-3.9,0-.1,0-.3,0-.4-.1-2.3,1.6-4.2,3.9-4.3.1,0,.3,0,.4,0,1.6-.1,3.1.8,3.8,2.2l6.1-2.9c0-.2,0-.5,0-.7-.1-2.3,1.6-4.2,3.9-4.3.1,0,.3,0,.4,0,2.2-.1,4.2,1.5,4.3,3.8,0,.2,0,.3,0,.5.1,2.2-1.6,4.2-3.8,4.3-.2,0-.3,0-.5,0-1.6,0-3.1-.8-3.9-2.3l-6.1,2.8c0,.3,0,.5,0,.8,0,.3,0,.5,0,.8M4.8,14.9c1.4.2,2.7-.9,2.9-2.3,0-.2,0-.4,0-.6.2-1.4-.9-2.8-2.3-2.9-.2,0-.4,0-.6,0-1.4-.2-2.7.9-2.9,2.3,0,.2,0,.4,0,.6-.2,1.4.9,2.8,2.3,2.9.2,0,.4,0,.6,0M19,9.2c1.4.2,2.7-.9,2.9-2.3,0-.2,0-.4,0-.6.2-1.4-.9-2.8-2.3-2.9-.2,0-.4,0-.6,0-1.4-.2-2.7.9-2.9,2.3,0,.2,0,.4,0,.6-.2,1.4.9,2.8,2.3,2.9.2,0,.4,0,.6,0M19,20.6c1.4.2,2.7-.9,2.9-2.3,0-.2,0-.4,0-.6.2-1.4-.9-2.8-2.3-2.9-.2,0-.4,0-.6,0-1.4-.2-2.7.9-2.9,2.3,0,.2,0,.4,0,.6-.2,1.4.9,2.8,2.3,2.9.2,0,.4,0,.6,0"/>';
+                    htmlCode += '                        </svg>';
+                    htmlCode += '                    </a>';
+                    htmlCode += '                    <div class="over">';
+                    htmlCode += '                        compartilhar';
+                    htmlCode += '                    </div>';
+                    htmlCode += '               </div>';
+
+                    if(item.tell_client != null){
+                        htmlCode += '               <div class="hld-bt hld-conte">';
+                        htmlCode += '                    <a href="#" class="bt-modal" data-target="galeria" data-medium="story" data-sub="' + countModal + '"  data-download="'+ item.content +'" data-unique="true" data-timing="false" selectable="true">';
+                        htmlCode += '                       <svg xmlns="http://www.w3.org/2000/svg"  width="29" height="25.7" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 29 25.7">';
+                        htmlCode += '                         <path class="shape-over" d="M12.7,21s-2.1-2.6-4.5-3.2v-.5c1.3-.6,2.1-2.1,2.1-3.7,0-2.2-1.6-4-3.6-3.9-1.9,0-3.5,1.9-3.4,4.1,0,1.8,1.1,3.3,2.6,3.8v.5c-2.4.9-4.5,3.5-4.5,3.5L.2,25.7h14.3l-1.7-4.7Z"/>';
+                        htmlCode += '                         <path d="M1.6,25.7H0v-.8c0-4.1,1.5-6.6,4.5-7.5-1.1-.8-1.8-2.1-1.7-3.4-.2-2.3,1.6-4.2,3.8-4.4.2,0,.4,0,.6,0,2.3-.2,4.2,1.5,4.4,3.7,0,.2,0,.4,0,.6,0,1.4-.6,2.6-1.7,3.4,3,.9,4.5,3.4,4.5,7.5v.8h-1.6v-.8c0-4.3-1.8-6.4-5.7-6.4s-5.6,2.1-5.6,6.4v.8ZM10.1,14c.1-1.4-1-2.7-2.4-2.8-.2,0-.3,0-.5,0-1.4-.2-2.7.9-2.9,2.3,0,.2,0,.3,0,.5-.2,1.5.9,2.8,2.3,3,.2,0,.4,0,.6,0,1.5.1,2.8-.9,2.9-2.4,0-.2,0-.4,0-.6M15.8,12.9c-1.9-1.3-3-3.5-2.9-5.8,0-4.4,3.1-7.1,8-7.1s8,2.7,8,7.1-3.1,7.3-8,7.3c-.7,0-1.3,0-2-.2-.9.9-1.9,1.8-2.9,2.6l-1-1.2c1.2-.9,2.4-1.9,3.4-3.1.8.2,1.7.3,2.5.3,4.1,0,6.4-2.1,6.4-5.8s-2.4-5.6-6.4-5.6-6.4,2-6.4,5.6c0,1.8.8,3.6,2.4,4.6-.3.5-.6.9-1.1,1.2"/>';
+                        htmlCode += '                       </svg>';
+                        htmlCode += '                    </a>';
+                        htmlCode += '                    <div class="over">';
+                        htmlCode += '                        conte para o <br> seu cliente';
+                        htmlCode += '                    </div>';
+                        htmlCode += '               </div>';
+
+                        let saved = false;
+
+                        if (item.read_later !== undefined) {
+                            if(item.read_later){
+                                saved = true;
+                            }
+                        }
+
+                        htmlModal = '';
+                        if(item.tell_client_type == 'video'){
+                            htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.tell_client + '" data-slideTitle="' + encodeURIComponent(item.share_message.trim()) + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.tell_client) + '"  data-vehicle="' + item.vehicles + '" data-version="' + item.version + '">';
+                            htmlModal += '  <div class="slide sld-video autoplay" style="background-image:url(\'' + item.content + '\');">';
+                            htmlModal += '      <div class="hld-video">';
+                            htmlModal += '          <div class="source"></div>';
+                            htmlModal += '      </div>';
+                            htmlModal += '      <a href="#" class="bt-video-modal" data-target="video" data-video="' + item.tell_client + '">';
+                            htmlModal += '          <div class="img" style="background-image: url(\'' + item.content + '\');"></div>';
+                            htmlModal += '      </a>';
+                            htmlModal += '  </div>';
+                            htmlModal += '</div>';
+                        } else if(item.tell_client_type == 'pdf'){
+                            htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.tell_client + '" data-slideTitle="' + encodeURIComponent(item.share_message.trim()) + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.tell_client) + '"  data-vehicle="' + item.vehicles + '" data-version="' + item.version + '">';
+                            htmlModal += '  <div class="slide" style="background-image:url(\'' + item.tell_client + '\');">';
+
+                            htmlModal += '    <div class="midia midia-pdf">';
+                            htmlModal += '       <div class="aux-scroll" id="pdf-' + item.id + '" data-pdf="' + item.tell_client + '">';
+                            htmlModal += '           <div class="loader-panel"><div></div><span></span></div>';
+                            htmlModal += '       </div>';
+                            htmlModal += '    </div>';
+
+                            htmlModal += '  </div>';
+                            htmlModal += '</div>';
+                        } else {
+                            htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.tell_client + '" data-slideTitle="' + encodeURIComponent(item.share_message.trim()) + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.tell_client) + '"  data-vehicle="' + item.vehicles + '" data-version="' + item.version + '"><div class="slide" style="background-image:url(\'' + item.tell_client + '\');"></div></div>';
+                        }
+
+                        if(area == 'meus-itens-salvos'){
+                            arrSlides = [];
+                        }
+
+                        arrSlides.push(htmlModal);
+                        countModal++;
+                    }
+
+                    htmlCode += '           </div>';
+                    htmlCode += '       </div>';
+                    htmlCode += '   </div>';
+                    htmlCode += '</div>';
+                }
+            });
+            
+
+            let actualArea = window.location.hash.substring(1,window.location.hash.length);
+
+            $('.hld-loading-' + page).remove();
+            $('#internal-holder').append(htmlCode);
+
+            let sliderHTML = '';
+            for (i = 0; i < arrSlides.length; i++) {
+                sliderHTML += arrSlides[i];
+            }
+            $('#galeria .slider').html(sliderHTML);
+
+            checkText();
+            closeModal();
+        } else {
+            $('.hld-loading-' + page).remove();
+            $('#internal-holder').append('<div class="txt-fim">Isso é tudo! &nbsp;&nbsp;&nbsp; :)</div>');
+        }
+    }
+}
+
+function checkText() {
+    $('.aux-text').each(function(){
+        var thisHeight = $(this).height() - 30;
+        var textHeight = $(this).find('.text').height();
+
+        if(thisHeight > 0 && thisHeight < textHeight){
+            $(this).addClass('txt-expande');
+            if($(window).width() < 992){
+                $(this).find('.bt-expand-text').text('ler mais...');
+            }
+        } else {
+            $(this).removeClass('txt-expande');
+        }
+    })
+}
+
+function resizeText(target, type) {
+    if(type == 'mais') {
+        $(target).attr('data-target', 'menos');
+        if($(window).width() < 992){
+            $(target).text('...ler menos');
+        } else {
+            $(target).text('ler menos');
+        }
+        $(target).parent().parent().parent().parent().parent().addClass('show');
+    } else {
+        $(target).attr('data-target', 'mais');
+        if($(window).width() < 992){
+            $(target).text('ler mais...');
+        }else{
+            $(target).text('ler mais');
+        }
+        $(target).parent().parent().parent().parent().parent().removeClass('show');
+    }
+}
+
+let countSteps = 0;
+let currentStep = 0;
+
+$('.bt-iniciar-tour').on('click', function (event) {
+    event.preventDefault();
+    $('#tour').removeClass('ini').addClass('steps');
+    showStep(currentStep, 'initial');
+});
+
+$('.bt-next-tour').on('click', function (event) {
+    event.preventDefault();
+    if(currentStep + 1 < countSteps){
+        currentStep++;
+        showStep(currentStep, 'next');
+    } else {
+        $('#tour').removeClass('ini steps on');
+        $('html, body').removeClass('freeze');
+        if($(window).width() < 992){
+            $('[data-target="dashboard"]').parent().addClass('selected');
+            $('[data-target="tour"]').parent().removeClass('selected');
+            $('.nav-mobile .bt').css({'pointer-events':'all'});
+        }
+    }
+});
+
+$('.bt-prev-tour').on('click', function (event) {
+    event.preventDefault();
+    if(currentStep - 1 >= 0){
+        currentStep--;
+        showStep(currentStep, 'prev');
+    } else {
+        $('#tour').removeClass('steps').addClass('ini');
+    }
+});
+
+$('.bt-fechar-tour').on('click', function (event) {
+    event.preventDefault();
+    $('#tour').removeClass('ini steps on');
+    $('html, body').removeClass('freeze');
+    currentStep = 0;
+
+    if($(window).width() < 992){
+        $('[data-target="dashboard"]').parent().addClass('selected');
+        $('[data-target="tour"]').parent().removeClass('selected');
+        $('.nav-mobile .bt').css({'pointer-events':'all'});
+    }
+});
+
+
+let arrTourDesktop = [
+                { target:'.switcher [data-target="perfil"]', boxsize:'box-p', offset:'-1,2,0,4', boxposition:'right', offsetbox:'0,0,0,0', tipposition:'', ajust:'border-radius:30px;', text:'Encontre configurações e mais opções nesse menu.' },
+                { target:'.accordion .master-bt:nth-child(1)', boxsize:'box-p', offset:'10,0,10,0', boxposition:'right', offsetbox:'0,0,0,0', tipposition:'', ajust:'border-radius:30px;', text:'Clique aqui para voltar à página inicial a qualquer momento.' },
+                { target:'.accordion .master-bt:nth-child(2)', boxsize:'box-p', offset:'10,0,10,0', boxposition:'right', offsetbox:'0,0,0,0', tipposition:'', ajust:'border-radius:30px;', text:'Encontre todos os materiais para download e compartilhamento nesta biblioteca.' },
+                { target:'.accordion .master-bt:nth-child(3)', boxsize:'box-p', offset:'10,0,10,0', boxposition:'right', offsetbox:'0,0,0,0', tipposition:'', ajust:'border-radius:30px;', text:'Acesse as campanhas mais recentes e fique por dentro das novidades.' },
+                { target:'.menu-slider.destaque', boxsize:'box-m', offset:'0,10,10,10', boxposition:'bottom', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Confira os conteúdos em destaque e informações mais importante.' },
+                { target:'#menu-dashboard', boxsize:'box-m', offset:'0,0,0,0', boxposition:'bottom', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Veja os conteúdos por temas e organize a ordem de acordo com sua preferência.'},
+                { target:'#internal-holder .post:nth-child(1)', boxsize:'box-g', offset:'0,16,16,16', boxposition:'top-left', offsetbox:'0,0,0,0', tipposition:'left', ajust:'', text:'Leia os conteúdos completos e esteja sempre atualizado.'},
+                { target:'#internal-holder .post:nth-child(1) .bt-react', boxsize:'box-m', offset:'8,8,8,8', boxposition:'top-right', offsetbox:'0,0,0,0', tipposition:'right', ajust:'', text:'Gostou? Toque para reagir e sabermos o que achou!'},
+                { target:'#internal-holder .post:nth-child(1) .hld-reactions .over', boxsize:'box-m', offset:'0,8,0,0', boxposition:'top-right', offsetbox:'0,0,0,0', tipposition:'right', ajust:'', text:'Escolha sua reação: curta, ame, aplauda, entre outras.'},
+                { target:'#internal-holder .post:nth-child(1) .bt-save', boxsize:'box-m', offset:'8,8,8,8', boxposition:'top-right', offsetbox:'0,0,0,0', tipposition:'right', ajust:'', text:'Salve este conteúdo para encontrá-lo facilmente depois.'},
+                { target:'.area .bt', boxsize:'box-p', offset:'5,5,5,5', boxposition:'left-top', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Personalize seu Feed: para escolher a prioridade de conteúdos, clique aqui.'},
+                { target:'.panel-config', boxsize:'box-g', offset:'', boxposition:'left-center', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Organize os temas e a ordem em que deseja vê-los, de acordo com sua preferência.'},
+                { target:'aside.right .banners', boxsize:'box-m', offset:'8,8,8,8', boxposition:'left-top', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Confira os principais destaques aqui e acesse os materiais facilmente.'},
+                { target:'.bt.informacao', boxsize:'box-m', offset:'-1,2,0,4', boxposition:'bottom-right', offsetbox:'0,0,0,0', tipposition:'right', ajust:'', text:'Quando houver qualquer dúvida esse tutorial estará sempre disponível aqui. '},
+                { target:'.bt.notificacao', boxsize:'box-m', offset:'-1,2,0,4', boxposition:'bottom-right', offsetbox:'0,0,0,0', tipposition:'right', ajust:'', text:'Veja os conteúdos mais recentes e os que ainda não foram visualizados.'},
+                { target:'.bt.busca', boxsize:'box-m', offset:'-1,2,0,4', boxposition:'bottom-right', offsetbox:'0,0,0,0', tipposition:'right', ajust:'', text:'Use a busca para encontrar rapidamente conteúdos específicos.'},
+                { target:'.menu-slider.icons', boxsize:'box-m', offset:'0,10,10,10', boxposition:'bottom', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Navegue pelos diferentes tipos de materiais disponíveis para download e compartilhamento.' },
+                { target:'#sidebar-holder', boxsize:'box-p', offset:'-74,0,0,0', boxposition:'left-center', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Utilize o filtro por veículo para encontrar rapidamente os materiais desejados.'},
+                { target:'#internal-holder .post:nth-child(1)', boxsize:'box-p', offset:'1,2,2,1', boxposition:'right', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Ao clicar em um material ou passar o mouse por ele, você pode baixar ou compartilhar o conteúdo diretamente com seu cliente.' },
+                { target:'.menu-slider.icons', boxsize:'box-m', offset:'0,10,10,10', boxposition:'bottom', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Para encontrar rapidamente os materiais de campanha que estão disponíveis, utilize o filtro de acordo com o tema desejado.' },
+                { target:'#internal-holder .type-campanha-momento .title', boxsize:'box-p', offset:'10,10,10,10', boxposition:'bottom', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'As campanhas disponíveis podem ser fixas ou com data de validade. As que possuírem validade serão sinalizadas com este ícone e a respectiva data.' },
+                { target:'#internal-holder .type-campanha-momento .description', boxsize:'box-p', offset:'1,17,17,0', boxposition:'right', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Acesse todos os materiais das campanhas fixas clicando diretamente no link do Salesforce.' },
+              ];
+
+let arrTourMobile = [
+                { target:'.bt.perfil', boxsize:'box-mobile', offset:'-1,2,0,4', boxposition:'bottom-right', offsetbox:'0,0,0,0', tipposition:'right', ajust:'', text:'Encontre configurações e mais opções nesse menu.'},
+                { target:'.nav-mobile .master-bt:nth-child(1)', boxsize:'box-mobile', offset:'1,2,1,2', boxposition:'mobile-top', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Clique aqui para voltar à página inicial a qualquer momento.' },
+                { target:'.nav-mobile .master-bt:nth-child(2)', boxsize:'box-mobile', offset:'1,2,1,2', boxposition:'mobile-top', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Encontre todos os materiais para download e compartilhamento nesta biblioteca.' },
+                { target:'.nav-mobile .master-bt:nth-child(3)', boxsize:'box-mobile', offset:'1,2,1,2', boxposition:'mobile-top', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Acesse as campanhas mais recentes e fique por dentro das novidades.' },
+                { target:'.menu-slider.destaque', boxsize:'box-mobile', offset:'0,16,8,16', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Confira os conteúdos em destaque e informações mais importante.' },
+                { target:'#menu-dashboard', boxsize:'box-mobile', offset:'0,16,0,16', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Veja os conteúdos por temas e organize a ordem de acordo com sua preferência.' },
+                { target:'#internal-holder .post:nth-child(1)', boxsize:'box-mobile', offset:'0,0,8,0', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Leia os conteúdos completos e esteja sempre atualizado.' },
+                { target:'#internal-holder .post:nth-child(1) .bt-react', boxsize:'box-mobile', offset:'4,4,4,4', boxposition:'mobile-top', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Clique para reagir ao conteúdo e nos contar o que achou!' },
+                { target:'#internal-holder .post:nth-child(1) .hld-reactions .over', boxsize:'box-mobile', offset:'0,8,0,0', boxposition:'mobile-top', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Escolha sua reação: curta👍, ame❤️, aplauda👏, entre outras.' },
+                { target:'#internal-holder .post:nth-child(1) .bt-save', boxsize:'box-mobile', offset:'4,4,4,4', boxposition:'mobile-top', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Salve este conteúdo para encontrá-lo facilmente depois. Para isso, clique nas três barras no canto superior direito. ' },
+                { target:'.bt-config', boxsize:'box-mobile', offset:'', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Personalize seu Feed: clique aqui e defina a ordem e os assuntos que mais te interessam.' },
+                { target:'.panel-config .configs', boxsize:'box-mobile', offset:'-82,32,-24,0', boxposition:'mobile-bottom', offsetbox:'80,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Organize os temas e a ordem em que deseja vê-los, de acordo com sua preferência.' },
+                { target:'#content-holder .banners', boxsize:'box-mobile', offset:'0,0,-4,0', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Confira os principais destaques aqui e acesse os materiais facilmente.' },
+                { target:'.bt.notificacao', boxsize:'box-mobile', offset:'0,0,0,0', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Veja os conteúdos e notificações mais recentes que ainda não foram visualizados.' },
+                { target:'.nav-mobile .master-bt:nth-child(4)', boxsize:'box-mobile', offset:'', boxposition:'mobile-top', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Use a busca e encontre rapidamente os materiais e conteúdos que você deseja.' },
+                { target:'.nav-mobile .master-bt:nth-child(5)', boxsize:'box-mobile', offset:'', boxposition:'mobile-top', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Está com dúvidas? Não se preocupe, nosso tutorial ficará disponível aqui.' },
+                { target:'.menu-slider.icons', boxsize:'box-mobile', offset:'0,32,8,32', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Navegue pelos diferentes tipos de materiais disponíveis para download e compartilhamento.' },
+                { target:'.filtro-mobile .bt-filtro', boxsize:'box-mobile', offset:'0,0,0,0', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Utilize o filtro por veículo para encontrar rapidamente os materiais desejados.' },
+                { target:'#internal-holder .post:nth-child(1)', boxsize:'box-mobile', offset:'0,0,0,0', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Ao clicar em um material ou passar o mouse por ele, você pode baixar ou compartilhar o conteúdo diretamente com seu cliente.' },
+                { target:'.menu-slider.icons', boxsize:'box-mobile', offset:'0,32,8,32', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'mobile-tip', ajust:'', text:'Para encontrar rapidamente os materiais de campanha que estão disponíveis, utilize o filtro de acordo com o tema desejado.' },
+                { target:'#internal-holder .type-campanha-momento .title', boxsize:'box-mobile', offset:'10,10,10,10', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'As campanhas disponíveis podem ser fixas ou com data de validade. As que possuírem validade serão sinalizadas com este ícone e a respectiva data.' },
+                { target:'#internal-holder .type-campanha-momento .description', boxsize:'box-mobile', offset:'1,17,17,0', boxposition:'mobile-bottom', offsetbox:'0,0,0,0', tipposition:'', ajust:'', text:'Acesse todos os materiais das campanhas fixas clicando diretamente no link do Salesforce.' },
+              ];
+
+let activeBack = '';
+
+function showStep(num, direction) {
+    let waitStep = 0;
+
+    let arrTour = [];
+    if($(window).width() < 992){
+        arrTour = arrTourMobile;
+
+        if(num == 5) {
+            if(direction == 'prev') {
+                $('html, body').animate({
+                    scrollTop: $('.menu-slider.destaque').offset().top - 50
+                }, 400);
+                waitStep = 500;
+            }
+        }
+
+        if(num == 6) {
+            if(direction == 'next') {
+                $('html, body').animate({
+                    scrollTop: $('#internal-holder').offset().top + 50
+                }, 400);
+                waitStep = 500;
+            }
+        }
+
+        if(num == 8) {
+            $(arrTour[8]['target']).css({'opacity':'1'});
+        } else {
+            $(arrTour[8]['target']).css({'opacity':'0'});
+        }
+
+        if(num == 10) {
+           if(direction == 'next') {
+                $('html, body').animate({
+                    scrollTop: $('#content-holder').offset().top
+                }, 400);
+                waitStep = 500;
+            }
+        } 
+
+        if(num == 9) {
+            if(direction == 'prev') {
+                $('html, body').animate({
+                    scrollTop: $('#internal-holder').offset().top + 50
+                }, 400);
+                waitStep = 500;
+            }
+        }
+
+        if(num == 11) {
+            $('.panel-config').addClass('hard open');
+        } else {
+            $('.panel-config').removeClass('open');
+            let wait = setTimeout(function(){
+                clearTimeout(wait);
+                $('.panel-config').removeClass('hard');
+            }, 500);
+        }
+
+        if(num == 15) {
+            if(activeArea == 'biblioteca-de-materiais'){
+                waitStep = 500;
+                makeHash('dashboard', 'internal');
+            }
+        }
+
+        if(num == 16) {
+            waitStep = 500;
+            makeHash('biblioteca-de-materiais', 'internal');
+        }
+
+        if(num == 18) {
+            if(activeArea == 'campanhas'){
+                waitStep = 1000;
+                makeHash('biblioteca-de-materiais', 'internal');
+            }
+        }
+
+        if(num == 19) {
+            waitStep = 500;
+            makeHash('campanhas', 'internal');
+        }
+
+        if(num == 20) {
+            if(direction == 'next') {
+                $('html, body').animate({
+                    scrollTop: $('.type-campanha-momento').offset().top - 50
+                }, 400);
+                waitStep = 500;
+            }
+        }
+
+    } else {
+        arrTour = arrTourDesktop;
+        
+        if(num == 0) {
+            $('aside.left').attr('data-anchor','perfil');
+        } else {
+            $('aside.left').attr('data-anchor','menu');
+        }
+
+        if(num == 8) {
+            $(arrTour[8]['target']).css({'opacity':'1'});
+        } else {
+            $(arrTour[8]['target']).css({'opacity':'0'});
+        }
+
+        if(num == 11) {
+            $('.panel-config').addClass('hard open');
+        } else {
+            $('.panel-config').removeClass('open');
+            let wait = setTimeout(function(){
+                clearTimeout(wait);
+                $('.panel-config').removeClass('hard');
+            }, 500);
+        }
+
+        if(num == 15) {
+            if(activeArea == 'biblioteca-de-materiais'){
+                waitStep = 500;
+                makeHash('dashboard', 'internal');
+            }
+        }
+
+        if(num == 16) {
+            waitStep = 500;
+            makeHash('biblioteca-de-materiais', 'internal');
+        }
+
+        if(num == 18) {
+            if(activeArea == 'campanhas'){
+                waitStep = 1000;
+                makeHash('biblioteca-de-materiais', 'internal');
+            }
+        }
+
+        if(num == 19) {
+            waitStep = 500;
+            makeHash('campanhas', 'internal');
+        }
+
+        if(num == 20) {
+            if(direction == 'next') {
+                $('html, body').animate({
+                    scrollTop: $('.type-campanha-momento').offset().top - 100
+                }, 400);
+                waitStep = 500;
+            }
+        }
+    }
+
+    $('#box-tour').hide();
+    $('.tour .shape').attr('style', 'width:0px; height:0px;');
+    let waitGeral = setTimeout(function(){
+            clearTimeout(waitGeral);
+
+            let item = arrTour[num]['target'];
+            let ajust = arrTour[num]['ajust'];
+            let boxPosition = arrTour[num]['boxposition'];
+            let tipPosition = arrTour[num]['tipposition'];
+            let offsetShape = arrTour[num]['offset'];
+            let offsetBox = arrTour[num]['offsetbox'];
+            let position = $(item).offset();
+            let newStyles = '';
+            let tipClass = '';
+            let offsetArray = [];
+            let offsetBoxArray = [];
+
+            if (offsetShape) {
+                offsetArray = offsetShape.split(',');
+
+                newStyles = 'top:' + (position.top - offsetArray[0])  + 'px; left:' + (position.left - offsetArray[3]) + 'px; width:' + ($(item).width() + (offsetArray[1] * 2)) + 'px; height:' + ($(item).height() + (offsetArray[2] * 2)) + 'px;';
+            } else {
+                newStyles = 'top:' + position.top  + 'px; left:' + position.left + 'px; width:' + $(item).width() + 'px; height:' + $(item).height() + 'px;';            
+            }
+
+             if (offsetBox) {
+                offsetBoxArray = offsetBox.split(',');
+            }
+
+            if (ajust) {
+                newStyles = `${ajust} ${newStyles}`;
+            }
+            if (tipPosition) {
+                if(tipPosition == 'left') {
+                    tipClass = 'tip-left';
+                }
+                if(tipPosition == 'right') {
+                    tipClass = 'tip-right';
+                }
+            }
+            
+            $('#box-tour').show();
+            $('#box-tour').attr('class','');
+            $('#box-tour').addClass(arrTour[num]['boxsize'] + '  ' + arrTour[num]['boxposition'] + ' ' + tipClass);
+            $('#box-tour .txt').text(arrTour[num]['text']);
+
+            $('.tour .shape').attr('style', newStyles);
+
+            $('#box-tour .dots .dot').each(function(index){
+                if(index <= num ){
+                    $(this).addClass('on');
+                } else {
+                    $(this).removeClass('on');
+                }
+            })
+
+            if(tipPosition == 'mobile-tip') {
+                let posTip = (position.left + (Number($(item).width()) / 2)) - 23;
+                if((posTip + 23) > ($('#box-tour').width() + 40)){
+                    posTip = ($('#box-tour').width() + 18);
+                }
+                $('head').append('<style>#box-tour:before{left:'+ posTip +'px;}</style>');
+            }
+            
+            if(boxPosition == 'right') {
+                 if (offsetShape) {
+                    $('#box-tour').attr('style', 'top:' + (position.top - offsetArray[0])  + 'px; left:' + ((position.left + $(item).width() + Number(offsetArray[1])) + 45) + 'px;')
+                } else {
+                    $('#box-tour').attr('style', 'top:' + position.top  + 'px; left:' + ((position.left + $(item).width()) + 45) + 'px;')
+                }
+            }
+            if(boxPosition == 'left-top') {
+                 if (offsetShape) {
+                    $('#box-tour').attr('style', 'top:' + (position.top - offsetArray[0])  + 'px; left:' + (position.left - $('#box-tour').width() - 75) + 'px;')
+                } else {
+                    $('#box-tour').attr('style', 'top:' + position.top  + 'px; left:' + (position.left - $('#box-tour').width() - 75) + 'px;')
+                }
+            }
+            if(boxPosition == 'left-center') {
+                 if (offsetShape) {
+                    $('#box-tour').attr('style', 'top: 50%; transform: translate(0,-50%); left:' + (position.left - $('#box-tour').width() - 75) + 'px;')
+                } else {
+                    $('#box-tour').attr('style', 'top: 50%; transform: translate(0,-50%); left:' + (position.left - $('#box-tour').width() - 75) + 'px;')
+                }
+            }
+            if(boxPosition == 'top-center') {
+                $('#box-tour').attr('style', 'top:' + (position.top - $('#box-tour').height() - 55)  + 'px; left:' + (position.left + ($('.tour .shape').width() / 2)) + 'px; transform: translate(-50%);')
+            }
+            if(boxPosition == 'top-left') {
+                $('#box-tour').attr('style', 'top:' + (position.top - $('#box-tour').height() - 55)  + 'px; left: ' + (position.left + 50) + 'px;')
+            }
+            if(boxPosition == 'top-right') {
+                $('#box-tour').attr('style', 'top:' + (position.top - $('#box-tour').height() - 60)  + 'px; left:' + ((position.left - $('#box-tour').width()) + 10) + 'px;')
+            }
+            if(boxPosition == 'bottom') {
+                $('#box-tour').attr('style', 'top:' + (position.top + $('.tour .shape').height() + 30) + 'px; left: 50%; transform: translate(-50%);')
+            }
+            if(boxPosition == 'bottom-right') {
+                if($(window).width() < 992){
+                    $('#box-tour').attr('style', 'top:' + (position.top + $('.tour .shape').height() + 30)  + 'px; left:' + ((position.left - $('#box-tour').width()) + 5) + 'px;')
+                } else {
+                    $('#box-tour').attr('style', 'top:' + (position.top + $('.tour .shape').height() + 30)  + 'px; left:' + ((position.left - $('#box-tour').width()) + 20) + 'px;')
+                }
+            }
+
+            if(boxPosition == 'mobile-top') {
+                $('#box-tour').attr('style', 'top:' + (position.top - ($('#box-tour').height() + 60))  + 'px; left: 16px;')
+            }
+            if(boxPosition == 'mobile-bottom') {
+                $('#box-tour').attr('style', 'top:' + ((position.top + Number(offsetBoxArray[0])) + ($('.tour .shape').height() + 30))  + 'px; left: 16px;')
+            }
+
+            if($(window).width() < 992){
+                let wait = setTimeout(function(){
+                    clearTimeout(wait);
+                    $('[data-target="dashboard"]').parent().removeClass('selected');
+                    $('[data-target="tour"]').parent().addClass('selected');
+                    $('.nav-mobile .bt:not(.selected)').css({'pointer-events':'none'});
+                }, 25);
+            }
+    }, waitStep);
+
+}
+
+function deletaPerfil(){
+    const params = { q:'disable_user'};
+
+    app.request(params, false, 'secret_key', ( res ) => {
+        if(res.error != null) {
+        } else {
+            $('#deletar-perfil').addClass('ret');
+
+            let wait = setTimeout(function(){
+                clearTimeout(wait);
+                logOut();
+            }, 3000);
+        }
+    });
+}
+
+function enviaSenha(type){
+    if(type == 'senha-esqueci'){
+        let email = keeper.get('email');
+
+        const params = { q:'password_request', email:email};
+
+        app.request(params, false, 'secret_key', ( res ) => {
+            if(res.error != null) {
+            } else {
+                makeModal('senha-esqueci');
+            }
+        });
+    }
+    if(type == 'reenviar'){
+        let email = keeper.get('email');
+
+        const params = { q:'password_request', email:email};
+
+        app.request(params, false, 'secret_key', ( res ) => {
+            if(res.error != null) {
+            } else {
+                closeModal();
+            }
+        });
+    }
+}
+function salvaDados(type){
+    if(type == 'name'){
+        let name = $('.configuracao input[name="nome"]').val();
+        let URIname = encodeURIComponent(name);
+
+        const params = { q:'update_user', name:URIname };
+        
+        app.request(params, false, null, ( res ) => {
+            if(res.error != null) {
+            }else{
+                const keeperParams = { name:name };
+                keeper.set(keeperParams, STORAGE_TYPE, 10);
+
+                makeModal('dados-sucesso');
+            }
+        });
+    }
+    if(type == 'password'){
+        let error = 0;
+        let senhaAtual = $('.configuracao input[name="senha-atual"]').val();
+        let senhaNova = $('.configuracao input[name="nova-senha"]').val();
+        let senhaConfirma = $('.configuracao input[name="confirma-senha"]').val();
+
+        $('.msg-error').removeClass('on');
+        $('.configuracao input[name="senha-atual"]').parent().removeClass('error');
+        $('.configuracao input[name="nova-senha"]').parent().removeClass('error');
+        $('.configuracao input[name="confirma-senha"]').parent().removeClass('error');
+
+        if(senhaAtual == ''){
+            $('.configuracao input[name="senha-atual"]').parent().addClass('error');
+            $('.msg-error').html('preencha todos os campos');
+            error++;
+        }
+        if(senhaNova == ''){
+            $('.configuracao input[name="nova-senha"]').parent().addClass('error');
+            $('.msg-error').html('preencha todos os campos');
+            error++;
+        }
+        if(senhaConfirma == ''){
+            $('.configuracao input[name="confirma-senha"]').parent().addClass('error');
+            $('.msg-error').html('preencha todos os campos');
+            error++;
+        }
+
+        if($('.validacao .item').hasClass('error')){
+            $('.msg-error').html('crie uma nova senha mais segura');
+            $('.configuracao input[name="nova-senha"]').parent().addClass('error');
+            error++;
+        } else {
+            if(senhaNova != senhaConfirma){
+                $('.msg-error').html('as senhas não coincidem');
+                $('.configuracao input[name="confirma-senha"]').parent().addClass('error');
+                error++;
+            }
+        }
+
+        if(error > 0){
+            $('.msg-error').addClass('on');
+            return;
+        }
+
+        const params = { q:'update_user', current_password:senhaAtual, new_password:senhaConfirma };
+        
+        app.request(params, false, null, ( res ) => {
+            if(res.error != null) {
+                if(res.error == 'Senha Inválida.'){
+                    $('.configuracao input[name="senha-atual"]').parent().addClass('error');
+                    $('.msg-error').html('verifique a sua senha atual');
+                    $('.msg-error').addClass('on');
+                }
+            }else{
+                makeModal('senha-sucesso');
+            }
+        });
+    }
+}
+
+function makeModal(string, type, sub, timing = true, unique = false) {
+    if(string == 'tour') {
+        if($('#tour').hasClass('on')){
+            $('#tour').removeClass('ini steps on');
+            $('html, body').removeClass('freeze');
+
+            if($(window).width() < 992){
+                $('[data-target="dashboard"]').parent().addClass('selected');
+                $('[data-target="tour"]').parent().removeClass('selected');
+                $('.nav-mobile .bt').css({'pointer-events':'all'});
+            }
+            return;
+        } else {
+            makeHash('dashboard', 'internal');
+            $('html, body').addClass('freeze');
+
+            $('#box-tour .dots').html('');
+
+            if($(window).width() < 992){
+                countSteps = arrTourMobile.length;
+            }else{
+                countSteps = arrTourDesktop.length;
+            }
+
+            for(i=0; i<countSteps; i++){
+                $('#box-tour .dots').append('<div class="dot"></div>')
+            }
+
+            
+            $('#tour').addClass('on');
+        }
+    }
+
+    if(type){
+        $('#' + string).removeClass('cartao');
+        $('#' + string).removeClass('perfil');
+
+        $('#' + string).addClass( type + ' on');
+    } else {
+        $('#' + string).addClass('on');
+    }
+
+    if( $('#' + string + ' .slider').length > 0 ){
+        
+        if($('#' + string + ' .slider').hasClass('slick-slider')){
+            $('#' + string + ' .slider').slick('unslick');
+        }
+
+        let initial = 0;
+        if(type == 'destaque' || type == 'story' || type == 'post'){
+            if(sub){
+                initial = sub;
+            }
+        }
+
+        let slider = $('#' + string + ' .slider');
+        window.slickTime  = 0;
+
+        slider.on('beforeChange', function(event, slick, currentSlide, nextSlide, currentSlideIndex){
+            $('.modal .slick-dots li').each(function(index){
+              if(index < nextSlide){
+                  $(this).find('button').attr('style', 'width:100%');
+              } else {
+                  $(this).find('button').attr('style', 'width:0');
+                  window.slickTime  = 0;
+              }
+            });
+
+            if($('*[data-slick-index="' + currentSlide + '"] .playing').length > 0){
+                $('*[data-slick-index="' + currentSlide + '"]').find('.sld-video').removeClass('playing');
+                $('*[data-slick-index="' + currentSlide + '"]').find('video').get(0).pause();
+                $('*[data-slick-index="' + currentSlide + '"]').find('video').get(0).currentTime = 0;
+            }
+
+            if($('*[data-slick-index="' + nextSlide + '"] .sld-video.autoplay').length > 0) {
+                var thisPlayer = $('*[data-slick-index="' + nextSlide + '"] .sld-video');
+                var video = $('*[data-slick-index="' + nextSlide + '"] .bt-video-modal').attr('data-video');
+
+                thisPlayer.find('.hld-video .source').html('<video controls autoplay><source src="' + video + '" type="video/mp4"></video>');
+                thisPlayer.addClass('playing');
+            }
+
+            let slideID = $('*[data-slick-index="' + nextSlide + '"]').find('.aux-slide').attr('data-slideID');
+            let slideSaved = $('*[data-slick-index="' + nextSlide + '"]').find('.aux-slide').attr('data-slideSaved');
+            let slideDownload = $('*[data-slick-index="' + nextSlide + '"]').find('.aux-slide').attr('data-slideDownload');
+            let slideTitle = $('*[data-slick-index="' + nextSlide + '"]').find('.aux-slide').attr('data-slideTitle');
+            let slideText = $('*[data-slick-index="' + nextSlide + '"]').find('.aux-slide').attr('data-slideText');
+            let slideLink = $('*[data-slick-index="' + nextSlide + '"]').find('.aux-slide').attr('data-slideLink');
+
+            let slideVehicle = $('*[data-slick-index="' + nextSlide + '"]').find('.aux-slide').attr('data-vehicle');
+            let slideVersion = $('*[data-slick-index="' + nextSlide + '"]').find('.aux-slide').attr('data-version');
+            
+            if(slideID){
+                slider.parent().find('.bt-save').attr('data-target', slideID);
+                slider.parent().parent().find('.bt-baixar').attr('data-target', slideDownload);
+                slider.parent().parent().find('.bt-baixar').attr('data-medium', slideID);
+                slider.parent().parent().find('.bt-baixar').attr('data-vehicle', slideVehicle);
+                slider.parent().parent().find('.bt-baixar').attr('data-version', slideVersion);
+                slider.parent().parent().find('.bt-compartilhar').attr('data-target', slideDownload);
+                slider.parent().parent().find('.bt-compartilhar').attr('data-share-title', slideTitle);
+                slider.parent().parent().find('.bt-compartilhar').attr('data-share-text', slideText);
+                slider.parent().parent().find('.bt-compartilhar').attr('data-share-link', slideLink);
+                slider.parent().parent().find('.bt-compartilhar').attr('data-vehicle', slideVehicle);
+                slider.parent().parent().find('.bt-compartilhar').attr('data-version', slideVersion);
+
+                if(slideSaved == 'true') {
+                    slider.parent().find('.bt-save').addClass('active');
+                } else {
+                    slider.parent().find('.bt-save').removeClass('active');
+                }
+            }
+        });
+        
+        slider.on('afterChange', function(event, currentSlide, currentSlideIndex){
+            let id = $('.slick-current').find('.aux-scroll').attr('id');
+            let pdf = $('.slick-current').find('.aux-scroll').attr('data-pdf');
+            
+            if(pdf) {
+                carregaPDF(pdf, id);
+            }
+        });
+
+        slider.on('init', function(event, currentSlide, currentSlideIndex){
+            let wait = setTimeout(function(){
+                clearTimeout(wait);
+                let id = $('.slick-current').find('.aux-scroll').attr('id');
+                let pdf = $('.slick-current').find('.aux-scroll').attr('data-pdf');
+                
+                let slideID = $('.slick-current').find('.aux-slide').attr('data-slideID');
+                let slideSaved = $('.slick-current').find('.aux-slide').attr('data-slideSaved');
+                let slideDownload = $('.slick-current').find('.aux-slide').attr('data-slideDownload');
+                let slideTitle = $('.slick-current').find('.aux-slide').attr('data-slideTitle');
+                let slideText = $('.slick-current').find('.aux-slide').attr('data-slideText');
+                let slideLink = $('.slick-current').find('.aux-slide').attr('data-slideLink');
+
+                let slideVehicle = $('.slick-current').find('.aux-slide').attr('data-vehicle');
+                let slideVersion = $('.slick-current').find('.aux-slide').attr('data-version');
+                
+                if(pdf) {
+                    carregaPDF(pdf, id);
+                }
+
+                if(slideID){
+                    slider.parent().find('.bt-save').attr('data-target', slideID);
+                    slider.parent().parent().find('.bt-baixar').attr('data-target', slideDownload);
+                    slider.parent().parent().find('.bt-baixar').attr('data-medium', slideID);
+                    slider.parent().parent().find('.bt-baixar').attr('data-vehicle', slideVehicle);
+                    slider.parent().parent().find('.bt-baixar').attr('data-version', slideVersion);
+                    slider.parent().parent().find('.bt-compartilhar').attr('data-target', slideDownload);
+                    slider.parent().parent().find('.bt-compartilhar').attr('data-share-title', slideTitle);
+                    slider.parent().parent().find('.bt-compartilhar').attr('data-share-text', slideText);
+                    slider.parent().parent().find('.bt-compartilhar').attr('data-share-link', slideLink);
+                    slider.parent().parent().find('.bt-compartilhar').attr('data-vehicle', slideVehicle);
+                    slider.parent().parent().find('.bt-compartilhar').attr('data-version', slideVersion);
+
+                    if(slideSaved == 'true') {
+                        slider.parent().find('.bt-save').addClass('active');
+                    } else {
+                        slider.parent().find('.bt-save').removeClass('active');
+                    }
+                }
+
+                
+                slider.slick('slickGoTo', initial, true);         
+            }, 100);
+        });
+        if(timing == 'false') {
+            slider.slick({
+              infinite: false,
+              arrows: true,
+              autoplay: false,
+              dots: false,
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              nextArrow: $('#' + string + ' .nav-slider .arrow.right'),
+              prevArrow: $('#' + string + ' .nav-slider .arrow.left'),
+              responsive: [
+                {
+                  breakpoint: 992,
+                  settings: {
+                    arrows: false,
+                  }
+                },
+              ],
+            })
+        } else {
+            slider.slick({
+              infinite: false,
+              arrows: true,
+              autoplay: true,
+              autoplaySpeed: 5000,
+              dots: true,
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              pauseOnFocus: true,
+              pauseOnHover: true,
+              timing: true,
+              nextArrow: $('#' + string + ' .nav-slider .arrow.right'),
+              prevArrow: $('#' + string + ' .nav-slider .arrow.left'),
+              appendDots: $('#' + string + ' .bulls'),
+              responsive: [
+                {
+                  breakpoint: 992,
+                  settings: {
+                    arrows: false,
+                  }
+                },
+              ],
+            });
+
+            setInterval(function(){
+                $('.modal li.slick-active button').attr('style','width:' + window.slickTime +'%')
+            }, 50);
+        }
+
+        if(unique == 'true') {
+            slider.slick('slickSetOption', 'arrows', false, true);
+            slider.slick('slickSetOption', 'draggable', false, true);
+            slider.slick('slickSetOption', 'accessibility', false, true);
+            $('#' + string + ' .nav-slider').hide();
+        }
+        // slider.slick('slickGoTo', initial, true);
+    }
+}
+
+function closeModal() {
+    $('.modal').removeClass('on');
+
+    if($('.modal .playing').length > 0){
+        let wait = setTimeout(function(){
+            clearTimeout(wait);
+            $('.playing').find('video').get(0).pause();
+            $('.playing').find('video').get(0).currentTime = 0;
+            $('.sld-video').removeClass('playing');
+        }, 500);
+    }
+}
+
+function share(target, id){
+    let type = '';
+    let title = $(target).attr('data-share-title');
+    let text = $(target).attr('data-share-text');
+    let link = $(target).attr('data-share-link');
+    let whatsappURL = '';
+    
+    if(title == ''){
+        title = 'Renault';
+    }
+    if(text == ''){
+        text = 'Veja esse material que achei interessante.';
+    }
+
+    let emailText = decodeURIComponent(text).replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '%0D%0A');
+    
+
+    if( /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        whatsappURL = 'whatsapp://send?text=' + '*' + title  + '*%0D%0A%0D%0A' + emailText + '%0D%0A%0D%0A' + link;
+    } else {
+        whatsappURL = 'https://api.whatsapp.com/send/?text=' + '*' + title  + '*%0D%0A%0D%0A' + emailText + '%0D%0A%0D%0A' + link;
+    }
+    $('.modal.compartilhar').find('[data-type="whatsapp"]').attr('href', whatsappURL);
+    $('.modal.compartilhar').find('[data-type="telegram"]').attr('href', 'https://t.me/share/url?url=' + link + '&text=' + emailText);
+    $('.modal.compartilhar').find('[data-type="facebook"]').attr('href', 'https://www.facebook.com/sharer.php?u='+ link +'&p[title]='+ title);
+    $('.modal.compartilhar').find('[data-type="linkedin"]').attr('href', 'https://www.linkedin.com/shareArticle?mini=true&url='+ link +'&title='+ title);
+    $('.modal.compartilhar').find('[data-type="email"]').attr('href', 'mailto:?subject='+ title +'&body=' + emailText + '%0D%0A%0D%0A' + link);
+
+    if(link.includes('feedrenault')) {
+        type = 'file';
+        let index = link.lastIndexOf('%2F');
+        let archivename = link.substring(index + 3, link.length);
+
+        if (navigator.canShare) {
+            shareArchive(link, archivename);
+        } else {
+            $('.modal.compartilhar').addClass('on');
+        }
+    } else {
+        type = 'link';
+        if (navigator.canShare) {
+            navigator.share({
+                title: title,
+                text: text,
+                url: link,
+            })
+        } else {
+            $('.modal.compartilhar').addClass('on');
+        }
+    }
+}
+
+function manualShare(title, text, link, lote = false){
+    let whatsappURL = '';
+    
+    if(title == ''){
+        title = 'Renault';
+    }
+    if(text == ''){
+        text = 'Veja esse material que achei interessante.';
+    }
+
+    let emailText = decodeURIComponent(text).replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '%0D%0A');
+    
+
+    if( /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        whatsappURL = 'whatsapp://send?text=' + '*' + title  + '*%0D%0A%0D%0A' + emailText + '%0D%0A%0D%0A' + link;
+    } else {
+        whatsappURL = 'https://api.whatsapp.com/send/?text=' + '*' + title  + '*%0D%0A%0D%0A' + emailText + '%0D%0A%0D%0A' + link;
+    }
+    $('.modal.compartilhar').find('[data-type="whatsapp"]').attr('href', whatsappURL);
+    $('.modal.compartilhar').find('[data-type="telegram"]').attr('href', 'https://t.me/share/url?url=' + link + '&text=' + emailText);
+    $('.modal.compartilhar').find('[data-type="facebook"]').attr('href', 'https://www.facebook.com/sharer.php?u='+ link +'&p[title]='+ title);
+    $('.modal.compartilhar').find('[data-type="linkedin"]').attr('href', 'https://www.linkedin.com/shareArticle?mini=true&url='+ link +'&title='+ title);
+    $('.modal.compartilhar').find('[data-type="email"]').attr('href', 'mailto:?subject='+ title +'&body=' + emailText + '%0D%0A%0D%0A' + link);
+
+    if (navigator.canShare) {
+        let index = link.lastIndexOf('%2F');
+        let archivename = link.substring(index + 3, link.length);
+        shareArchive(link, archivename);
+    } else {
+        $('.modal.compartilhar').addClass('on');
+    }
+
+    if(lote){
+        countShare++;
+        if(countShare < totalShare) {
+            shareLote(arrSelection);
+        }
+    }
+}
+
+async function shareArchive(url, archivename) {
+  if (navigator.canShare) {
+    try {
+      const response = await fetch(decodeURIComponent(url));
+      const blob = await response.blob();
+      const file = new File([blob], archivename, {type: blob.type});
+
+      await navigator.share({
+        files: [file]
+      });
+    } catch (err) {
+      $('.modal.compartilhar').addClass('on');
+    }
+  } else {
+    $('.modal.compartilhar').addClass('on');
+  }
+
+}
+
+function closeShare() {
+    $('.modal.compartilhar').removeClass('on');
+}
+
+function savePost(target, id, sub = null) {
+    let params = '';
+
+    if($(target).hasClass('active')){
+        params = { q:'read_later', id:id, value:'0' };
+        $(target).removeClass('active');
+
+        if(sub == 'galeria') {
+            $('#galeria .slick-current').find('.aux-slide').attr('data-slideSaved', 'false');
+        }
+    } else {
+        params = { q:'read_later', id:id, value:'1' };
+        $(target).addClass('active');
+
+        if(sub == 'galeria') {
+            $('#galeria .slick-current').find('.aux-slide').attr('data-slideSaved', 'true');
+        }
+    }
+
+    app.request(params, false, null, ( res ) => {
+        if(res.error != null) {
+        }else{
+        }
+    });
+}
+
+function downloadPost(link, id) {
+    const params = { q:'downloaded', id:id };
+    app.request(params, false, null, ( res ) => {
+        if(res.error != null) {
+        }else{
+            if(link.includes('feedrenault')) {
+                util.download(link)
+            } else {
+                window.open(link, "_blank"); 
+            }
+        }
+    });
+}
+
+
+let countDownload = 0;
+let countShare = 0;
+let totalShare = 0;
+
+function shareLote(array) {
+    totalShare = array.length;
+    let link = array[countShare];
+
+    if(link.includes('feedrenault')) {
+        manualShare('', '', link, true)
+    } 
+}
+
+function downloadLote(array) {
+    let total = array.length;
+    let link = array[countDownload];
+
+    if(link.includes('feedrenault')) {
+        util.download(link);
+        
+        countDownload++;
+        if(countDownload < total) {
+            let wait = setTimeout(function(){
+                clearTimeout(wait);
+                downloadLote(array);
+            }, 500);
+        }
+    } 
+
+}
+
+function reactPost(target, id) {
+    let params = '';
+    let statusInicial = $('.bt-react[data-target="' + id + '"]').hasClass('active');
+    let hldID = id;
+
+    if($(target).hasClass('active')) {
+        params = { q:'rank', id:id, score:'0' };
+        $(target).removeClass('active');
+        $(target).parent().find('.over a').removeClass('active');
+
+        if($(target).parent().attr('class') == 'over') {
+            if($(target).attr('data-type') == 'like'){
+                $(target).html(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                      <g class="off">
+                        <path d="M2.8,9.4h1.3v11.6h-1.3v-11.6ZM12.6,10.7l.5-3.4c.3-1.7-.5-3.1-1.5-3.1h-.4v1.8c0,.6,0,1.2-.3,1.8l-1.4,2.7c-.7,1.2-1.5,1.5-3,1.5h-1v-1.3h.9c1,.2,1.9-.4,2.2-1.3l.9-1.8c.3-.7.5-1.5.5-2.2v-2.4h1.8c1.9,0,3,2,2.8,4.3l-.3,2.2h4.7c1,0,2,.6,2.1,1.7v.2c0,.5-.2,1-.5,1.3.3.4.5.9.5,1.4,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,1-.7,1.8-1.7,1.8h-6.8c-1.5,0-2.1-1.3-3.5-1.3h-.9v-1.3h1.4c1.5,0,2.3,1.3,3.5,1.3h6c.5,0,.8-.2.8-.6s-.3-.6-.8-.6h-.5v-1.3h1.7c.6,0,.9-.2.9-.6s-.3-.6-.9-.6h-1.7v-1.3h3c.5,0,.9-.2.9-.6s-.3-.6-.9-.6h-3v-1.3h3.1c.5,0,.8-.2.8-.6s-.3-.7-.8-.7h-6.2l-.3-.3Z"/>
+                      </g>
+                      <g class="on">
+                        <rect x="2.9" y="9.4" width="1.3" height="11.6"/>
+                        <path d="M21.1,11.4c0-1.1-.8-1.9-1.9-1.9h-4.9l.3-2.2c.3-2.3-.8-4.3-2.8-4.3h-1.8v2.3c0,.8,0,1.5-.4,2.2l-.9,1.8c-.3.9-1.3,1.5-2.2,1.3h-.9v9h.9c1.4,0,1.9,1.3,3.5,1.3h6.6c1,0,1.8-.6,1.9-1.6v-.2c0-.3,0-.5-.2-.8.9-.2,1.5-.9,1.5-1.8s0-.5-.2-.8c.9-.1,1.6-.9,1.5-1.8,0-.5-.2-1-.5-1.4.3-.3.5-.8.5-1.3"/>
+                      </g>
+                    </svg>
+                `);
+            }
+            if($(target).attr('data-type') == 'love'){
+                $(target).html(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                      <path class="off" d="M11.5,20c-4.9-3-8.1-7.1-8.1-11.1s1.7-4.9,4.4-4.9c1.7,0,3.3.9,4.2,2.3.9-1.4,2.5-2.3,4.2-2.3,2.7,0,4.4,1.8,4.4,4.9s-3.2,8.1-8.1,11.1h-.9ZM7.8,5.2c-2,0-3.2,1.3-3.2,3.7s2.9,7.1,7.4,9.9c4.5-2.8,7.4-6.6,7.4-9.9s-1.2-3.7-3.2-3.7-2.9,1-4.2,3.2c-1.2-2.2-2.5-3.2-4.2-3.2"/>
+                      <path class="on" d="M11.5,20c-4.9-3-8.1-7.1-8.1-11.1s1.7-4.9,4.4-4.9c1.7,0,3.3.9,4.2,2.3.9-1.4,2.5-2.3,4.2-2.3,2.7,0,4.4,1.8,4.4,4.9s-3.2,8.1-8.1,11.1h-.9Z"/>
+                    </svg>
+                `);
+            }
+            if($(target).attr('data-type') == 'wow'){
+                $(target).html(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                        <path class="off" d="M9.4,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM4.7,13.5c.4,3.6,3.6,6.3,7.3,6.1,4.2,0,6.9-2.8,7.3-6.2l1.1.6c-.6,3.7-3.7,6.7-8.4,6.7s-7.9-3-8.4-6.8l1.1-.5ZM4.9,10.8c.9-.4,1.4-.7,1.9-1,.6.4,1.2.7,1.8,1-.2-.9-.3-1.4-.4-1.9.8-.7,1.1-1,1.6-1.5-.7-.1-1.4-.2-2.1-.3-.4-.9-.6-1.4-.9-1.9-.3.6-.5,1-.9,1.9-.6,0-1.1.1-2.1.3.4.5.8.8,1.5,1.5-.1.5-.2,1-.3,2M8.3,13.3h7.4l.5.8c-.4,2.8-2.1,4.2-4.2,4.2s-3.8-1.4-4.2-4.2l.5-.8ZM14.6,5.4c-.8-.3-1.7-.4-2.6-.4-.9,0-1.7.1-2.5.3l-.5-1.1c1-.3,2-.4,3-.4,1.1,0,2.1.2,3.1.5l-.5,1.1ZM14.9,14.5h-6c.6,2,1.6,2.7,3,2.7s2.4-.7,3-2.7M19.9,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM15.4,10.8c.9-.4,1.4-.7,1.9-1,.6.4,1.2.7,1.8,1-.2-.9-.3-1.4-.4-1.9.8-.7,1.1-1,1.6-1.5-.7-.1-1.4-.2-2.1-.3-.4-.9-.6-1.4-.9-1.9-.3.6-.5,1-.9,1.9-.6,0-1.1.1-2.1.3.4.5.8.8,1.5,1.5-.1.5-.2,1-.3,2"/>
+                        <path class="on" d="M9.4,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM4.7,13.5c.4,3.6,3.6,6.3,7.3,6.1,4.2,0,6.9-2.8,7.3-6.2l1.1.6c-.6,3.7-3.7,6.7-8.4,6.7s-7.9-3-8.4-6.8l1.1-.5ZM8.3,13.3h7.4l.5.8c-.4,2.8-2.1,4.2-4.2,4.2s-3.8-1.4-4.2-4.2l.5-.8ZM14.6,5.4c-.8-.3-1.7-.4-2.6-.4-.9,0-1.7.1-2.5.3l-.5-1.1c1-.3,2-.4,3-.4,1.1,0,2.1.2,3.1.5l-.5,1.1ZM14.9,14.5h-6c.6,2,1.6,2.7,3,2.7s2.4-.7,3-2.7M19.9,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3Z"/>
+                    </svg>
+                `);
+            }
+            if($(target).attr('data-type') == 'like'){
+                $(target).html(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                      <g class="off">
+                        <path d="M2.8,9.4h1.3v11.6h-1.3v-11.6ZM12.6,10.7l.5-3.4c.3-1.7-.5-3.1-1.5-3.1h-.4v1.8c0,.6,0,1.2-.3,1.8l-1.4,2.7c-.7,1.2-1.5,1.5-3,1.5h-1v-1.3h.9c1,.2,1.9-.4,2.2-1.3l.9-1.8c.3-.7.5-1.5.5-2.2v-2.4h1.8c1.9,0,3,2,2.8,4.3l-.3,2.2h4.7c1,0,2,.6,2.1,1.7v.2c0,.5-.2,1-.5,1.3.3.4.5.9.5,1.4,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,1-.7,1.8-1.7,1.8h-6.8c-1.5,0-2.1-1.3-3.5-1.3h-.9v-1.3h1.4c1.5,0,2.3,1.3,3.5,1.3h6c.5,0,.8-.2.8-.6s-.3-.6-.8-.6h-.5v-1.3h1.7c.6,0,.9-.2.9-.6s-.3-.6-.9-.6h-1.7v-1.3h3c.5,0,.9-.2.9-.6s-.3-.6-.9-.6h-3v-1.3h3.1c.5,0,.8-.2.8-.6s-.3-.7-.8-.7h-6.2l-.3-.3Z"/>
+                      </g>
+                      <g class="on">
+                        <rect x="2.9" y="9.4" width="1.3" height="11.6"/>
+                        <path d="M21.1,11.4c0-1.1-.8-1.9-1.9-1.9h-4.9l.3-2.2c.3-2.3-.8-4.3-2.8-4.3h-1.8v2.3c0,.8,0,1.5-.4,2.2l-.9,1.8c-.3.9-1.3,1.5-2.2,1.3h-.9v9h.9c1.4,0,1.9,1.3,3.5,1.3h6.6c1,0,1.8-.6,1.9-1.6v-.2c0-.3,0-.5-.2-.8.9-.2,1.5-.9,1.5-1.8s0-.5-.2-.8c.9-.1,1.6-.9,1.5-1.8,0-.5-.2-1-.5-1.4.3-.3.5-.8.5-1.3"/>
+                      </g>
+                    </svg>
+                `);
+            } 
+            if($(target).attr('data-type') == 'clap'){
+                $(target).html(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                      <g class="off">
+                        <path d="M23,18.2l.2-.7c.2-.6.4-1.2.4-1.8,0-.9-.3-1.7-.7-2.5h0s-.9-1.9-.9-1.9c0,0,0,0,0,0l-1.6-3.2-.5-1.1c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.5-.9c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.9l3.5,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6-7.1-4.8c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.4,2.1.9-.8-4.1-8.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l3.8,7.5,1-.5-2.7-5.4c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0l2.5,4.9.9-.5h0s0,0,0,0l-1.8-3.6c-.2-.3,0-.6.2-.8.1,0,.3,0,.4,0,.2,0,.4,0,.5.3l2.6,5.2c.6,1,.9,2.1,1,3.2,0,.6-.1,1.2-.4,1.7l-.3.9,1.1,2.2,1-.5-.9-1.9Z"/>
+                        <path d="M1.7,13.9c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.5,2.1.9-.8L2.5,5.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l2.3,4.6c0-.5.2-1.1.5-1.5l-.7-1.5c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0v.2c.1,0,.2,0,.2,0,0-.5.2-.9.4-1.3v-.3c-.4-.6-1-1-1.7-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.5,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6L1.7,13.9Z"/>
+                        <path d="M14.4,2.6l-1.3-2.6-1,.5,1.3,2.6,1-.5Z"/>
+                        <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>
+                        <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>
+                      </g>
+                      <g class="on">
+                        <path d="M22.9,18.2l.2-.7c.2-.6.4-1.2.4-1.8,0-.9-.3-1.7-.7-2.5h0s-.9-1.9-.9-1.9c0,0,0,0,0,0l-1.6-3.2-.5-1.1c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.5-.9c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.4,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6-7.1-4.8c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.5,2.1.9-.8-4.1-8.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l3.8,7.5,1-.5-2.7-5.4c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0l2.5,4.9.9-.5h0s0,0,0,0l-1.8-3.6c-.2-.3,0-.6.2-.8.1,0,.3,0,.4,0,.2,0,.4,0,.5.3l2.6,5.2c.5,1,.9,2.1,1,3.2,0,.6-.1,1.2-.4,1.7l-.3.9,1.1,2.2,1-.5-.9-1.9Z"/>
+                        <path d="M14.4,2.6L13.1,0l-1,.5,1.3,2.6,1-.5Z"/>
+                        <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>
+                        <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>
+                        <path d="M7.6,17.9c-.8-.5-1.2-1.4-1.3-2.3,0-1.5,1.2-2.8,2.7-2.8.2,0,.4,0,.6,0l-1.9-4.1c-.2-.4-.3-.9-.3-1.3,0-1,.6-2,1.6-2.4,0-.5.2-.9.4-1.3v-.3c-.4-.6-1-1-1.7-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.4,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5h0s1.5-.8,1.5-.8l-3.9-2.6ZM9.1,19.4h0s0,0,0,0h0Z"/>
+                        <path d="M14.4,2.6L13.1,0l-1,.5,1.3,2.6,1-.5Z"/>
+                        <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>
+                        <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>
+                      </g>
+                    </svg>
+                `);
+            } 
+            if($(target).attr('data-type') == 'sad'){
+                $(target).html(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                      <g class="off">
+                        <path d="M12,3.2c5.4,0,8.8,3.4,8.8,8.8s-3.4,8.8-8.8,8.8S3.2,17.3,3.2,12,6.6,3.2,12,3.2M12,4.4c-4.7,0-7.6,2.9-7.6,7.6s2.9,7.6,7.6,7.6,7.6-2.9,7.6-7.6-2.9-7.6-7.6-7.6M9.4,15.9l-.7-.9c.8-1.1,2-1.7,3.3-1.7s2.5.7,3.3,1.7l-.7.9c-.6-.8-1.6-1.3-2.6-1.4-1,0-2,.5-2.6,1.4M10.9,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3M15.3,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>
+                      </g>
+                      <g class="on">
+                        <path d="M12,3.2c5.4,0,8.8,3.4,8.8,8.8s-3.4,8.8-8.8,8.8S3.2,17.3,3.2,12,6.6,3.2,12,3.2"/>
+                        <path fill="#ffffff" d="M9.4,15.9l-.7-.9c.8-1.1,2-1.7,3.3-1.7s2.5.7,3.3,1.7l-.7.9c-.6-.8-1.6-1.3-2.6-1.4-1,0-2,.6-2.6,1.4"/>
+                        <path fill="#ffffff" d="M10.9,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>
+                        <path fill="#ffffff" d="M15.3,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>
+                      </g>
+                    </svg>
+                `);
+            } 
+        }
+
+        $(target).parent().parent().find('.bt-react').attr('data-type', 'like');
+        $(target).parent().parent().find('.bt-react').removeClass('active');
+        $(target).parent().parent().find('.bt-react').html(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+              <g class="off">
+                <path d="M2.8,9.4h1.3v11.6h-1.3v-11.6ZM12.6,10.7l.5-3.4c.3-1.7-.5-3.1-1.5-3.1h-.4v1.8c0,.6,0,1.2-.3,1.8l-1.4,2.7c-.7,1.2-1.5,1.5-3,1.5h-1v-1.3h.9c1,.2,1.9-.4,2.2-1.3l.9-1.8c.3-.7.5-1.5.5-2.2v-2.4h1.8c1.9,0,3,2,2.8,4.3l-.3,2.2h4.7c1,0,2,.6,2.1,1.7v.2c0,.5-.2,1-.5,1.3.3.4.5.9.5,1.4,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,1-.7,1.8-1.7,1.8h-6.8c-1.5,0-2.1-1.3-3.5-1.3h-.9v-1.3h1.4c1.5,0,2.3,1.3,3.5,1.3h6c.5,0,.8-.2.8-.6s-.3-.6-.8-.6h-.5v-1.3h1.7c.6,0,.9-.2.9-.6s-.3-.6-.9-.6h-1.7v-1.3h3c.5,0,.9-.2.9-.6s-.3-.6-.9-.6h-3v-1.3h3.1c.5,0,.8-.2.8-.6s-.3-.7-.8-.7h-6.2l-.3-.3Z"/>
+              </g>
+              <g class="on">
+                <rect x="2.9" y="9.4" width="1.3" height="11.6"/>
+                <path d="M21.1,11.4c0-1.1-.8-1.9-1.9-1.9h-4.9l.3-2.2c.3-2.3-.8-4.3-2.8-4.3h-1.8v2.3c0,.8,0,1.5-.4,2.2l-.9,1.8c-.3.9-1.3,1.5-2.2,1.3h-.9v9h.9c1.4,0,1.9,1.3,3.5,1.3h6.6c1,0,1.8-.6,1.9-1.6v-.2c0-.3,0-.5-.2-.8.9-.2,1.5-.9,1.5-1.8s0-.5-.2-.8c.9-.1,1.6-.9,1.5-1.8,0-.5-.2-1-.5-1.4.3-.3.5-.8.5-1.3"/>
+              </g>
+            </svg>
+        `);
+    } else {
+        if($(target).attr('data-type') == 'love'){
+            params = { q:'rank', id:id, score:'1' };
+            $(target).parent().find('a').removeClass('active');
+
+            $(target).addClass('active');
+            $(target).parent().parent().find('.bt-react').addClass('active');
+            $(target).parent().parent().find('.bt-react').attr('data-type', 'love');
+            $(target).parent().parent().find('.bt-react').html(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                  <path class="off" d="M11.5,20c-4.9-3-8.1-7.1-8.1-11.1s1.7-4.9,4.4-4.9c1.7,0,3.3.9,4.2,2.3.9-1.4,2.5-2.3,4.2-2.3,2.7,0,4.4,1.8,4.4,4.9s-3.2,8.1-8.1,11.1h-.9ZM7.8,5.2c-2,0-3.2,1.3-3.2,3.7s2.9,7.1,7.4,9.9c4.5-2.8,7.4-6.6,7.4-9.9s-1.2-3.7-3.2-3.7-2.9,1-4.2,3.2c-1.2-2.2-2.5-3.2-4.2-3.2"/>
+                  <path class="on" d="M11.5,20c-4.9-3-8.1-7.1-8.1-11.1s1.7-4.9,4.4-4.9c1.7,0,3.3.9,4.2,2.3.9-1.4,2.5-2.3,4.2-2.3,2.7,0,4.4,1.8,4.4,4.9s-3.2,8.1-8.1,11.1h-.9Z"/>
+                </svg>
+            `);
+        }
+        if($(target).attr('data-type') == 'wow'){
+            params = { q:'rank', id:id, score:'2' };
+            $(target).parent().find('a').removeClass('active');
+
+            $(target).addClass('active');
+            $(target).parent().parent().find('.bt-react').addClass('active');
+            $(target).parent().parent().find('.bt-react').attr('data-type', 'wow');
+            $(target).parent().parent().find('.bt-react').html(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                    <path class="off" d="M9.4,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM4.7,13.5c.4,3.6,3.6,6.3,7.3,6.1,4.2,0,6.9-2.8,7.3-6.2l1.1.6c-.6,3.7-3.7,6.7-8.4,6.7s-7.9-3-8.4-6.8l1.1-.5ZM4.9,10.8c.9-.4,1.4-.7,1.9-1,.6.4,1.2.7,1.8,1-.2-.9-.3-1.4-.4-1.9.8-.7,1.1-1,1.6-1.5-.7-.1-1.4-.2-2.1-.3-.4-.9-.6-1.4-.9-1.9-.3.6-.5,1-.9,1.9-.6,0-1.1.1-2.1.3.4.5.8.8,1.5,1.5-.1.5-.2,1-.3,2M8.3,13.3h7.4l.5.8c-.4,2.8-2.1,4.2-4.2,4.2s-3.8-1.4-4.2-4.2l.5-.8ZM14.6,5.4c-.8-.3-1.7-.4-2.6-.4-.9,0-1.7.1-2.5.3l-.5-1.1c1-.3,2-.4,3-.4,1.1,0,2.1.2,3.1.5l-.5,1.1ZM14.9,14.5h-6c.6,2,1.6,2.7,3,2.7s2.4-.7,3-2.7M19.9,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM15.4,10.8c.9-.4,1.4-.7,1.9-1,.6.4,1.2.7,1.8,1-.2-.9-.3-1.4-.4-1.9.8-.7,1.1-1,1.6-1.5-.7-.1-1.4-.2-2.1-.3-.4-.9-.6-1.4-.9-1.9-.3.6-.5,1-.9,1.9-.6,0-1.1.1-2.1.3.4.5.8.8,1.5,1.5-.1.5-.2,1-.3,2"/>
+                    <path class="on" d="M9.4,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3ZM4.7,13.5c.4,3.6,3.6,6.3,7.3,6.1,4.2,0,6.9-2.8,7.3-6.2l1.1.6c-.6,3.7-3.7,6.7-8.4,6.7s-7.9-3-8.4-6.8l1.1-.5ZM8.3,13.3h7.4l.5.8c-.4,2.8-2.1,4.2-4.2,4.2s-3.8-1.4-4.2-4.2l.5-.8ZM14.6,5.4c-.8-.3-1.7-.4-2.6-.4-.9,0-1.7.1-2.5.3l-.5-1.1c1-.3,2-.4,3-.4,1.1,0,2.1.2,3.1.5l-.5,1.1ZM14.9,14.5h-6c.6,2,1.6,2.7,3,2.7s2.4-.7,3-2.7M19.9,12.5c-1.2-.5-1.8-.9-2.7-1.3-.8.4-1.5.8-2.7,1.3l-.5-.3c.1-1,.3-1.9.5-2.9-.7-.6-1.1-1.1-2-2.1v-.7c1.4-.3,2.1-.4,3-.5.4-.9.8-1.6,1.5-2.7h.5c.6,1.1,1,1.9,1.5,2.7.9.1,1.6.3,2.8.5v.7c-.7.9-1.2,1.5-1.9,2.1.2,1,.4,1.9.5,2.9l-.5.3Z"/>
+                </svg>
+            `);
+        }
+        if($(target).attr('data-type') == 'like'){
+            params = { q:'rank', id:id, score:'3' };
+            $(target).parent().find('a').removeClass('active');
+
+            $(target).addClass('active');
+            $(target).parent().parent().find('.bt-react').addClass('active');
+            $(target).parent().parent().find('.bt-react').attr('data-type', 'like');
+            $(target).parent().parent().find('.bt-react').html(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                  <g class="off">
+                    <path d="M2.8,9.4h1.3v11.6h-1.3v-11.6ZM12.6,10.7l.5-3.4c.3-1.7-.5-3.1-1.5-3.1h-.4v1.8c0,.6,0,1.2-.3,1.8l-1.4,2.7c-.7,1.2-1.5,1.5-3,1.5h-1v-1.3h.9c1,.2,1.9-.4,2.2-1.3l.9-1.8c.3-.7.5-1.5.5-2.2v-2.4h1.8c1.9,0,3,2,2.8,4.3l-.3,2.2h4.7c1,0,2,.6,2.1,1.7v.2c0,.5-.2,1-.5,1.3.3.4.5.9.5,1.4,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,.9-.6,1.7-1.5,1.8.2.2.2.5.2.8,0,1-.7,1.8-1.7,1.8h-6.8c-1.5,0-2.1-1.3-3.5-1.3h-.9v-1.3h1.4c1.5,0,2.3,1.3,3.5,1.3h6c.5,0,.8-.2.8-.6s-.3-.6-.8-.6h-.5v-1.3h1.7c.6,0,.9-.2.9-.6s-.3-.6-.9-.6h-1.7v-1.3h3c.5,0,.9-.2.9-.6s-.3-.6-.9-.6h-3v-1.3h3.1c.5,0,.8-.2.8-.6s-.3-.7-.8-.7h-6.2l-.3-.3Z"/>
+                  </g>
+                  <g class="on">
+                    <rect x="2.9" y="9.4" width="1.3" height="11.6"/>
+                    <path d="M21.1,11.4c0-1.1-.8-1.9-1.9-1.9h-4.9l.3-2.2c.3-2.3-.8-4.3-2.8-4.3h-1.8v2.3c0,.8,0,1.5-.4,2.2l-.9,1.8c-.3.9-1.3,1.5-2.2,1.3h-.9v9h.9c1.4,0,1.9,1.3,3.5,1.3h6.6c1,0,1.8-.6,1.9-1.6v-.2c0-.3,0-.5-.2-.8.9-.2,1.5-.9,1.5-1.8s0-.5-.2-.8c.9-.1,1.6-.9,1.5-1.8,0-.5-.2-1-.5-1.4.3-.3.5-.8.5-1.3"/>
+                  </g>
+                </svg>
+            `);
+
+
+            if(!$(target).parent().hasClass('over')) {
+                $(target).parent().find('.bt-like').addClass('active');   
+            }
+        } 
+        if($(target).attr('data-type') == 'clap'){
+            params = { q:'rank', id:id, score:'4' };
+            $(target).parent().find('a').removeClass('active');
+
+            $(target).addClass('active');
+            $(target).parent().parent().find('.bt-react').addClass('active');
+            $(target).parent().parent().find('.bt-react').attr('data-type', 'clap');
+            $(target).parent().parent().find('.bt-react').html(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                  <g class="off">
+                    <path d="M23,18.2l.2-.7c.2-.6.4-1.2.4-1.8,0-.9-.3-1.7-.7-2.5h0s-.9-1.9-.9-1.9c0,0,0,0,0,0l-1.6-3.2-.5-1.1c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.5-.9c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.9l3.5,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6-7.1-4.8c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.4,2.1.9-.8-4.1-8.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l3.8,7.5,1-.5-2.7-5.4c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0l2.5,4.9.9-.5h0s0,0,0,0l-1.8-3.6c-.2-.3,0-.6.2-.8.1,0,.3,0,.4,0,.2,0,.4,0,.5.3l2.6,5.2c.6,1,.9,2.1,1,3.2,0,.6-.1,1.2-.4,1.7l-.3.9,1.1,2.2,1-.5-.9-1.9Z"/>
+                    <path d="M1.7,13.9c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.5,2.1.9-.8L2.5,5.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l2.3,4.6c0-.5.2-1.1.5-1.5l-.7-1.5c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0v.2c.1,0,.2,0,.2,0,0-.5.2-.9.4-1.3v-.3c-.4-.6-1-1-1.7-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.5,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6L1.7,13.9Z"/>
+                    <path d="M14.4,2.6l-1.3-2.6-1,.5,1.3,2.6,1-.5Z"/>
+                    <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>
+                    <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>
+                  </g>
+                  <g class="on">
+                    <path d="M22.9,18.2l.2-.7c.2-.6.4-1.2.4-1.8,0-.9-.3-1.7-.7-2.5h0s-.9-1.9-.9-1.9c0,0,0,0,0,0l-1.6-3.2-.5-1.1c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.5-.9c-.2-.6-.9-1-1.6-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.4,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5-1.2-2.6-7.1-4.8c-.3-.2-.4-.4-.4-.6,0-.3.2-.5.5-.5,0,0,0,0,0,0,.2,0,.4.1.5.2l3.5,2.1.9-.8-4.1-8.6c0-.1,0-.2,0-.3,0-.3.4-.5.7-.5.2,0,.4,0,.5.3l3,5.9,1-.5-2.9-5.8-.7-1.3c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l3.8,7.5,1-.5-2.7-5.4c0,0,0-.2,0-.3,0-.3.3-.6.7-.5.2,0,.4,0,.5.3l.5,1h0l2.5,4.9.9-.5h0s0,0,0,0l-1.8-3.6c-.2-.3,0-.6.2-.8.1,0,.3,0,.4,0,.2,0,.4,0,.5.3l2.6,5.2c.5,1,.9,2.1,1,3.2,0,.6-.1,1.2-.4,1.7l-.3.9,1.1,2.2,1-.5-.9-1.9Z"/>
+                    <path d="M14.4,2.6L13.1,0l-1,.5,1.3,2.6,1-.5Z"/>
+                    <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>
+                    <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>
+                    <path d="M7.6,17.9c-.8-.5-1.2-1.4-1.3-2.3,0-1.5,1.2-2.8,2.7-2.8.2,0,.4,0,.6,0l-1.9-4.1c-.2-.4-.3-.9-.3-1.3,0-1,.6-2,1.6-2.4,0-.5.2-.9.4-1.3v-.3c-.4-.6-1-1-1.7-1-.5,0-1,.3-1.2.7l-.4-.8c-.2-.6-.9-1-1.6-1-.9,0-1.6.6-1.7,1.5,0,0,0,0,0,0,0,.2,0,.5.1.7-.9,0-1.7.7-1.7,1.6,0,.3,0,.6.2.8l3.4,7.2-1.9-1.2c-.4-.2-.8-.4-1.2-.4-.9,0-1.6.8-1.6,1.7,0,.6.3,1.1.8,1.4l6.9,4.8,1.1,2.3,1-.5h0s1.5-.8,1.5-.8l-3.9-2.6ZM9.1,19.4h0s0,0,0,0h0Z"/>
+                    <path d="M14.4,2.6L13.1,0l-1,.5,1.3,2.6,1-.5Z"/>
+                    <path d="M20.7,3.4l-.5-1-2.6,1.3.5,1,2.6-1.3Z"/>
+                    <rect x="15" y="1.2" width="2.9" height="1.1" transform="translate(9.6 16.8) rotate(-71.6)"/>
+                  </g>
+                </svg>
+            `);
+        } 
+        if($(target).attr('data-type') == 'sad'){
+            params = { q:'rank', id:id, score:'5' };
+            $(target).parent().find('a').removeClass('active');
+
+            $(target).addClass('active');
+            $(target).parent().parent().find('.bt-react').addClass('active');
+            $(target).parent().parent().find('.bt-react').attr('data-type', 'sad');
+            $(target).parent().parent().find('.bt-react').html(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" version="1.1" viewBox="0 0 24 24">
+                  <g class="off">
+                    <path d="M12,3.2c5.4,0,8.8,3.4,8.8,8.8s-3.4,8.8-8.8,8.8S3.2,17.3,3.2,12,6.6,3.2,12,3.2M12,4.4c-4.7,0-7.6,2.9-7.6,7.6s2.9,7.6,7.6,7.6,7.6-2.9,7.6-7.6-2.9-7.6-7.6-7.6M9.4,15.9l-.7-.9c.8-1.1,2-1.7,3.3-1.7s2.5.7,3.3,1.7l-.7.9c-.6-.8-1.6-1.3-2.6-1.4-1,0-2,.5-2.6,1.4M10.9,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3M15.3,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>
+                  </g>
+                  <g class="on">
+                    <path d="M12,3.2c5.4,0,8.8,3.4,8.8,8.8s-3.4,8.8-8.8,8.8S3.2,17.3,3.2,12,6.6,3.2,12,3.2"/>
+                    <path fill="#ffffff" d="M9.4,15.9l-.7-.9c.8-1.1,2-1.7,3.3-1.7s2.5.7,3.3,1.7l-.7.9c-.6-.8-1.6-1.3-2.6-1.4-1,0-2,.6-2.6,1.4"/>
+                    <path fill="#ffffff" d="M10.9,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>
+                    <path fill="#ffffff" d="M15.3,9.7c0,.5-.3,1-.9,1.1h-.3c-.5,0-1-.3-1.1-.9v-.2c0-.5.3-1,.8-1.1h.3c.5,0,1,.3,1.1.8v.3"/>
+                  </g>
+                </svg>
+            `);
+        } 
+    }
+
+    app.request(params, false, null, ( res ) => {
+        if(res.error != null) {
+        }else{
+            let paramsCheck = { q:'feed', id:hldID};
+            app.request(paramsCheck, false, null, ( res ) => {
+                if(res.error != null) {
+                }else{
+                    let item = res.feed[0];
+                    $('.bt-react[data-target="' + hldID + '"]').parent().parent().parent().find('.reactions').attr('data-num', item.score_reactions);
+                    let htmlCode = '';
+                    let loopReaction = item.score_reactions;
+
+                    if(loopReaction){
+                        loopReaction.forEach(function(react) {
+                            if( react.id == 1  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_love.svg">';
+                            }
+                            if( react.id == 2  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_wow.svg">';
+                            }
+                            if( react.id == 3  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_like.svg">';
+                            }
+                            if( react.id == 4  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_clap.svg">';
+                            }
+                            if( react.id == 5  && react.score_count > 0){
+                                htmlCode += '               <img src="assets/images/offset_sad.svg">';
+                            }
+                        })
+                    }
+                               
+                    $('.bt-react[data-target="' + hldID + '"]').parent().parent().parent().find('.reactions .types').html(htmlCode);
+                    if(item.score_count > 0){
+                        if(item.score_count > 1){
+                            $('.bt-react[data-target="' + hldID + '"]').parent().parent().parent().find('.reactions .status').text(item.score_count  + ' reações');
+                        } else {
+                            $('.bt-react[data-target="' + hldID + '"]').parent().parent().parent().find('.reactions .status').text(item.score_count  + ' reação');
+                        }
+                    } else {
+                        $('.bt-react[data-target="' + hldID + '"]').parent().parent().parent().find('.reactions .status').text('');
+                    }
+                }
+            });
+        }
+    });
+}
+
+/* FAQ */
+function faq(target) {
+    if($('[data-anchor="' + target + '"]').find('.resposta').is(':visible')){
+      $('[data-anchor="' + target + '"]').removeClass('open');
+      $('[data-anchor="' + target + '"]').find('.resposta').slideUp();  
+    } else {
+      $('[data-anchor="' + target + '"]').addClass('open');
+      $('[data-anchor="' + target + '"]').find('.resposta').slideDown();
+    }
+}
+
+/* PERFIL */
+/* PASSWORD */
+function viewPassword(event){
+  if($(event.target).parent().hasClass('esconder')){
+    $(event.target).parent().removeClass('esconder');
+    $(event.target).parent().find('input').attr('type', 'password');
+  } else {
+    $(event.target).parent().addClass('esconder');
+    $(event.target).parent().find('input').attr('type', 'text');
+  }
+};
+
+
+/* SCROLL */
+function scroll(target) {
+    let offset = 0;
+
+    if($(window).width() < 992){
+        offset = 30;
+    } else {
+        offset = 50;
+    }
+
+    $('html, body').animate({
+        scrollTop: $('*[data-anchor="'+ target +'"]').offset().top - offset
+    }, 1000);
+}
+
+/* CROP */
+let fileInput = $('#file');
+let image = $('#image');
+let cropper = '';
+let fileName = '';
+let range = $('#scale');
+
+fileInput.on('change', function(){
+    let reader = new FileReader();
+    fileName = fileInput.prop('files')[0].name.split(".")[0];
+
+    reader.readAsDataURL(fileInput.prop('files')[0]);
+    reader.onload = () => {
+    image.attr("src", reader.result);
+    $('.hld-foto').addClass('on');
+
+    if (cropper) {
+      cropper.destroy();
+    }
+
+    cropper = new Cropper(image[0], {
+        dragMode: 'move',
+        aspectRatio: 1,
+        autoCropArea: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+        ready() {
+          this.cropper.zoomTo(1);
+          $('.drag-slide').addClass('on');
+        },
+      });
+    };
+
+    $('.bt-salvar-imagem').removeClass('off');
+    $('.mascara').addClass('off');
+    $('.crop-foto .hld-img .info').addClass('on');
+
+    let wait = setTimeout(function(){
+        clearTimeout(wait);
+        $('.crop-foto .hld-img .info').removeClass('on');
+    }, 2000);
+
+    function updateRange() {
+        let max = range.prop('max');
+        let min = range.prop('min');
+        let wid = range.width() - 20;
+        let perc = (range.val() * 100) / max;
+        let step = ((perc * wid) / 100) + 10;
+
+        let currentValue = Number(range.val());
+        let zoomValue = parseFloat(currentValue);
+
+        cropper.zoomTo(zoomValue.toFixed(4));
+    }
+
+    $(document).on('input', range, function() {
+      updateRange();
+    });
+
+    $('.drag-slide .bt-mais').on("click", function(event) {
+        event.preventDefault();
+        range.val(Number(range.val()) + 0.1);
+        updateRange();
+    });
+
+    $('.drag-slide .bt-menos').on("click", function(event) {
+        event.preventDefault();
+        range.val(Number(range.val()) - 0.1);
+        updateRange();
+    });
+    
+});
+
+function salvaImagem(target, type){
+    let imgSrc = cropper.getCroppedCanvas({}).toDataURL();
+
+    $.ajax({
+        url: 'actions/imagem.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          img: imgSrc
+        },
+        success: function (data) {
+          let imgName = data.name + '.jpg';
+          let imgURL = 'download/img/' + imgName;
+          
+
+          if(type == 'cartao'){
+            $('input[name="img-card"]').val(imgURL);
+            $('.cartao .foto').css({'background-image':'url(\'' + imgURL + '\')'}).addClass('on');
+
+            let params = { q:'set_digital_card', image:imgURL };
+            app.request(params, false, null, ( res ) => {
+                closeModal();
+            });
+          }
+
+          if(type == 'perfil'){
+            $('.dados .img .hld').css({'background-image':'url(\'' + imgURL + '\')'});
+
+            const keeperParams = { image:imgName };
+            keeper.set(keeperParams, STORAGE_TYPE, 10);
+
+            let params = { q:'update_user', image_url:imgName };
+            app.request(params, false, null, ( res ) => {
+                closeModal();
+            });
+          }
+        }
+    });
+}
+
+
+let arrFiltros = [];
+window.filtro = arrFiltros;
+
+function filtraVeiculo(target, filtro, sidebar = null){
+    if(activeArea == 'materiais-imagens-dos-veiculos' || activeArea == 'materiais-ficha-de-modelos'){
+        arrFiltros = [];
+        window.filtro = arrFiltros;
+
+        if(!$(target).hasClass('on')) {
+            $('#lista-filtro .bt-filtro-veiculo').removeClass('on');
+            $(target).addClass('on');
+            let carro = $(target).attr('data-name');
+
+            makeHash(activeArea, 'internal', carro)
+        }  else {
+            $('#lista-filtro .bt-filtro-veiculo').removeClass('on');
+        }
+    } else {
+        $(target).toggleClass('on');
+
+        if($(target).hasClass('on')) {
+            arrFiltros.push(filtro);
+        } else {
+            let indexFiltro = arrFiltros.indexOf(filtro);
+            arrFiltros.splice(indexFiltro, 1);
+        }
+
+        window.filtro = arrFiltros;
+
+        let globalArea = activeArea.substring(0,8)
+
+        if(globalArea == 'campanha') {
+            campanhas.init(activeArea, true);
+        }
+
+        if(globalArea == 'materiai') {
+            if(activeArea != 'materiais-cartao-digital') {
+                materiais.init(activeArea, true);
+            }
+        }
+
+        if(sidebar) {
+            $('aside.right').removeClass('open');
+        }
+    }
+}
+
+/* LOGOUT */
+function logOut(){
+  keeper.clear();
+  $('main').load('login.html');
+}
+
+/* GLOBAL CLICK */
+function globalClick(event, target) {
+    let targetClassList = target.classList;
+    let btTarget = target.getAttribute('data-target');
+    let btMedium = target.getAttribute('data-medium');
+    let btSub = target.getAttribute('data-sub');
+    let btTiming = target.getAttribute('data-timing');
+    let btUnique = target.getAttribute('data-unique');
+    let btCheck = target.getAttribute('data-check');
+
+    console.log(event + ' | ' + target + ' | ' + targetClassList + ' | ' + btTarget)
+
+    if(btTarget != null) {
+        event.preventDefault();
+    }
+
+    switch (true) {
+      case targetClassList.contains('bt-changeview'):
+        makeHash(btTarget, 'internal', btMedium, btSub);
+        break;
+      case targetClassList.contains('bt-viewnotificacao'):
+        viewNotificacao(btSub);
+        makeHash(btTarget, 'internal', btMedium, btSub);
+        break;
+      case targetClassList.contains('bt-ler-todas'):
+        viewAll(btMedium);
+        break;
+      case targetClassList.contains('bt-switcher'):
+        base.switcher(btTarget);
+        break;
+      case targetClassList.contains('bt-dropdown'):
+        base.menu(target);
+        break;
+      case targetClassList.contains('bt-modal'):
+        makeModal(btTarget, btMedium, btSub, btTiming, btUnique);
+        break;
+      case targetClassList.contains('bt-close-modal'):
+        closeModal();
+        break;
+      case targetClassList.contains('bt-compartilhar'):
+        share(target, btTarget);
+        break;
+      case targetClassList.contains('bt-close-compartile'):
+        closeShare();
+        break;
+      case targetClassList.contains('bt-save'):
+        savePost(target, btTarget, btSub);
+        break;
+      case targetClassList.contains('bt-baixar'):
+        downloadPost(btTarget, btMedium);
+        break;
+      case targetClassList.contains('bt-salvar'):
+        salvaDados(btTarget);
+        break;
+      case targetClassList.contains('bt-enviar-senha'):
+        enviaSenha(btTarget);
+        break;
+      case targetClassList.contains('bt-deletar'):
+        deletaPerfil(btTarget);
+        break;
+      case targetClassList.contains('bt-react'):
+        reactPost(target, btTarget);
+        break;
+      case targetClassList.contains('bt-like'):
+        reactPost(target, btTarget);
+        break;
+      case targetClassList.contains('bt-love'):
+        reactPost(target, btTarget);
+        break;
+      case targetClassList.contains('bt-wow'):
+        reactPost(target, btTarget);
+        break;
+      case targetClassList.contains('bt-clap'):
+        reactPost(target, btTarget);
+        break;
+      case targetClassList.contains('bt-sad'):
+        reactPost(target, btTarget);
+        break;
+      case targetClassList.contains('bt-cancelar-modal'):
+        closeModal();
+        break;
+      case targetClassList.contains('holder-busca'):
+        closeModal();
+        break;
+      case targetClassList.contains('bt-toggle-info'):
+        $(event.target).toggleClass('on');
+        $(event.target).parent().parent().find('.aux-content').slideToggle()
+        break;
+      case targetClassList.contains('bt-faq'):
+        faq(btTarget);
+        break;
+      case targetClassList.contains('bt-scroll'):
+        scroll(btTarget);
+        break;
+      case targetClassList.contains('bt-view'):
+        viewPassword(event);
+        break;
+      case targetClassList.contains('bt-voto'):
+        sidebar.enquete(target, btTarget);
+        break;
+      case targetClassList.contains('bt-expand-text'):
+        resizeText(target, btTarget);
+        break;
+      case targetClassList.contains('bt-geraimg'):
+        montaCard(btTarget);
+        break;
+      case targetClassList.contains('bt-geracartao'):
+        montaCartao(btTarget);
+        break;
+      case targetClassList.contains('check-filter'):
+        checkContentFilter(btCheck, 'change');
+        break;
+      case targetClassList.contains('bt-filter'):
+        btContentFilter(btCheck, 'change');
+        break;
+      case targetClassList.contains('check-option'):
+        checkConfigForm(btCheck, 'change');
+        break;
+      case targetClassList.contains('bt-excluir'):
+        checkConfigForm(btCheck, 'delete');
+        break;
+      case targetClassList.contains('bt-historyback'):
+        history.back();
+        break;
+      case targetClassList.contains('bt-filtro-veiculo'):
+        filtraVeiculo(target, btTarget, false)
+        break;
+      case targetClassList.contains('aplica-filtro'):
+        filtraVeiculo(target, btTarget, true)
+        break;
+      case targetClassList.contains('modal-cartao'):
+        $('.edit-card .formulario').addClass('on');
+        break;
+       case targetClassList.contains('bt-salvar-cartao'):
+        $('.edit-card .bts-editado').addClass('on');
+        $('.edit-card .formulario').removeClass('on');
+        break;
+      case targetClassList.contains('bt-fechar-form'):
+        $('.edit-card .formulario').removeClass('on');
+        break;
+      case targetClassList.contains('bt-filtro'):
+        $('aside.right').addClass('open');
+        break;
+      case targetClassList.contains('bt-fechar-filtro'):
+        $('aside.right').removeClass('open');
+        break;
+      case targetClassList.contains('bt-perfil'):
+        $('aside.left').attr('data-anchor', 'perfil');
+        $('aside.left').addClass('open');
+        break;
+      case targetClassList.contains('bt-fechar-perfil'):
+        $('aside.left').removeClass('open');
+        break;
+      case targetClassList.contains('bt-filter'):
+        $('.panel-filter').addClass('open');
+        break;
+      case targetClassList.contains('fechar-filter'):
+        $('.panel-filter').removeClass('open');
+        break;
+      case targetClassList.contains('check-search-filter'):
+        checkSearchFilter(btCheck, 'change');
+        break;
+      case targetClassList.contains('bt-search-all'):
+        setSearchFilter('all');
+        break;
+      case targetClassList.contains('bt-search-clean'):
+        setSearchFilter('clean');
+        break;
+      case targetClassList.contains('bt-save-filter'):
+        applyFilter();
+        break;
+      case targetClassList.contains('remove-filter'):
+        removeFilter(btTarget);
+        break;
+      case targetClassList.contains('bt-config'):
+        $('.panel-config').addClass('open');
+        break;
+      case targetClassList.contains('fechar-config'):
+        $('.panel-config').removeClass('open');
+        break;
+      case targetClassList.contains('salvar-config'):
+        salvaConfigForm();
+        break;
+      case targetClassList.contains('bt-logout'):
+        logOut();
+        break;
+      case targetClassList.contains('bt-youtube'):
+        montaYoutube($(event.target));
+        break;
+      case targetClassList.contains('bt-youtube-close'):
+        closeYoutube($(event.target));
+        break;
+      case targetClassList.contains('bt-video'):
+        montaVideo($(event.target));
+        break;
+      case targetClassList.contains('bt-video-modal'):
+        montaVideoModal($(event.target));
+        break;
+      case targetClassList.contains('bt-video-close'):
+        closeVideo($(event.target));
+        break;
+      case targetClassList.contains('bt-salvar-imagem'):
+        salvaImagem(btTarget, btMedium);
+        break;
+      case targetClassList.contains('carregar-mais'):
+        loadMore(btTarget, btMedium, btSub);
+        break;
+      // case targetClassList.contains('carregar-mais-imagens'):
+      //   loadImages(btTarget, btMedium);
+      //   break;
+      case targetClassList.contains('bt-mais-cards'):
+        loadCards(btTarget, btMedium, btSub);
+        break;
+      case targetClassList.contains('bt-mais-ficha'):
+        loadFicha(btTarget, btMedium, btSub);
+        break;
+      case targetClassList.contains('bt-acc'):
+        accordion(target, btTarget);
+        break;
+      case targetClassList.contains('bt-expand-enquete'):
+        toggleEnquete(btTarget);
+        break;
+    }
+};
+
+function toggleEnquete(target) {
+    console.log(target);
+    if($('.enquete-mobile').hasClass('open')) {
+        $('.enquete-mobile').removeClass('open');
+        $('.enquete-mobile').find('.acc-aux').slideUp();
+    } else {
+        $('.enquete-mobile').addClass('open');
+        $('.enquete-mobile').find('.acc-aux').slideDown();
+    }
+}
+
+/* ACCORDION */
+function accordion(target, secao) {
+    if($(target).parent().parent().find('.conteudo').is(':visible')){
+      $(target).parent().parent().removeClass('selected');
+      $(target).parent().parent().find('.conteudo').slideUp();  
+    } else {
+      $('.' + secao + ' .area-acc').removeClass('selected');
+      $('.' + secao + ' .conteudo').slideUp();
+
+      $(target).parent().parent().addClass('selected');
+      $(target).parent().parent().find('.conteudo').slideDown();
+    }
+}
+
+
+/* SELECT */
+let arrSelection = [];
+function selectionClick(event, target) {
+    let txtSelecionado = '';
+    let tg = event.target;
+    let tgDownload = $(tg).attr('data-download');
+
+    if(iniSelection > 0){
+        if($(target).hasClass('selection')) {
+            $(target).removeClass('selection');
+            countSelection--;
+
+            let indArray = arrSelection.indexOf(tgDownload);
+            if (indArray > -1) { 
+              arrSelection.splice(indArray, 1);
+            }
+        } else {
+            $(target).addClass('selection');
+            countSelection++;
+
+            arrSelection.push(tgDownload)
+        }
+    }
+
+    if(countSelection > 1) {
+        txtSelecionado = 'selecionados';
+    } else {
+        txtSelecionado = 'selecionado';
+    }
+
+    $('.num-selection').text(countSelection + ' ' + txtSelecionado);
+    iniSelection++;
+}
+
+let touchTimer;
+let isSelecting = false;
+let countSelection = 0;
+let iniSelection = 0;
+
+$(document).on('mousedown', 'a[selectable="true"]', function (event) {
+    let thisEvent = $(this);
+    if(!isSelecting) {
+        touchTimer = setTimeout(() => {
+            event.preventDefault();
+            thisEvent.addClass('selection');
+            isSelecting = true;
+
+            $('.num-selection').text('1 selecionado ');
+            $('#internal-holder').addClass('selection-mode');
+
+            let tg = event.target;
+            let tgDownload = $(tg).attr('data-download');
+
+            arrSelection.push(tgDownload)
+
+            countSelection = 1;
+            clearTimeout(touchTimer);
+            return false;
+        }, 800);
+    }
+});
+$(document).on('mouseup', 'a[selectable="true"]', function (event) {
+    if (isSelecting) {
+        event.preventDefault();
+    } 
+    clearTimeout(touchTimer);
+});
+
+$(document).on('mouseleave', 'a[selectable="true"]', function (event) {
+    clearTimeout(touchTimer);
+});
+
+/* VIDEO */
+function closeVideo(target){
+    var thisPlayer = target.parent().parent();
+    thisPlayer.find('.hld-video .source').html('');
+    thisPlayer.removeClass('expand').removeClass('playing');
+}
+
+function montaVideo(target){
+    var thisPlayer = target.parent();
+    var video = target.attr('data-video');
+
+    thisPlayer.find('.hld-video .source').html('<video controls><source src="' + video + '" type="video/mp4"></video>');
+    
+    if($(window).width() > 992){
+        thisPlayer.addClass('expand');
+    }
+    
+    playTimer = setTimeout(() => {
+    clearTimeout(playTimer);
+        thisPlayer.find('.hld-video .source video').get(0).play();
+        thisPlayer.addClass('playing');
+    }, 500);
+}
+
+function montaVideoModal(target){
+    var thisPlayer = target.parent();
+    var video = target.attr('data-video');
+
+    thisPlayer.find('.hld-video .source').html('<video controls autoplay><source src="' + video + '" type="video/mp4"></video>');
+    thisPlayer.addClass('playing');
+}
+
+/* YOUTUBE */
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var playerVideo;
+
+function closeYoutube(target){
+    var thisPlayer = target.parent().parent();
+    thisPlayer.find('.hld-youtube .source').html('');
+    thisPlayer.removeClass('expand').removeClass('playing');
+}
+
+function montaYoutube(target){
+    var video = target.attr('data-video');
+    
+    var thisPlayer = target.parent();
+    thisPlayer.find('.hld-youtube .source').html('<div id="playerVideo-' + video + '"></div>');
+    
+    if($(window).width() > 992){
+        thisPlayer.addClass('expand');
+    }
+    
+
+  playerVideo = new YT.Player('playerVideo-' + video, {
+      height: '100%',
+      width: '100%',
+      videoId: video,
+      playerVars: {
+          autoplay: 1,
+          autohide: 1,
+          disablekb: 1, 
+          controls: 0,
+          showinfo: 0,
+          modestbranding: 0,
+          fs: 0,
+          autohide: 1,
+          rel: 0,
+          enablejsapi: 1
+      },
+      events: {
+          onReady: function(e) {
+              e.target.setPlaybackQuality('hd1080');
+              e.target.seekTo(0);
+          },
+          onStateChange: function(e) {
+
+            if(e && e.data === 1){
+                thisPlayer.addClass('playing');
+            }else if(e && e.data === 0){
+                e.target.playVideo();
+            }else if(e && e.data === 2){
+              
+            }
+          }
+      }
+  });
+
+}
+
+function carregaPDF(url, container) {
+    container = $('#' + container);
+    $(".pdfpage").remove();
+
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '../libraries/pdf.worker.min.js';
+
+    var loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.onProgress = function(data) {
+        var pct = parseInt(99 * data.loaded / data.total);
+    
+        if (pct > 100) pct = 100;
+            container.find(".loader-panel > span").text(pct);
+        }
+        loadingTask.promise.then(function(pdf) {
+        pdfjsAdicionaPagina(pdf, 1, container);
+    }, function (reason) {
+    // PDF loading error
+    console.error(reason);
+    });
+}
+
+function pdfjsAdicionaPagina(pdf, pagina, container) {
+    if (pagina > pdf.numPages) return;
+
+    pdf.getPage(pagina).then(function(page) {
+        var viewport = page.getViewport({scale: 1});
+        if (!container.is(":visible")) return;
+        
+        container.append('<div class="pdfpage" id="pagina' + pagina + '"><canvas class="pdfcanvas"></canvas><div class="annotation"></div></div>');
+        var el = container.find(".pdfpage:last-child");
+        var canvas = el.find("canvas")[0];
+        var context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        // Render PDF page into canvas context
+        var renderContext = {
+            canvasContext: context,
+            viewport: viewport
+        };
+
+        var renderTask = page.render(renderContext);
+        
+        setupAnnotations(page, el.find('.annotation'));
+        renderTask.promise.then(function () {
+            container.find(".loader-panel").addClass("loader-inactive");
+            container.find(".pdfpage:last-child").addClass("loaded");
+            pdfjsAdicionaPagina(pdf, pagina + 1, container) 
+        });
+    });
+}
+
+function setupAnnotations(page, annotationLayerDiv) {
+    var promise = page.getAnnotations().then(function (annotationsData) {
+        if (annotationsData.length == 0) return;
+
+        var pdfjsLib = window['pdfjs-dist/build/pdf'];
+        for (var i = 0; i < annotationsData.length; i++) {
+            var data = annotationsData[i];
+            var link = "#";
+            var target = "";
+
+            if (data.subtype == "Link" && data.url) {
+                link = data.url;
+                target = "_blank";
+            } else if (data.subtype = "Widget" && data.dest) {
+                var m = data.dest.match(/Bookmark (\d+)/);
+                if (m && m[1]) {
+                    link = "#pagina" + m[1];
+                } else {
+                    return;
+                }
+            } else {
+                return;
+            }
+
+            var r = data.rect;
+            var v = page.view;
+            r = pdfjsLib.Util.normalizeRect([r[0], v[3] - r[1] + v[1], r[2], v[3] - r[3] + v[1]]);
+            var el = "<a href='" + link + "' " +
+                      "target='" + target + "' " + 
+                      "style='" + 
+                      "transform: scale(" + annotationLayerDiv.outerWidth() / v[2] + "); " + 
+                      "transform-origin:" + -r[0] + 'px ' + -r[1] + 'px; ' +
+                      "left:" + r[0] + "px; " + 
+                      "top:" + r[1] + "px; " + 
+                      "width:" + (r[2] - r[0]) + "px; " + 
+                      "height:" + (r[3] - r[1]) + "px; " + 
+                      "'></a>";
+
+            annotationLayerDiv.append(el);
+        }
+    });
+    return promise; 
+}
+
+/* LISTENERS */
+$('#form-busca-geral').on('submit', function(event){
+    event.preventDefault();
+    makeHash('busca', 'internal', $(this).find('[name="busca"]').val()); 
+
+    closeModal();
+})
+
+
+document.addEventListener('click', function(event) {
+    if(!isSelecting){
+        globalClick(event, event.target);
+    } else {
+        var selectable = $(event.target).attr('selectable');
+
+        if (typeof selectable !== 'undefined' && selectable !== false) {
+            selectionClick(event, event.target);
+            event.preventDefault();
+        } else {
+            let targetClick = event.target.classList;
+
+            if(targetClick.contains('bt-baixar-lote')){
+                downloadLote(arrSelection);
+                event.preventDefault();
+            } else if(targetClick.contains('bt-compartilhar-lote')){
+                shareLote(arrSelection);
+                event.preventDefault();
+            } else {
+                isSelecting = false;
+                countSelection = 0;
+                iniSelection = 0;
+                arrSelection = [];
+                countDownload = 0;
+                countShare = 0;
+                totalShare = 0;
+                clearTimeout(touchTimer);
+                $('#internal-holder').removeClass('selection-mode');
+                $('a[selectable="true"]').removeClass('selection');
+                globalClick(event, event.target);
+
+            }
+        }
+    }
+}, false);
+
+$(document).on('input', 'input[type="password"]', function(event){
+  event.preventDefault();
+
+  var tamanho = $(this).val().length;
+  if(tamanho > 0){
+    $(this).parent().addClass('preenchido');
+  } else {
+    $(this).parent().removeClass('preenchido');
+  }
+});
+
+
+window.addEventListener('hashchange', function() {
+    makeHash(location.hash, 'hash');
+}, false);
+
+if(window.location.hash) {
+    makeHash(window.location.hash, 'external');
+} else {
+    makeHash('dashboard', 'internal');
+}
+
+let wait = setTimeout(function(){
+        clearTimeout(wait);
+$('body').removeClass('preload');
+    }, 500);

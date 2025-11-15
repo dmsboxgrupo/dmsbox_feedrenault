@@ -1,0 +1,190 @@
+body {
+	font-family: 'Renault Life';
+    font-weight: normal;
+	color: #000;
+}
+
+.form-control {
+	color: #333;
+}
+
+.no-margin {
+	margin: 0;
+}
+
+.btn-lg {
+	font-size: 1.15rem;
+}
+
+.page-titles {
+	padding: 15px;
+}
+
+.page-titles .breadcrumb {
+	font-size: 17px;
+}
+
+.btn-warning {
+	background: #ffc803;
+	color: #fff !important;
+}
+
+.topbar ul.dropdown-user li a {
+	color: #262626;
+}
+
+.topbar ul.dropdown-user li a:hover {
+	color: #ffc803;
+	background-color: #ffc8031a;
+}
+
+.profile-tab li a.nav-link.active, 
+.customtab li a.nav-link.active {
+	border-bottom: 2px solid #ffc803;
+	color: #ffc803;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    border: 1px solid #000;
+    background-color: #000;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    border: 1px solid #ffc803;
+    background-color: #ffc803;
+}
+
+.btn-default {
+	background: #101010;
+    border: 1px solid #000000;
+	color: #eee;
+}
+
+.btn-default:hover {
+	background: #222222;
+    border: 1px solid #000000;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, 
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, 
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active,
+.page-titles .breadcrumb .breadcrumb-item.active,
+.sidebar-nav ul li a {
+    color: #423000;
+}
+
+.topbar {
+	background: #ffffff;
+}
+
+.topbar .logo {
+	height: 50px;
+	height: 50px;
+}
+
+.topbar .profile-pic {
+	font-size: 33px;
+}
+
+.profile-tab li a.nav-link, 
+.customtab li a.nav-link {
+    color: #565656;
+}
+
+a,
+.sidebar-nav ul li a.active, 
+.sidebar-nav ul li a:hover,
+.sidebar-nav > ul > li > a.active i, 
+.sidebar-nav > ul > li > a:hover i {
+	color: #ffc803;
+}
+
+a:hover,
+.sidebar-nav > ul > li:hover > a, 
+.sidebar-nav > ul > li:hover > a i {
+	color: #ffc803;
+}
+
+html body .text-themecolor {
+	color: #ffc803 !important;
+}
+
+.page-wrapper {
+    background: #f7f7f7;
+}
+
+.sidebar-nav > ul > li.active > a, 
+.sidebar-nav > ul > li.active:hover > a {
+	background: #ffc803;
+}
+
+.topbar {
+	box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+.topbar .navbar-light .navbar-nav .nav-item > a.nav-link,
+.topbar .navbar-light .navbar-nav .nav-item > a.nav-link:hover,
+.topbar .navbar-light .navbar-nav .nav-item > a.nav-link:focus {
+	color: #000 !important;
+}
+
+.mini-sidebar .top-navbar .navbar-header {
+	width: auto;
+	margin-right: 10px;
+}
+
+.sidebar-nav ul li a {
+	text-transform: uppercase;
+	font-size: 17px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background: #ffbc001a;
+}
+
+.table-striped tbody tr:hover {
+	background: #ffbc0052;
+}
+
+.custom-select {
+  background: url(../template/assets/images/custom-select.png) right 0.75rem center no-repeat; 
+}
+
+/* fixes plugins */
+
+.ql-editor {
+	font-family: 'Renault Life';
+	font-size: 16px;
+}
+
+.dropify-wrapper .dropify-message p {
+	text-align: center;
+}
+
+/* select2 */
+
+.select2 {
+	width: 100%;
+}
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
+    color: #eee;
+    background: #1e88e5;
+    border: 1px solid #0058b7;
+}
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove {
+    color: #eee;
+}
+.select2-container--default .select2-results__group {
+	color: #222;
+}
+
+/* fix height */
+.select2-container .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__arrow {
+	height: 38px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	line-height: 38px !important;
+}

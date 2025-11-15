@@ -1,0 +1,14 @@
+[25-Aug-2021 00:13:30 America/Fortaleza] PHP Notice:  Undefined index: user_category in C:\xampp\htdocs\renault\admin\user_report.php on line 250
+[25-Aug-2021 00:13:30 America/Fortaleza] PHP Notice:  Undefined index: user_category in C:\xampp\htdocs\renault\admin\user_report.php on line 250
+[25-Aug-2021 00:13:30 America/Fortaleza] PHP Notice:  Undefined index: user_category in C:\xampp\htdocs\renault\admin\user_report.php on line 250
+[25-Aug-2021 00:13:30 America/Fortaleza] PHP Notice:  Undefined index: user_category in C:\xampp\htdocs\renault\admin\user_report.php on line 250
+[25-Aug-2021 00:13:30 America/Fortaleza] PHP Notice:  Undefined index: user_category in C:\xampp\htdocs\renault\admin\user_report.php on line 250
+[25-Aug-2021 00:15:50 America/Fortaleza] PHP Notice:  Undefined index: user_category in C:\xampp\htdocs\renault\admin\user_report.php on line 102
+[25-Aug-2021 00:19:23 America/Fortaleza] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '2021-08-25', last_login) as 'Dias Sem Acesso'
+						FROM `users` 
+						whe...' at line 27 in C:\xampp\htdocs\renault\includes\database.php:140
+Stack trace:
+#0 C:\xampp\htdocs\renault\includes\database.php(140): PDOStatement->execute(NULL)
+#1 C:\xampp\htdocs\renault\admin\user_report.php(136): DataBase->query('SELECT \r\n\t\t\t\t\t\t...')
+#2 {main}
+  thrown in C:\xampp\htdocs\renault\includes\database.php on line 140

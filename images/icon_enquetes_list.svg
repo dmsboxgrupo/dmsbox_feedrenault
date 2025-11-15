@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <g id="Grupo_3038" data-name="Grupo 3038" transform="translate(181 -1114)">
+    <path id="Caminho_1050" data-name="Caminho 1050" d="M0,0H100V100H0Z" transform="translate(-181 1114)"/>
+    <g id="Grupo_3037" data-name="Grupo 3037" transform="translate(-159.105 1135.193)">
+      <g id="Grupo_2647" data-name="Grupo 2647" transform="translate(0.001)">
+        <path id="Caminho_859" data-name="Caminho 859" d="M9.228,15.14H4.873A74.753,74.753,0,0,1,0,7.778L3.525,5.6c1.143,1.867,2.281,3.63,3.524,5.5A117.919,117.919,0,0,0,13.378,0l3.627,1.97c-3.111,5.7-4.874,8.711-7.778,13.17m0,21.572H4.873A74.752,74.752,0,0,1,0,29.349l3.524-2.178c1.143,1.867,2.281,3.63,3.524,5.5a117.919,117.919,0,0,0,6.33-11.1l3.627,1.968c-3.111,5.706-4.874,8.713-7.778,13.172m0,21.572H4.873A74.753,74.753,0,0,1,0,50.921l3.524-2.18c1.143,1.869,2.281,3.632,3.524,5.5a117.92,117.92,0,0,0,6.33-11.1l3.627,1.97c-3.111,5.7-4.874,8.711-7.778,13.17" transform="translate(-0.001)" fill="#efdf00"/>
+        <rect id="Retângulo_733" data-name="Retângulo 733" width="34.638" height="4.252" transform="translate(21.466 10.889)" fill="#fff"/>
+        <rect id="Retângulo_734" data-name="Retângulo 734" width="34.638" height="4.252" transform="translate(21.466 32.461)" fill="#fff"/>
+        <rect id="Retângulo_735" data-name="Retângulo 735" width="34.638" height="4.252" transform="translate(21.466 54.032)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

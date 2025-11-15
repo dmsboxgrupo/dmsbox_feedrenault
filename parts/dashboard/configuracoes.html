@@ -1,0 +1,113 @@
+<div class="content">
+    <div class="area-mobile">
+        <div class="txt">configurações</div>
+
+        <div class="bt-fechar">
+            <a href="#" class="bt-changeview" data-target="dashboard"></a>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <div class="header-text">
+        <h3>configurações da conta</h3>
+        <p>Digite as informações que deseja atualizar e <br> clique em “salvar” para finalizar.</p>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div class="internal" id="internal-holder"></div>
+
+    <div class="modal mensagem" id="dados-sucesso">
+        <div class="holder">
+            <div class="msg">
+                <div class="ico"><img src="assets/images/ico_ok.svg"></div>
+                <div class="txt">
+                    <h3>suas alterações foram salvas!</h3>
+                </div>
+            </div>
+
+            <div class="bts">
+                <div class="bt alt">
+                    <a href="#" class="bt-changeview" data-target="dashboard">voltar para o Feed Renaut</a>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <div class="modal mensagem" id="deletar-perfil">
+        <div class="holder">
+            <div class="msg">
+                <div class="txt">
+                    <h3>deletar perfil</h3>
+                </div>
+                <div class="txt">
+                    <p>tem certeza que deseja excluir definitivamente todos os seus dados de perfil, navegação, histórico, favoritos e itens salvos?</p>
+                </div>
+            </div>
+
+            <div class="bts">
+                <div class="bt alt">
+                    <a href="#" class="bt-changeview" data-target="dashboard">não, voltar para o Feed Renaut</a>
+                </div>
+                <div class="bt">
+                    <a href="#" class="bt-deletar" data-target="perfil">sim, deletar meu perfil definitivamente</a>
+                </div>
+            </div>
+
+            <div class="msg retorno">
+                <div class="txt">
+                    <h3>perfil deletado com sucesso!</h3>
+                </div>
+                <div class="txt">
+                    <p>para acessar novamente o portal será preciso fazer um novo cadastro.</p>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <div class="modal mensagem" id="senha-sucesso">
+        <div class="holder">
+            <div class="msg">
+                <div class="ico"><img src="assets/images/ico_senha_ok.svg"></div>
+                <div class="txt">
+                    <h3>senha alterada com sucesso!</h3>
+                </div>
+            </div>
+
+            <div class="bts">
+                <div class="bt alt">
+                    <a href="#" class="bt-changeview" data-target="dashboard">voltar para o Feed Renaut</a>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <div class="modal mensagem" id="senha-esqueci">
+        <div class="holder">
+            <div class="msg">
+                <div class="ico"><img src="assets/images/ico_senha_esqueci.svg"></div>
+                <div class="txt">
+                    <h3>redefinição de senha</h3>
+                </div>
+                <div class="txt">
+                    <p>um e-mail foi enviado para</p>
+                </div>
+                <div class="hld-email" id="email-senha"></div>
+                <div class="txt">
+                    <p>Confira inclusive sua caixa de spam e siga as instruções para criar uma nova senha. caso não tenha recebido o e-mail, clique no botão abaixo para tentar novamente.</p>
+                </div>
+            </div>
+
+            <div class="bts">
+                <div class="bt alt">
+                    <a href="#" class="bt-enviar-senha" data-target="reenviar">enviar novamente</a>
+                </div>
+                <div class="bt-grid">
+                    <a href="#" class="bt-close-modal" data-target="modal">voltar</a>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+</div>
+
+<script src="assets/js/parts/configuracoes.js" type="text/javascript" charset="utf-8"></script>

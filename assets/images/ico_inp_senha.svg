@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Grupo_2649" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27 27">
+  <!-- Generator: Adobe Illustrator 29.0.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 192)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #d9d9d6;
+      }
+
+      .st1 {
+        fill: none;
+      }
+
+      .st2 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="st1" x="3.6" y="9.5" width="19.7" height="8"/>
+    </clipPath>
+  </defs>
+  <g class="st2">
+    <g id="Grupo_2648">
+      <path id="Caminho_910" class="st0" d="M3.6,13.5c-.2,2,1.3,3.8,3.3,4,.2,0,.4,0,.6,0,2,.1,3.8-1.4,3.9-3.4,0-.2,0-.4,0-.6h0s10,0,10,0v2.4h2v-4.3h-12.4c-.7-1.3-2-2.1-3.5-2-2-.1-3.7,1.5-3.9,3.5,0,.2,0,.3,0,.5M9.4,13.5c0,1.4-.6,2-1.9,2s-1.9-.6-1.9-2c-.1-1,.6-1.8,1.6-2,.1,0,.2,0,.3,0,1-.1,1.8.6,1.9,1.5,0,.1,0,.3,0,.4"/>
+      <rect id="Retângulo_774" class="st0" x="17.4" y="11.6" width="2" height="4.2"/>
+    </g>
+  </g>
+</svg>

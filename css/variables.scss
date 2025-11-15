@@ -1,0 +1,44 @@
+$font: 'NouvelR', sans-serif;
+$am1: #ffd500;
+$am2: #ffbc0a;
+$margin: 28px;
+$titlefontsize: 20px;
+$headerheight: 42px;
+$footerheight: 72px;
+$maxwidth: 1000px;
+$minwidth: 320px;
+$maxvideoheight: #{$maxwidth/1.777777777777};
+$minvideoheight: #{$minwidth/1.777777777777};
+
+@mixin height100vh() {
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 100vh));
+}
+
+@mixin minheight100vh() {
+  min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  min-height: calc(var(--vh, 100vh));
+}
+
+@mixin popuptelacheia100vh() {
+  position: fixed;
+  top: 0;
+  @include height100vh;
+  background-color: rgba(0,0,0,0.6);
+}
+
+@mixin popuptelacheia() {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+}
+
+@mixin largurarestrita() {
+  width: 100vw;
+  max-width: $maxwidth;
+  min-width: $minwidth;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
