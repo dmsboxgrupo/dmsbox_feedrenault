@@ -2287,7 +2287,6 @@ function loadFicha(target, group, subgroup){
 }
 
 function loadCards(target, group, subgroup){
-    console.log(target+', '+group+', '+subgroup);
     let params =  '';
 
     if(target == 'materiais') {
@@ -2379,13 +2378,8 @@ function loadCards(target, group, subgroup){
                     }
                 }
 
-                let shareMSG = '';
-                if(item.share_message) {
-                    shareMSG = encodeURIComponent(item.share_message.trim());
-                }
-
                 if(item.content_type == 'video'){
-                    htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.share_link + '" data-slideTitle="' + shareMSG + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.share_link) + '" data-vehicle="' + item.vehicles + '" data-version="' + item.version + '">';
+                    htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.share_link + '" data-slideTitle="' + encodeURIComponent(item.share_message.trim()) + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.share_link) + '" data-vehicle="' + item.vehicles + '" data-version="' + item.version + '">';
                     htmlModal += '  <div class="slide sld-video" style="background-image:url(\'' + item.thumbnail + '\');">';
                     htmlModal += '      <div class="hld-video">';
                     htmlModal += '          <div class="source"></div>';
@@ -2396,7 +2390,7 @@ function loadCards(target, group, subgroup){
                     htmlModal += '  </div>';
                     htmlModal += '</div>';
                 } else if(item.pdf != null){
-                    htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.share_link + '" data-slideTitle="' + shareMSG + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.share_link) + '" data-vehicle="' + item.vehicles + '" data-version="' + item.version + '">';
+                    htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.share_link + '" data-slideTitle="' + encodeURIComponent(item.share_message.trim()) + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.share_link) + '" data-vehicle="' + item.vehicles + '" data-version="' + item.version + '">';
                     htmlModal += '  <div class="slide" style="background-image:url(\'' + item.content + '\');">';
 
                     htmlModal += '    <div class="midia midia-pdf">';
@@ -2408,7 +2402,7 @@ function loadCards(target, group, subgroup){
                     htmlModal += '  </div>';
                     htmlModal += '</div>';
                 } else {
-                    htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.share_link + '" data-slideTitle="' + shareMSG + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.share_link) + '" data-vehicle="' + item.vehicles + '" data-version="' + item.version + '"><div class="slide" style="background-image:url(\'' + item.content + '\');"></div></div>';
+                    htmlModal += '<div class="aux-slide" data-slideID="' + item.id + '" data-slideSaved="' + saved + '" data-slideDownload="' + item.share_link + '" data-slideTitle="' + encodeURIComponent(item.share_message.trim()) + '"  data-slideText=""  data-slideLink="' + encodeURIComponent(item.share_link) + '" data-vehicle="' + item.vehicles + '" data-version="' + item.version + '"><div class="slide" style="background-image:url(\'' + item.content + '\');"></div></div>';
                 }
             })
 
