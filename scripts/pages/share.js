@@ -46,6 +46,24 @@ class SharePage extends Feed {
 			this.updateSearchGallery( search );
 			
 		});
+
+		signal.on('share', ( data ) => {
+
+			const contentDom = $(data.content);
+
+			const id = contentDom.attr( 'content-id' );
+			const message = contentDom.attr( 'content-message' ) ? decodeURI( contentDom.attr( 'content-message' ) ) + ' - ' : '';
+			const url = decodeURI( this.toAbsoluteURL( contentDom.attr( 'content-url' ) ) );
+			const download = contentDom.attr( 'content-download' );
+
+			// Se houver arquivo para download, compartilha como imagem
+			if (download) {
+				ui.mostraCompartilhar(url, message, download);
+			} else {
+				ui.mostraCompartilhar(url, message);
+			}
+
+		});
 	}
 
 	updateSearchGallery( search ) {
@@ -88,6 +106,20 @@ class SharePage extends Feed {
 			
 		}
 		
+	}
+
+	toAbsoluteURL( url ) {
+
+		if (!url) return '';
+
+		if ( url.indexOf('http') !== 0 ) {
+
+			return `https://feedrenault.com.br/${url}`;
+
+		}
+
+		return url;
+
 	}
 
 	playID( id = this.galleryPlayID ) {
@@ -479,7 +511,7 @@ console.log('TIPO -> ' + tipo)
 		  	});
 
 		
-		  $('body').on('click', '.bt-gera-cartao', function(ev) {
+		  $('body').on('click', '.bt-gera-cartao, .bt-compartilha-cartao', function(ev) {
 		     ev.preventDefault();
 		     ev.stopImmediatePropagation();
 
@@ -526,7 +558,40 @@ console.log('TIPO -> ' + tipo)
 		        }
 		      });
 		   });
-		   
+
+		$('body').on('click', '[content-id="cartao-digital"] .compartilhar, .acao-icone.compartilhar[data-cartao-digital]', function(ev) {
+			ev.preventDefault();
+			ev.stopImmediatePropagation();
+
+			var whats = 'https://api.whatsapp.com/send?phone=550' + $('#valWhatsapp').val().replace(/\D/g, '');
+			var tel = 'tel:0' + $('#valTelefone').val().replace(/\D/g, '');
+			var mail = 'mailto:' + $('#valEmail').val();
+			var loc = 'https://www.google.com.br/maps/dir//' + encodeURI($('#valLocalizacao').val());
+
+			$.ajax({
+				url: 'cartao.php',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					bg: $('#valBg').val(),
+					img: $('#valImg').val(),
+					nome: $('#valNome').val(),
+					cargo: $('#valCargo').val(),
+					whatsapp: whats,
+					telefone: tel,
+					email: mail,
+					localizacao: loc,
+					concessionaria: $('#valConcessionaria').val(),
+				},
+				success: function (data) {
+					var down_card = app.url("/content.php?card=" + data.folder_name);
+
+					// Compartilhar como arquivo
+					ui.mostraCompartilhar(down_card, 'Cartão Digital - ', down_card);
+				}
+			});
+		});
+
 		} else {
 			var params = Object.assign({}, this.feed, this.filterGallery, {q:'feed', filter:'compartilhar', content_type: 'image', limit: '10'});
 

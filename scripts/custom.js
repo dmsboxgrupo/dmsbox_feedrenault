@@ -712,18 +712,30 @@ $(function() {
 
     // Compartilhar
 
-    function mostraCompartilhar(url, titulo) {
+    function mostraCompartilhar(url, titulo, file) {
       if (navigator.share) {
         if ( native.browser ) {
-			
-			native.post({
+
+			var shareData = {
 				query: 'share',
-				message: titulo + ' - ' + url,
+				message: titulo + url,
 				url: url
-			});
-			
+			};
+
+			// Se houver arquivo (imagem), adiciona ao compartilhamento
+			if (file) {
+				shareData.file = file;
+				shareData.title = titulo;
+			}
+
+			native.post(shareData);
+
 		} else {
-			navigator.share({title: titulo, url: url});
+			var shareData = {title: titulo, url: url};
+			if (file) {
+				shareData.file = file;
+			}
+			navigator.share(shareData);
 		}
       } else {
         url = encodeURIComponent(url);
@@ -748,11 +760,7 @@ $(function() {
     if (!bodyEvents) $('body').on('click', '.acao-icone.compartilhar', function(ev) {
       ev.stopImmediatePropagation();
 	  signal.emit('share', { content: $(this).parents("[content-id]")[0] });
-	  if (options.share !== false) {
-        var url = "https://renault.com.br/";
-        var titulo = "Renault";
-        mostraCompartilhar(url, titulo);
-	  }
+	  // O handler do signal em main.js vai processar o compartilhamento
     });
 
     if ($(".compartilhar-popup:not(.done)").length) {
@@ -1966,11 +1974,7 @@ $(function() {
       $('body').on('click', '#destaque .destaque-compartilhar', function(ev) {
         cancelFullScreen();
         signal.emit('share', { content: $(this).parents("[content-id]")[0] });
-        if (options.share !== false) {
-          var url = "https://renault.com.br/";
-          var titulo = "Renault";
-          mostraCompartilhar(url, titulo);
-		}
+        // O handler do signal em main.js vai processar o compartilhamento
       });
 
 	  $('body').on('click', 'a[content-download]', function(ev) {

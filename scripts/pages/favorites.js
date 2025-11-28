@@ -27,6 +27,37 @@ class FavoritesPage extends Feed {
 			
 		});
 		
+		signal.on('share', ( data ) => {
+
+			const contentDom = $(data.content);
+
+			const id = contentDom.attr( 'content-id' );
+			const message = contentDom.attr( 'content-message' ) ? decodeURI( contentDom.attr( 'content-message' ) ) + ' - ' : '';
+			const url = decodeURI( this.toAbsoluteURL( contentDom.attr( 'content-url' ) ) );
+			const download = contentDom.attr( 'content-download' );
+
+			// Se houver arquivo para download, compartilha como imagem
+			if (download) {
+				ui.mostraCompartilhar(url, message, download);
+			} else {
+				ui.mostraCompartilhar(url, message);
+			}
+
+		});
+	}
+
+	toAbsoluteURL( url ) {
+
+		if (!url) return '';
+
+		if ( url.indexOf('http') !== 0 ) {
+
+			return `https://feedrenault.com.br/${url}`;
+
+		}
+
+		return url;
+
 	}
 
 	update() {
