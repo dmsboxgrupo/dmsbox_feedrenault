@@ -1541,7 +1541,7 @@ aside.right .aux-bt .bt-aplicar.disabled { pointer-events: none; opacity: 0.5; }
   .post[type="feed"] .midia.playing .bt-youtube:before { opacity: 0; }
   .post[type="feed"] .midia.playing .bt-youtube:after { opacity: 0; }
   .post[type="feed"] .midia .hld-video { top: 0; width: 100%; height: 100%; aspect-ratio: 1/1; }
-  .post[type="feed"] .midia .hld-video .source { width: 100%; aspect-ratio: 1/1; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+  .post[type="feed"] .midia .hld-video .source { width: auto; aspect-ratio: 1/1; display: flex; justify-content: center; align-items: center; overflow: hidden; height: 100%; }
   .post[type="feed"] .midia.playing .bt-video { pointer-events: none; }
   .post[type="feed"] .midia.playing .bt-video:before { opacity: 0; }
   .post[type="feed"] .midia.playing .bt-video:after { opacity: 0; }
